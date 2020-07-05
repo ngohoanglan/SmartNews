@@ -81,60 +81,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TpB-CR-YeG" customClass="CheckBox" customModule="LatestHeadline" customModuleProvider="target">
-                                <rect key="frame" x="163" y="465" width="16" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="UnSelectedAll"/>
-                                <connections>
-                                    <action selector="btUnCheckAll:" destination="xK6-jD-GRw" eventType="touchUpInside" id="dJH-1i-L06"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b10-99-3ha">
-                                <rect key="frame" x="1" y="512" width="318" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="IMPORT NEWSPAPERS">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="btImportNewspaper:" destination="xK6-jD-GRw" eventType="touchUpInside" id="0tO-3M-PwM"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ygY-kY-eLq" customClass="CheckBox" customModule="LatestHeadline" customModuleProvider="target">
-                                <rect key="frame" x="27" y="462" width="16" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Select All"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isChecked" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="btCheckAll:" destination="xK6-jD-GRw" eventType="touchUpInside" id="z2k-fC-TS9"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" fixedFrame="YES" text="uncheck all" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WIa-At-P1b">
-                                <rect key="frame" x="187" y="462" width="103" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="check all" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wR9-Gr-eJT">
-                                <rect key="frame" x="55" y="462" width="68" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yNo-SG-asc">
-                                <rect key="frame" x="-1" y="18" width="319" height="426"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yNo-SG-asc">
+                                <rect key="frame" x="16" y="0.0" width="343" height="557"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="57" id="txI-Pp-ABy" customClass="SelectNewspapersTableViewCell" customModule="LatestHeadline" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="319" height="57"/>
+                                        <rect key="frame" x="0.0" y="28" width="343" height="57"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="txI-Pp-ABy" id="r5Z-pS-HSQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="319" height="57"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="57"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wgq-kx-bAi">
@@ -174,21 +129,39 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b10-99-3ha">
+                                <rect key="frame" x="16" y="565" width="343" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="h7E-NL-PPk"/>
+                                </constraints>
+                                <state key="normal" title="IMPORT NEWSPAPERS">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="btImportNewspaper:" destination="xK6-jD-GRw" eventType="touchUpInside" id="0tO-3M-PwM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="yNo-SG-asc" firstAttribute="leading" secondItem="meh-bb-1Il" secondAttribute="leadingMargin" id="ENl-jG-ZCB"/>
+                            <constraint firstItem="yNo-SG-asc" firstAttribute="trailing" secondItem="meh-bb-1Il" secondAttribute="trailingMargin" id="L2F-fV-mdW"/>
+                            <constraint firstItem="b10-99-3ha" firstAttribute="leading" secondItem="meh-bb-1Il" secondAttribute="leadingMargin" id="dsn-sV-8DR"/>
+                            <constraint firstItem="b10-99-3ha" firstAttribute="trailing" secondItem="meh-bb-1Il" secondAttribute="trailingMargin" id="nGq-Wj-qxO"/>
+                            <constraint firstItem="wYE-r0-5Z5" firstAttribute="top" secondItem="b10-99-3ha" secondAttribute="bottom" constant="32" id="tnC-W6-wc7"/>
+                            <constraint firstItem="yNo-SG-asc" firstAttribute="top" secondItem="SK3-YZ-5Vh" secondAttribute="bottom" id="ty3-6h-Dq4"/>
+                            <constraint firstItem="b10-99-3ha" firstAttribute="top" secondItem="yNo-SG-asc" secondAttribute="bottom" constant="8" id="yVT-lM-c3u"/>
+                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="btCheckAll" destination="ygY-kY-eLq" id="wHf-2T-HXE"/>
                         <outlet property="btImportNewspapers" destination="b10-99-3ha" id="AoK-MA-Mda"/>
-                        <outlet property="btUnCheckAll" destination="TpB-CR-YeG" id="1Ne-kW-zee"/>
-                        <outlet property="lbCheckAll" destination="wR9-Gr-eJT" id="jdQ-zB-xOe"/>
-                        <outlet property="lbUnCheckAll" destination="WIa-At-P1b" id="Ot8-ym-xPd"/>
                         <outlet property="tableViewNewspapers" destination="yNo-SG-asc" id="xMQ-eY-qSK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mjp-vP-cHy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-283" y="245"/>
+            <point key="canvasLocation" x="-284" y="244.22788605697153"/>
         </scene>
         <!--Main Menu View Controller-->
         <scene sceneID="dOA-vA-AcU">

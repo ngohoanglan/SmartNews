@@ -42,6 +42,8 @@
 		84CA79F01CAF896500F69FF9 /* SelectNewspapersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CA79EF1CAF896500F69FF9 /* SelectNewspapersTableViewCell.swift */; };
 		84CA79F41CAFC22D00F69FF9 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CA79F31CAFC22D00F69FF9 /* CheckBox.swift */; };
 		84ECB7E01CAE5846008F6A0A /* SiteSourceJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ECB7DF1CAE5846008F6A0A /* SiteSourceJson.swift */; };
+		C5656BA924B1CE6D00B33025 /* SelectNewspaperTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5656BA724B1CE6D00B33025 /* SelectNewspaperTableViewCell.swift */; };
+		C5656BAA24B1CE6D00B33025 /* SelectNewspaperTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5656BA824B1CE6D00B33025 /* SelectNewspaperTableViewCell.xib */; };
 		DA0237011F64E168000D8806 /* SearchResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0237001F64E168000D8806 /* SearchResultController.swift */; };
 		DA08E4971D52C1520092C53F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA08E4961D52C1520092C53F /* StoreKit.framework */; };
 		DA0D065E1D1E2EF7007A0288 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0D065D1D1E2EF7007A0288 /* WebViewViewController.swift */; };
@@ -165,6 +167,8 @@
 		84ECB7DF1CAE5846008F6A0A /* SiteSourceJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiteSourceJson.swift; sourceTree = "<group>"; };
 		A33CB3927A5B5FB9848F7277 /* Pods-VietNamNewspapers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VietNamNewspapers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VietNamNewspapers/Pods-VietNamNewspapers.debug.xcconfig"; sourceTree = "<group>"; };
 		BBDCB78975A228E2B83ED31D /* Pods_VietNamNewspapers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VietNamNewspapers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5656BA724B1CE6D00B33025 /* SelectNewspaperTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectNewspaperTableViewCell.swift; sourceTree = "<group>"; };
+		C5656BA824B1CE6D00B33025 /* SelectNewspaperTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectNewspaperTableViewCell.xib; sourceTree = "<group>"; };
 		DA0237001F64E168000D8806 /* SearchResultController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultController.swift; sourceTree = "<group>"; };
 		DA08E4961D52C1520092C53F /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		DA0D065D1D1E2EF7007A0288 /* WebViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
@@ -487,6 +491,8 @@
 				DA2761581F750DA000B03DEA /* FeedImageViewCellIPad.xib */,
 				DA27615A1F750DE400B03DEA /* FeedDataTableViewCellIPad.swift */,
 				DA27615C1F750DF900B03DEA /* FeedNotDescriptionViewCellIPad.swift */,
+				C5656BA724B1CE6D00B33025 /* SelectNewspaperTableViewCell.swift */,
+				C5656BA824B1CE6D00B33025 /* SelectNewspaperTableViewCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -607,6 +613,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5656BAA24B1CE6D00B33025 /* SelectNewspaperTableViewCell.xib in Resources */,
 				DAF4EC421F2D88E500B67CA6 /* DataViewController.xib in Resources */,
 				844B9C7B1C78AE870047ED2F /* LaunchScreen.storyboard in Resources */,
 				DA4DA7F51D6A092300A8F131 /* Localizable.strings in Resources */,
@@ -730,6 +737,7 @@
 				DA0D065E1D1E2EF7007A0288 /* WebViewViewController.swift in Sources */,
 				84CA79F41CAFC22D00F69FF9 /* CheckBox.swift in Sources */,
 				DA27C4EF1F2779B2002D2FB4 /* PMKPageMenuControllerDelegate.swift in Sources */,
+				C5656BA924B1CE6D00B33025 /* SelectNewspaperTableViewCell.swift in Sources */,
 				DA27C4EE1F2779B2002D2FB4 /* PMKPageMenuController.swift in Sources */,
 				DA27C4FD1F278236002D2FB4 /* DataViewController.swift in Sources */,
 				DAD4965C1D16344200A0CFD0 /* FavoriteArticleViewController.swift in Sources */,
