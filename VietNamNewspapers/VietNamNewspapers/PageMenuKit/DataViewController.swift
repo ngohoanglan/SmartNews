@@ -5,7 +5,7 @@
 //  Created by Ngô Lân on 7/25/17.
 //  Copyright © 2017 admin. All rights reserved.
 //
-
+import ImageLoader
 import Foundation
 import UIKit
 import GoogleMobileAds
@@ -719,7 +719,7 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                     cell.feedImageCell.image=nil
                     //
                     
-                    /* lan.nh
+                    /*
                     cell.feedImageCell.load.request(with: feedData.linkImage!, onCompletion: { image, error, operation in
                         
                         if operation == .network {
@@ -735,8 +735,8 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                             self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
                         }
                     })
-                  */
-                    
+                  
+                    */
                 }
                 
                 if(feedData.isRead==1)
@@ -976,23 +976,24 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                     //
                     cell.feedImageCell.image=nil
                     //
-                    /* lan.nh
+                    
+                    
                     cell.feedImageCell.load.request(with: feedData.linkImage!, onCompletion: { image, error, operation in
                         
                         if operation == .network {
                             let myImage : UIImage = Utils.resizeImage(image!, maxWidth: self.imageSize+50, maxHeight: self.imageSize+50)
                             let transition = CATransition()
                             transition.duration = 0.5
-                            transition.type = kCATransitionFade
+                            transition.type = CATransitionType.fade
                             cell.feedImageCell.layer.add(transition, forKey: nil)
                             cell.feedImageCell.image = myImage
                             
-                            feedData.imageArray=UIImagePNGRepresentation(myImage)
+                            feedData.imageArray=myImage.pngData()
                             let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.imageArray.rawValue : feedData.imageArray! as AnyObject]
                             self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
                         }
                     })
-                    */
+                    
                     
                 }
                 

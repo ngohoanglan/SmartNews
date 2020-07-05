@@ -353,23 +353,23 @@ class SiteDetailTableViewController: UIViewController, UITableViewDelegate, UITa
                 //
                 cell.feedImageCell.image=nil
                 //
-                /* lan.nh
+              
                 cell.feedImageCell.load.request(with: feedData.linkImage!, onCompletion: { image, error, operation in
                     print("image \(image?.size), render-image \(cell.feedImageCell.image?.size)")
                     if operation == .network {
                         let myImage : UIImage = Utils.resizeImage(image!, maxWidth: 75, maxHeight: 75)
                         let transition = CATransition()
                         transition.duration = 0.5
-                        transition.type = kCATransitionFade
+                        transition.type = CATransitionType.fade
                         cell.feedImageCell.layer.add(transition, forKey: nil)
                         cell.feedImageCell.image = myImage
                         
-                         feedData.imageArray=UIImagePNGRepresentation(myImage)
+                        feedData.imageArray=myImage.pngData()
                         let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.imageArray.rawValue : feedData.imageArray! as AnyObject]
                         self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
                     }
                 })
-                */
+            
                 /*
                 let myCompletionHandler: (URL?, UIImage?, NSError?,CacheType?) -> Void = { (data, response, error,cachtype) in
                     // this is where the completion handler code goes

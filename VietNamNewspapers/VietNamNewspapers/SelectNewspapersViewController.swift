@@ -5,6 +5,7 @@
 //  Created by admin on 3/30/16.
 //  Copyright © 2016 admin. All rights reserved.
 //
+import ImageLoader
 import FirebaseMessaging
 import UIKit
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
@@ -207,22 +208,22 @@ UITableViewDataSource, DownloadDelegate {
         cell.btnCheckBox.isChecked=newspaper.isCheck
         //cell.imgNewspaper.load(iconURL)
         cell.lableSiteName.text=newspaper.name
-        /* lan.nh
+      
         cell.imgNewspaper.load.request(with: iconURL, onCompletion: { image, error, operation in
           
             if operation == .network {
                
                 let transition = CATransition()
                 transition.duration = 0.5
-                transition.type = kCATransitionFade
+                transition.type = CATransitionType.fade
                 cell.imgNewspaper.layer.add(transition, forKey: nil)
                 cell.imgNewspaper.image = image
                 
-                self.newspapersList[(indexPath as NSIndexPath).row].iconArray=UIImagePNGRepresentation(image!)
+                self.newspapersList[(indexPath as NSIndexPath).row].iconArray=image!.pngData()
                 
             }
         })
-*/
+
         
         /*
         let myCompletionHandler: (URL?, UIImage?, NSError?,CacheType?) -> Void = { (data, response, error,cachtype) in

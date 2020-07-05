@@ -11,7 +11,7 @@ import MessageUI
 import Firebase
 import FirebaseInstanceID
 import FirebaseMessaging
-//import ImageLoader
+import ImageLoader
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     switch (lhs, rhs) {
     case let (l?, r?):
@@ -391,23 +391,23 @@ class SiteListTableViewController: UIViewController,UITableViewDelegate, UITable
         }
         else
         {
-            /* lan.nh
+            
             cell.imgIcon.load.request(with: site.siteIconPath!, onCompletion: { image, error, operation in
                
                 if operation == .network {
                   
                     let transition = CATransition()
                     transition.duration = 0.5
-                    transition.type = kCATransitionFade
+                    transition.type = CATransitionType.fade
                     cell.imgIcon.layer.add(transition, forKey: nil)
                     cell.imgIcon.image = image
                     
-                    site.iconArray=UIImagePNGRepresentation(image!)
+                    site.iconArray=image!.pngData()
                     let newSiteUpdate:Dictionary<String,AnyObject> = [SiteAttributes.iconArray.rawValue : site.iconArray! as AnyObject]
                     self.siteController.updateSite(site, newSiteDetails: newSiteUpdate)
                 }
             })
-*/
+
             /*
             let myCompletionHandler: (URL?, UIImage?, NSError?,CacheType?) -> Void = { (data, response, error,cachtype) in
                 // this is where the completion handler code goes

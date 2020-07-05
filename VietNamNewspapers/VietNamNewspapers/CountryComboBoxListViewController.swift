@@ -8,7 +8,7 @@
 
 import UIKit
 import FirebaseMessaging
-//import ImageLoader
+import ImageLoader
 class CountryComboBoxListViewController: UIViewController,UIPickerViewDataSource, UIPickerViewDelegate{
     
     @IBOutlet weak var pickerCountryList: UIPickerView!
@@ -22,25 +22,25 @@ class CountryComboBoxListViewController: UIViewController,UIPickerViewDataSource
     var country_code_selected:String!="US"
     var country_name_selected:String!
     @IBOutlet weak var lbSelectCountry: UILabel!
-   // @IBOutlet weak var viewContainer: UIView!
-     var setting=Settings()
+    // @IBOutlet weak var viewContainer: UIView!
+    var setting=Settings()
     @IBOutlet weak var btImportNewspapers: UIButton!
     @IBAction func buttonImportNewspapers(_ sender: AnyObject) {
         var index=pickerCountryList.selectedRow(inComponent: 0)
-         country_code_selected=countryList[index].code
+        country_code_selected=countryList[index].code
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.pickerCountryList.dataSource = self;
         self.pickerCountryList.delegate = self;
         btImportNewspapers.backgroundColor=UIColor(red: 51/255, green: 90/255, blue: 149/255, alpha: 1)
-       
+        
         
         
         passOject=UserDefaults()
-      
-       if(setting.getCountryCodeSelectedKey()=="")
-       {
+        
+        if(setting.getCountryCodeSelectedKey()=="")
+        {
             country_code_selected=NSLocale.current.regionCode
             if(country_code_selected=="GB")
             {
@@ -48,11 +48,11 @@ class CountryComboBoxListViewController: UIViewController,UIPickerViewDataSource
             }
         }
         else
-       {
-        country_code_selected = setting.getCountryCodeSelectedKey()
-        FIRMessaging.messaging().unsubscribe(fromTopic: "/topics/"+setting.getCountryCodeSelectedKey()+"")
-        print("UnSubscribed to "+setting.getCountryCodeSelectedKey()+" topic")
-        
+        {
+            country_code_selected = setting.getCountryCodeSelectedKey()
+            FIRMessaging.messaging().unsubscribe(fromTopic: "/topics/"+setting.getCountryCodeSelectedKey()+"")
+            print("UnSubscribed to "+setting.getCountryCodeSelectedKey()+" topic")
+            
         }
         btImportNewspapers.setTitle(NSLocalizedString("next", comment: ""), for: UIControl.State())
         lbSelectCountry.text=NSLocalizedString("select_country", comment: "")
@@ -61,7 +61,7 @@ class CountryComboBoxListViewController: UIViewController,UIPickerViewDataSource
         indicator.startAnimating()
         view.addSubview(indicator)
         
-                // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view.
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -77,21 +77,21 @@ class CountryComboBoxListViewController: UIViewController,UIPickerViewDataSource
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         
         let myView = UIView(frame: CGRect(x: 0, y: 0, width: pickerView.bounds.width - 30, height: 50))
-       
+        
         let myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-       //myImageView.load(countryList[row].imagePath)
-        /*lan.nh
-       myImageView.load.request(with: countryList[row].imagePath)
-        */
+        //myImageView.load(countryList[row].imagePath)
+        
+        myImageView.load.request(with: countryList[row].imagePath)
+        
         let myLabel = UILabel(frame: CGRect(x: 60, y: 0, width: pickerView.bounds.width - 90, height: 50 ))
- 
+        
         myLabel.text = countryList[row].name
         
         myView.addSubview(myLabel)
         myView.addSubview(myImageView)
         
         return myView
-    
+        
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
@@ -110,7 +110,7 @@ class CountryComboBoxListViewController: UIViewController,UIPickerViewDataSource
                     for item in countriesArray
                     {
                         var country:SWCountry!
-                        var countryDetail=item.components(separatedBy: "-")
+                        let countryDetail=item.components(separatedBy: "-")
                         if  countryDetail.count==2
                         {
                             
@@ -125,7 +125,7 @@ class CountryComboBoxListViewController: UIViewController,UIPickerViewDataSource
                     }
                     DispatchQueue.main.async {
                         self.pickerCountryList.reloadAllComponents()
-                        self.pickerCountryList.selectRow(self.getIndexfromList(self.country_code_selected, arrayCountry: self.countryList), inComponent: 0, animated: true)
+                    self.pickerCountryList.selectRow(self.getIndexfromList(self.country_code_selected, arrayCountry: self.countryList), inComponent: 0, animated: true)
                         self.indicator.stopAnimating()
                     }
                     
@@ -144,20 +144,20 @@ class CountryComboBoxListViewController: UIViewController,UIPickerViewDataSource
                 
                 self.present(alertController, animated: true, completion:nil)
             }
-        
-
-     
+            
+            
+            
         } else {
             // the URL was bad!
         }
-
-      
+        
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-   
+    
     func getIndexfromList(_ country_code:String, arrayCountry:Array<SWCountry>)->Int
     {
         var index:Int!=0
@@ -166,14 +166,14 @@ class CountryComboBoxListViewController: UIViewController,UIPickerViewDataSource
         }
         else
         {
-                for  c in arrayCountry
+            for  c in arrayCountry
+            {
+                if(c.code==self.country_code_selected)
                 {
-                    if(c.code==self.country_code_selected)
-                    {
-                        country_name_selected=c.name
-                        index=arrayCountry.firstIndex(of: c)
-                        break
-                    }
+                    country_name_selected=c.name
+                    index=arrayCountry.firstIndex(of: c)
+                    break
+                }
             }
         }
         return index
@@ -184,21 +184,21 @@ class CountryComboBoxListViewController: UIViewController,UIPickerViewDataSource
         var code:String!
         
         
-            for  c in arrayCountry
+        for  c in arrayCountry
+        {
+            if(c.name==country_name)
             {
-                if(c.name==country_name)
-                {
-                    code=c.code
-                    break
-                }
+                code=c.code
+                break
             }
-      
+        }
+        
         return code
         
     }
     
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
