@@ -516,7 +516,7 @@ class SiteListTableViewController: UIViewController,UITableViewDelegate, UITable
     }
     func rateApp(){
         
-        let app_id=NSLocalizedString("app_id", comment: "") as String!
+        let app_id=NSLocalizedString("app_id", comment: "") as String?
         
         // let url=URL(string : "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=\(app_id)")!
         let url=URL(string : "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id="+app_id!)!
@@ -557,14 +557,14 @@ class SiteListTableViewController: UIViewController,UITableViewDelegate, UITable
     func showRateMe() {
         
         
-        let app_id=NSLocalizedString("app_id", comment: "") as String!
-        let app_name=NSLocalizedString("app_name", comment: "") as String!
-        let rateTitle=NSLocalizedString("rate_app", comment: "") as String!
+        let app_id=NSLocalizedString("app_id", comment: "") as String?
+        let app_name=NSLocalizedString("app_name", comment: "") as String?
+        let rateTitle=NSLocalizedString("rate_app", comment: "") as String?
         let rateMassage = String.localizedStringWithFormat(NSLocalizedString("rate_message", comment: ""), app_name! )
         
-        let rateNow=NSLocalizedString("rate_now", comment: "") as String!
-        let noThanks=NSLocalizedString("no_thanks", comment: "") as String!
-        let later=NSLocalizedString("late", comment: "") as String!
+        let rateNow=NSLocalizedString("rate_now", comment: "") as String?
+        let noThanks=NSLocalizedString("no_thanks", comment: "") as String?
+        let later=NSLocalizedString("late", comment: "") as String?
         
         let urlRating=URL(string : "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id="+app_id!)!
         
@@ -703,13 +703,13 @@ class SiteListTableViewController: UIViewController,UITableViewDelegate, UITable
                                     
                                     
                                     
-                                    let updateTitle=NSLocalizedString("update_database", comment: "") as String!
-                                    let updateMassage = NSLocalizedString("update_message", comment: "")as String!
+                                    let updateTitle=NSLocalizedString("update_database", comment: "") as String?
+                                    let updateMassage = NSLocalizedString("update_message", comment: "")as String?
                                     let update_details_message="Details:\nNew: "+siteAdd+"\n"+"Updated: "+siteUpdate+"\n"+"Deleted: "+siteDelete
                                     let updateMassageFinal=updateMassage!+"\n"+update_details_message
-                                    let updateNow=NSLocalizedString("update_now", comment: "") as String!
-                                    let noThanks=NSLocalizedString("no_thanks", comment: "") as String!
-                                    let later=NSLocalizedString("late", comment: "") as String!
+                                    let updateNow=NSLocalizedString("update_now", comment: "") as String?
+                                    let noThanks=NSLocalizedString("no_thanks", comment: "") as String?
+                                    let later=NSLocalizedString("late", comment: "") as String?
                                     
                                     var alert = UIAlertController(title: updateTitle, message: updateMassageFinal, preferredStyle: UIAlertController.Style.alert)
                                     

@@ -120,7 +120,7 @@ public final class Map {
 			
 			// Returns dummy memory as a proxy for type `T`
 			let pointer = UnsafeMutablePointer<T>.allocate(capacity: 0)
-			pointer.deallocate(capacity: 0)
+			pointer.deallocate()
 			return pointer.pointee
 		}
 	}

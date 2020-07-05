@@ -34,14 +34,14 @@ private func setValue(_ value: Any, map: Map) {
 
 private func setValue(_ value: Any, key: String, checkForNestedKeys: Bool, dictionary: inout [String : Any]) {
 	if checkForNestedKeys {
-		let keyComponents = ArraySlice(key.characters.split { $0 == "." })
+		let keyComponents = ArraySlice(key.split { $0 == "." })
 		setValue(value, forKeyPathComponents: keyComponents, dictionary: &dictionary)
 	} else {
 		dictionary[key] = value
 	}
 }
 
-private func setValue(_ value: Any, forKeyPathComponents components: ArraySlice<String.CharacterView.SubSequence>, dictionary: inout [String : Any]) {
+private func setValue(_ value: Any, forKeyPathComponents components: ArraySlice<String.SubSequence>, dictionary: inout [String : Any]) {
 	if components.isEmpty {
 		return
 	}

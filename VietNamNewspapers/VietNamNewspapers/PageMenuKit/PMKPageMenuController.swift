@@ -133,7 +133,7 @@ public class PMKPageMenuController: UIViewController, UIScrollViewDelegate
     var titles: [String] = []
     for (index, viewController) in controllers.enumerated() {
       if let title = viewController.value(forKey: "title") as? String,
-         title.characters.count > 0 {
+         title.count > 0 {
         titles.append(title)
       }
       else {
@@ -546,7 +546,7 @@ extension PMKPageMenuController: UIPageViewControllerDelegate
   // MARK - UIPageViewControllerDelegate (optional)
   public func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
     if let viewController: UIViewController = pendingViewControllers.last {
-      if let index = self.childControllers.index(of: viewController) {
+      if let index = self.childControllers.firstIndex(of: viewController) {
         if index != currentIndex {
           self.willMoveIndicator(at: index)
         }
@@ -558,7 +558,7 @@ extension PMKPageMenuController: UIPageViewControllerDelegate
   // MARK - UIPageViewControllerDelegate (optional)
   public func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
     if let viewController: UIViewController = pageViewController.viewControllers?.last {
-      guard let index = self.childControllers.index(of: viewController) else {
+      guard let index = self.childControllers.firstIndex(of: viewController) else {
         return
       }
       if (completed) {
@@ -593,7 +593,7 @@ extension PMKPageMenuController: UIPageViewControllerDataSource
 {
   // MARK - UIPageViewControllerDataSource (required)
   public func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-    if let index = self.childControllers.index(of: viewController) {
+    if let index = self.childControllers.firstIndex(of: viewController) {
       if index != 0 && index != NSNotFound {
         return self.childControllers[index - 1]
       }
@@ -603,7 +603,7 @@ extension PMKPageMenuController: UIPageViewControllerDataSource
 
   // MARK - UIPageViewControllerDataSource (required)
   public func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-    if let index = self.childControllers.index(of: viewController) {
+    if let index = self.childControllers.firstIndex(of: viewController) {
       let count: Int = self.childControllers.count
       if index != NSNotFound && index + 1 < count {
         return self.childControllers[index + 1]

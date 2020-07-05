@@ -171,7 +171,7 @@ class CountryComboBoxListViewController: UIViewController,UIPickerViewDataSource
                     if(c.code==self.country_code_selected)
                     {
                         country_name_selected=c.name
-                        index=arrayCountry.index(of: c)
+                        index=arrayCountry.firstIndex(of: c)
                         break
                     }
             }

@@ -197,7 +197,7 @@ class SiteDetailTableViewController: UIViewController, UITableViewDelegate, UITa
         
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             
-            let index:Int=siteItemList.index(of: siteItemSelected)!
+            let index:Int=siteItemList.firstIndex(of: siteItemSelected)!
             switch swipeGesture.direction {
             case UISwipeGestureRecognizer.Direction.left:
                 if(index<siteItemList.count-1)
@@ -337,7 +337,7 @@ class SiteDetailTableViewController: UIViewController, UITableViewDelegate, UITa
         }
         
         
-        if(feedData.linkImage?.characters.count>10 && isDownloadImage==true)
+        if(feedData.linkImage?.count>10 && isDownloadImage==true)
         {
             
             

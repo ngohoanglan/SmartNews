@@ -221,7 +221,7 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
         
         if(UIDevice.current.userInterfaceIdiom == .phone)
         {
-            if((feedData.linkImage != nil ) && (feedData.linkImage?.characters.count)!>10 && setting.getBlockImage()==true)
+            if((feedData.linkImage != nil ) && (feedData.linkImage?.count)!>10 && setting.getBlockImage()==true)
             {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "CellNotDesc", for: indexPath)
                     as! FeedNotDescriptionViewCell
@@ -478,7 +478,7 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
         }
         else //IPad
         {
-            if((feedData.linkImage != nil ) && (feedData.linkImage?.characters.count)!>10 && setting.getBlockImage()==true)
+            if((feedData.linkImage != nil ) && (feedData.linkImage?.count)!>10 && setting.getBlockImage()==true)
             {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "CellNotDescIPad", for: indexPath)
                     as! FeedNotDescriptionViewCellIPad

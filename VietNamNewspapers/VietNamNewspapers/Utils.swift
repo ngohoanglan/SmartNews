@@ -193,7 +193,7 @@ class Utils
         var result:String=""
         input=input.replacingOccurrences(of: "-", with: "+").replacingOccurrences(of: "_", with: "/").replacingOccurrences(of: ",", with: "=")
         let encodeData=Data(base64Encoded: input, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters)
-        for c in input.characters
+        for c in input
         {
             
             let c_int=String(c).utf8[String(c).utf8.startIndex]
@@ -249,7 +249,7 @@ class Utils
         input=input.replacingOccurrences(of: "-", with: "+").replacingOccurrences(of: "_", with: "/").replacingOccurrences(of: ",", with: "=")
         //var lengtStr=input.characters.count
         
-        for c in input.characters
+        for c in input
         {
             
             let c_int=String(c).utf8[String(c).utf8.startIndex]
@@ -319,7 +319,7 @@ class Utils
         
         
         
-        for c in base64Encoded!.characters
+        for c in base64Encoded!
         {
             
             let c_int=String(c).utf8[String(c).utf8.startIndex]
@@ -376,7 +376,7 @@ class Utils
         input=input.replacingOccurrences(of: "-", with: "+").replacingOccurrences(of: "_", with: "/").replacingOccurrences(of: ",", with: "=")
         //var lengtStr=input.characters.count
         
-        for c in input.characters
+        for c in input
         {
             
             let c_int=String(c).utf8[String(c).utf8.startIndex]

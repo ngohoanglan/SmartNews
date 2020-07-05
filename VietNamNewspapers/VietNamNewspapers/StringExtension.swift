@@ -114,7 +114,7 @@ extension String {
     func indexOfString(_ intput:String)->Int
     {
         let range: Range<String.Index> = self.range(of: intput)!
-        let index:Int=self.characters.distance(from: self.startIndex, to: range.lowerBound)
+        let index:Int=self.distance(from: self.startIndex, to: range.lowerBound)
         return index
     }
     
