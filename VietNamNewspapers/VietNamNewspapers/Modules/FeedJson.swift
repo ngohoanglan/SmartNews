@@ -7,7 +7,7 @@
 //
 import ObjectMapper
 import Foundation
-class Feeds//:Mappable
+class Feeds:Mappable
 {
     var feedsJson: [FeedJson]?
     var version:Int?
@@ -22,7 +22,7 @@ class Feeds//:Mappable
     
 }
 
-class FeedJson//:Mappable
+class FeedJson:Mappable
 {
     
     var Title:String?

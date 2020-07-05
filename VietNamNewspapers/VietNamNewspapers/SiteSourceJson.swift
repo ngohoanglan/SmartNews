@@ -10,24 +10,24 @@ import UIKit
 import ObjectMapper
 
 class SitesSource:Mappable{
-       var siteSource: [SiteSource]?
-    var version:Int?
+    var siteSource: [SiteSource]?
+    var version: Int?
     required init?(map: Map) {
         
     }
     func mapping(map: Map) {
         version    <- map["version"]
-        
-         siteSource    <- map["sites"]
+        siteSource    <- map["sites"]
     }
 }
-class SiteSource//:Mappable
+class SiteSource:Mappable
 {
+    var url:String?
+    
     var isCheck:Bool=true
     var iconArray:Data?
     var siteItemSource: [SiteItemSource]?
     var name:String?
-    var url:String?
     var direct:Int?
     var leaf:Int?
     var icon:String?
@@ -41,30 +41,30 @@ class SiteSource//:Mappable
     var _default:Int?
     
     required init?(map: Map) {
-       // super.init(map)
-    
+        // super.init(map)
+        
     }
     
-     func mapping(map: Map) {
-      siteItemSource   <- map["feeds"]
-         name    <- map["name"]
+    func mapping(map: Map) {
          url    <- map["url"]
-         direct    <- map["direct"]
-         leaf    <- map["leaf"]
-         icon    <- map["icon"]
-         hide    <- map["hide"]
-         m    <- map["m"]
-         countrycode    <- map["countrycode"]
-         mobilizer    <- map["mobilizer"]
-         magazinecode    <- map["magazinecode"]
-         encoding    <- map["encoding"]
+        siteItemSource   <- map["feeds"]
+        name    <- map["name"]
+        direct    <- map["direct"]
+        leaf    <- map["leaf"]
+        icon    <- map["icon"]
+        hide    <- map["hide"]
+        m    <- map["m"]
+        countrycode    <- map["countrycode"]
+        mobilizer    <- map["mobilizer"]
+        magazinecode    <- map["magazinecode"]
+        encoding    <- map["encoding"]
         deleted    <- map["deleted"]
         _default    <- map["default"]
-       
+        
     }
     
 }
 class SiteItemSource:SiteSource
 {
-
+    
 }
