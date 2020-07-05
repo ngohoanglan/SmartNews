@@ -1,0 +1,54 @@
+/* 
+  Localizable.strings
+  VietNamNewspapers
+
+  Created by admin on 3/28/16.
+  Copyright © 2016 admin. All rights reserved.
+*/
+"country_code"="US";
+"country_name"="United States";
+"app_name"="Nouvelles";
+"app_id"="1214141931";
+
+
+"check_all"="Sélectionner tout";
+"uncheck_all"="Désélectionner";
+"import_newspapers"="IMPORTATION JOURNAUX";
+"select_country"="Sélectionnez votre pays";
+"next"="SUIVANT";
+"search_article"="Recherche d'articles";
+"favorite_article"="Favori d'articles";
+"add_more_newspaper"="Changer de pays";
+"share_app"="Partager app";
+"rate_app"="Évaluation app";
+"contact_us"="Contactez-nous";
+"newspapers_management"="Gestion de journaux";
+"feed_setting"="paramètres d'feed";
+"app_setting"="paramètre d'application";
+"block_image"="Télécharger Images";
+"description_expand"="Description Plus";
+"text_size"="Taille du texte";
+"clear_cache"="Vider le cache";
+"delete_item"="Retirer";
+"delete_newspaper"="Supprimer journaux";
+"confirm_delete_newspaper"="Êtes-vous sûr de vouloir supprimer %@ ?";
+"clear_success"="Toutes les données a été effacée";
+"cancel"="Annuler";
+"clear_cache_confirm"="Etes-vous sûr de vouloir effacer tous?";
+"remove_ads"="Remove Advertisement!";
+"error_message"="Une erreur est survenue. Veuillez réessayer ultèrieurement";
+"restore_purchase"="Restore Purchases";
+"ads_purchased"="Ads Purchased";
+"rate_now"="évaluer";
+"no_thanks"="non, merci";
+"late"="plus tard";
+"rate_message"="Merci d'utiliser %@";
+"update_database"="Base de données de mise à jour";
+"update_now"="Mettre à jour maintenant";
+"update_message"="Une nouvelle version de la base de données est disponible. Etes-vous sûr que vous voulez mettre à jour?";
+"error"="Erreur";
+"no_connection_message"="S'il vous plaît, vérifiez votre connexion à internet et réessayez";
+"delete_all_newspaper"="Supprimer tous les journaux";
+"confirm_delete_all_newspaper"="Voulez-vous vraiment supprimer tous les journaux?";
+
+

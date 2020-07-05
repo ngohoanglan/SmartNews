@@ -1,0 +1,52 @@
+/* 
+  Localizable.strings
+  VietNamNewspapers
+
+  Created by admin on 3/28/16.
+  Copyright © 2016 admin. All rights reserved.
+*/
+"country_code"="US";
+"country_name"="United States";
+"app_name"="Noticias";
+"app_id"="1214141931";
+
+"check_all"="Seleccionar todo";
+"uncheck_all"="Deseleccionar todo";
+"import_newspapers"="IMPORTAR";
+"select_country"="Selecciona tu pais";
+"next"="SIGUIENTE";
+"search_article"="Buscar artículos";
+"favorite_article"="Los artículos preferidos";
+"add_more_newspaper"="Cambiar país";
+"share_app"="Comparte esta aplicación";
+"rate_app"="Califica esta aplicación";
+"contact_us"="Atención al cliente";
+"newspapers_management"="Ajustes de periódicos";
+"feed_setting"="Ajustes de Feed";
+"app_setting"="Ajustes de Aplicacion";
+"block_image"="Descargar Imágenes";
+"description_expand"="Expandir Descripción";
+"text_size"="Tamaño del texto";
+"clear_cache"="Borrar caché";
+"delete_item"="Eliminar elemento";
+"delete_newspaper"="Eliminar periódicos";
+"confirm_delete_newspaper"="¿Está seguro que desea eliminar %@ ?";
+"clear_success"="Todos los datos se ha borrado";
+"cancel"="Cancelar";
+"clear_cache_confirm"="¿Está seguro de que desea borrar todo?";
+"remove_ads"="Retire Publicidad!";
+"error_message"="Ha ocurrido un error, por favor intente de nuevo más tarde";
+"restore_purchase"="Restaurar las compras";
+"ads_purchased"="Comprar publicidad";
+"rate_now"="La tasa";
+"no_thanks"="No, gracias";
+"late"="Tarde";
+"rate_message"="Gracias por usar %@";
+"update_database"="Actualizar base de datos";
+"update_now"="Actualizar ahora";
+"update_message"="Una nueva versión de la base de datos está disponible. ¿Seguro que desea actualizar?";
+"error"="Erreur";
+"no_connection_message"="Comprueba tu conexión a Internet y vuelve a intentarlo";
+"delete_all_newspaper"="Eliminar todos los periódicos";
+"confirm_delete_all_newspaper"="¿Seguro que quieres eliminar todos los periódicos?";
+

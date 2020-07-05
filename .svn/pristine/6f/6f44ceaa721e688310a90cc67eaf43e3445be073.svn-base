@@ -1,0 +1,60 @@
+//
+//  FeedNotDescriptionViewCellIPad.swift
+//  VietNamNewspapers
+//
+//  Created by Ngô Lân on 9/22/17.
+//  Copyright © 2017 admin. All rights reserved.
+//
+
+import UIKit
+
+class FeedNotDescriptionViewCellIPad: UITableViewCell {
+    
+    
+    @IBOutlet weak var btImportan: UIButton!
+    @IBOutlet weak var btnExpand: UIButton!
+    @IBOutlet weak var csDescriptionHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var lbDescription: UILabel!
+    @IBOutlet weak var lbPubdate: UILabel!
+    @IBOutlet weak var feedImageCell: UIImageView!
+    
+    @IBOutlet weak var lbTitleCell: UILabel!
+    
+    // @IBOutlet weak var pubDatelb: UILabel!
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+        
+    }
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        self.selectionStyle = .none
+        // Configure the view for the selected state
+    }
+    @IBAction func btnExpand(_ sender: AnyObject) {
+        if let btnExpandTapped=self.btnExpandTapped
+        {
+            btnExpandTapped()
+        }
+    }
+    
+    @IBAction func btnShare(_ sender: AnyObject) {
+        if let btnShareTapped = self.btnShareTapped
+        {
+            btnShareTapped()
+        }
+    }
+    
+    @IBAction func btnImportan(_ sender: AnyObject) {
+        if let btnImportanTapped=self.btnImportanTapped
+        {
+            btnImportanTapped()
+        }
+    }
+    
+    var btnShareTapped : (() -> Void)? = nil
+    var btnImportanTapped : (() -> Void)? = nil
+    var btnExpandTapped : (() -> Void)? = nil
+}
+

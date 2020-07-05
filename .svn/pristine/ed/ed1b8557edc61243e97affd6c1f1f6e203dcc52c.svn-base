@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "SiteDetailTableViewController.(SelectionChange in _1EE99DE478B0F72C62617E935DDB3161)(SiteItem, autoFreshing : Bool) -&gt; ():SiteDetailTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FeedDataController.updateClearAllImage(Int) -&gt; ():FeedDataController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "SiteListTableViewController.viewWillAppear(Bool) -&gt; ():SiteListTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "(Site_Site_ *)((Site_Site_ *)0x79858420)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SiteDetailTableViewController.((SelectionChange in _1EE99DE478B0F72C62617E935DDB3161)(SiteItem, autoFreshing : Bool) -&gt; ()).(closure #1).(closure #1):SiteDetailTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

@@ -1,0 +1,105 @@
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "1Zr-BM-QTC"; */
+"1Zr-BM-QTC.title" = "Title";
+
+/* Class = "UILabel"; text = "Description"; ObjectID = "3py-gZ-QIA"; */
+"3py-gZ-QIA.text" = "Description";
+
+/* Class = "UITableViewSection"; headerTitle = "Feed Settings"; ObjectID = "4lf-ol-pvP"; */
+"4lf-ol-pvP.headerTitle" = "Feed Settings";
+
+/* Class = "UILabel"; text = "Pubdate"; ObjectID = "5ry-0b-XQD"; */
+"5ry-0b-XQD.text" = "Pubdate";
+
+/* Class = "UILabel"; text = "Pubdate"; ObjectID = "8sn-uS-toP"; */
+"8sn-uS-toP.text" = "Pubdate";
+
+/* Class = "UILabel"; text = "Expand Description"; ObjectID = "8vW-Fq-dyB"; */
+"8vW-Fq-dyB.text" = "Expand Description";
+
+/* Class = "UILabel"; text = "Change Text Size"; ObjectID = "AHI-sN-yUs"; */
+"AHI-sN-yUs.text" = "Change Text Size";
+
+/* Class = "UITableViewSection"; headerTitle = "Section-3"; ObjectID = "Drr-tb-x6j"; */
+"Drr-tb-x6j.headerTitle" = "Section-3";
+
+/* Class = "UILabel"; text = "Description"; ObjectID = "Fc5-Dx-FOk"; */
+"Fc5-Dx-FOk.text" = "Description";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Gsm-6s-bIt"; */
+"Gsm-6s-bIt.text" = "Label";
+
+/* Class = "UILabel"; text = "Remove Advertisement"; ObjectID = "H74-sy-4cB"; */
+"H74-sy-4cB.text" = "Remove Advertisement";
+
+/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "J2X-sG-CQs"; */
+"J2X-sG-CQs.normalTitle" = "NEXT";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "JTi-Cx-XM7"; */
+"JTi-Cx-XM7.text" = "Label";
+
+/* Class = "UILabel"; text = "Description"; ObjectID = "QHE-76-620"; */
+"QHE-76-620.text" = "Description";
+
+/* Class = "UILabel"; text = "Pubdate"; ObjectID = "Rzf-NI-6bv"; */
+"Rzf-NI-6bv.text" = "Pubdate";
+
+/* Class = "UIButton"; normalTitle = "UnSelectedAll"; ObjectID = "TpB-CR-YeG"; */
+"TpB-CR-YeG.normalTitle" = "UnSelectedAll";
+
+/* Class = "UILabel"; text = "No Image"; ObjectID = "Trp-Od-Aaz"; */
+"Trp-Od-Aaz.text" = "No Image";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "VDL-4X-c4k"; */
+"VDL-4X-c4k.text" = "Label";
+
+/* Class = "UILabel"; text = "uncheck all"; ObjectID = "WIa-At-P1b"; */
+"WIa-At-P1b.text" = "uncheck all";
+
+/* Class = "UILabel"; text = "Restore Purchases"; ObjectID = "Yy0-ux-OId"; */
+"Yy0-ux-OId.text" = "Restore Purchases";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "aiY-ax-V7A"; */
+"aiY-ax-V7A.title" = "Title";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "an6-Rj-flh"; */
+"an6-Rj-flh.title" = "Title";
+
+/* Class = "UIButton"; normalTitle = "IMPORT NEWSPAPERS"; ObjectID = "b10-99-3ha"; */
+"b10-99-3ha.normalTitle" = "IMPORT NEWSPAPERS";
+
+/* Class = "UILabel"; text = "Delete data downloaded"; ObjectID = "cT1-hv-KAT"; */
+"cT1-hv-KAT.text" = "Delete data downloaded";
+
+/* Class = "UILabel"; text = "Description"; ObjectID = "jgK-rU-R1X"; */
+"jgK-rU-R1X.text" = "Description";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "jrC-1U-t1k"; */
+"jrC-1U-t1k.text" = "Label";
+
+/* Class = "UILabel"; text = "Pubdate"; ObjectID = "kra-cp-mfk"; */
+"kra-cp-mfk.text" = "Pubdate";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "omz-Tw-NwP"; */
+"omz-Tw-NwP.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "q8K-Si-60l"; */
+"q8K-Si-60l.text" = "Label";
+
+/* Class = "UILabel"; text = "Select a country"; ObjectID = "tdf-LA-8BI"; */
+"tdf-LA-8BI.text" = "Select a country";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "vBl-nl-qYe"; */
+"vBl-nl-qYe.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "vdg-SS-vZm"; */
+"vdg-SS-vZm.text" = "Title";
+
+/* Class = "UILabel"; text = "check all"; ObjectID = "wR9-Gr-eJT"; */
+"wR9-Gr-eJT.text" = "check all";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "wiQ-fl-GiF"; */
+"wiQ-fl-GiF.text" = "Title";
+
+/* Class = "UIButton"; normalTitle = "Select All"; ObjectID = "ygY-kY-eLq"; */
+"ygY-kY-eLq.normalTitle" = "Select All";

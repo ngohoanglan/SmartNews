@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "SiteDetailTableViewController.((SelectionChange in _1EE99DE478B0F72C62617E935DDB3161)(SiteDetailTableViewController) -&gt; (SiteItem, autoFreshing : Bool) -&gt; ()).(closure #1).(closure #1):SiteDetailTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "(String)content">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

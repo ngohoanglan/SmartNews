@@ -1,0 +1,563 @@
+//
+//  SettingsTableViewController.swift
+//  VietNamNewspapers
+//
+//  Created by Ngô Lân on 6/30/16.
+//  Copyright © 2016 admin. All rights reserved.
+//
+
+import UIKit
+import StoreKit
+import FirebaseMessaging
+class Settings
+{
+    fileprivate let countryCodeSelectedKey="countryCodeSelectedKey"
+    fileprivate let needToUpdateDBKey="needToUpdateDBKey"
+    fileprivate let dateCheckUpdateDBKey="dateCheckUpdateDBKey"
+    fileprivate let databaseVersionKey="databaseVersionKey"
+    fileprivate let databaseVersionIgnoreKey="databaseVersionIgnoreKey"
+    fileprivate let rateAppKey="rateAppKey"
+    fileprivate  let appLaunchCountKey="appLaunchCountKey"
+    fileprivate  let swDescriptionExpandKey:String="swDescriptionKey"
+    fileprivate let swDownloadImageKey:String="swDownloadImageKey"
+    fileprivate let sliderTextSizeKey:String="sliderTextSizeKey"
+    fileprivate let adsRemoveKey="adsRemoveKey"
+    fileprivate let admobKey="admobKey"
+    fileprivate let adsTypeKey="adsTypeKey"
+    fileprivate var sliderTextSizeKeyDefaultValue:Float=16
+    fileprivate  var swDownloadImageDefaultValue:Bool=true
+    fileprivate  var swDescriptionExpanDefaultValue:Bool=false
+    fileprivate  let setting=UserDefaults.standard
+    fileprivate let adsRemoveDefaultValue:Bool=false
+    fileprivate let dateCheckUpdateDBValue:Date=Calendar.current.date(byAdding: .day, value: -100, to: Date())!
+    fileprivate var admobDefaultValue:String="ca-app-pub-3108267494433171/3375569241"
+    func getCountryCodeSelectedKey() -> String {
+        if(setting.object(forKey: countryCodeSelectedKey) != nil)
+        {
+            return setting.string(forKey: countryCodeSelectedKey)!
+        }
+        return ""
+    }
+    func setCountryCodeSelectedKey(_ countryCode:String) -> Void {
+        setting.set(countryCode, forKey: countryCodeSelectedKey)
+    }
+    
+    
+    func getdatabaseVersionIgnoreKey() -> Int {
+        if(setting.object(forKey: databaseVersionIgnoreKey) != nil)
+        {
+            return setting.integer(forKey: databaseVersionIgnoreKey)
+        }
+        return 0
+    }
+    func setdatabaseVersionIgnoreKey(_ version:Int) -> Void {
+        setting.set(version, forKey: databaseVersionIgnoreKey)
+    }
+    func getNeedToUpdateBD()->Bool{
+        if(setting.object(forKey: needToUpdateDBKey) != nil)
+        {
+            return setting.bool(forKey: needToUpdateDBKey)
+        }
+        return false
+    }
+    func setNeedToUpdateBD(_ update:Bool) -> Void {
+        setting.set(update, forKey: needToUpdateDBKey)
+    }
+    
+    //Database version
+    func getDatabaseVersion() -> Int {
+        if(setting.object(forKey: databaseVersionKey) != nil)
+        {
+            return setting.integer(forKey: databaseVersionKey)
+        }
+        return 0
+    }
+    func setDatabaseVersion(_ version:Int) -> Void {
+        setting.set(version, forKey: databaseVersionKey)
+    }
+    
+    func getShowAds()-> Bool{
+        if(getAdsRemove()==true || getAdsType()==0 || getAppLaunchCount()<4){
+                return false
+        }
+        return true
+    }
+    func getAdmobKey() -> String {
+        if(setting.object(forKey: admobKey) != nil)
+        {
+            return setting.string(forKey: admobKey)!
+        }
+        return admobDefaultValue
+    }
+    func setAdmobKey(_ key:String) -> Void {
+        setting.set(key, forKey: admobKey)
+    }
+    enum AdsType:Int{
+        case None=0
+        case Banner=1
+        case Interestial=2
+    }
+    func getAdsType() -> Int {
+        if(setting.object(forKey: adsTypeKey) != nil)
+        {
+            return setting.integer(forKey: adsTypeKey)
+        }
+        return AdsType.None.rawValue
+    }
+    func setAdsType(_ key:Int) -> Void {
+        setting.set(key, forKey: adsTypeKey)
+    }
+    //Date check updateDB
+    func getCheckUpdateDB() -> Date {
+        if(setting.object(forKey: dateCheckUpdateDBKey) != nil)
+        {
+            return setting.object(forKey: dateCheckUpdateDBKey) as! Date
+        }
+        return Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+    }
+    func setCheckUpdateDB(_ date:Date) -> Void {
+        setting.set(date, forKey: dateCheckUpdateDBKey)
+    }
+    
+    //App launch count
+    func getAppLaunchCount() -> Int {
+        if(setting.object(forKey: appLaunchCountKey) != nil)
+        {
+            return setting.integer(forKey: appLaunchCountKey)
+        }
+        return 0
+    }
+    func setAppLaunchCount(_ count:Int) -> Void {
+        setting.set(count, forKey: appLaunchCountKey)
+    }
+    
+    func getRateApp()->Bool{
+        if(setting.object(forKey: rateAppKey) != nil)
+        {
+            let b = setting.bool(forKey: rateAppKey)
+            return b
+        }
+        return false
+    }
+    func setRateApp(_ rate:Bool) -> Void {
+        setting.set(rate, forKey: rateAppKey)
+    }
+    //Text Size
+    func getTextSize()  -> Float{
+        
+        if(setting.object(forKey: sliderTextSizeKey) != nil)
+        {
+            return setting.float(forKey: sliderTextSizeKey)
+            
+        }
+        if(UIDevice.current.userInterfaceIdiom == .phone){
+            return sliderTextSizeKeyDefaultValue
+        }
+        else
+        {
+            return sliderTextSizeKeyDefaultValue+3
+        }
+    }
+    func setTextSize(_ textSize:Float) -> Void {
+        setting.set(textSize, forKey: sliderTextSizeKey)
+    }
+    
+    //Block Image
+    
+    func getBlockImage() -> Bool {
+        if(setting.object(forKey: swDownloadImageKey) != nil)
+        {
+            return setting.bool(forKey: swDownloadImageKey)
+            
+        }
+        return swDownloadImageDefaultValue
+    }
+    func setBlockImage(_ isBlockImage:Bool) -> Void {
+        setting.set(isBlockImage, forKey: swDownloadImageKey)
+    }
+    
+    //IsExpand Description
+    func getExpandDescription() -> Bool {
+        if(setting.object(forKey: swDescriptionExpandKey) != nil)
+        {
+            return setting.bool(forKey: swDescriptionExpandKey)
+            
+        }
+        
+        return swDescriptionExpanDefaultValue
+        
+    }
+    func setExpandDescription(_ isExpandDescription:Bool) -> Void {
+        setting.set(isExpandDescription, forKey: swDescriptionExpandKey)
+    }
+    
+    //Add Remove
+    func getAdsRemove() -> Bool {
+        if(setting.object(forKey: adsRemoveKey) != nil)
+        {
+            return setting.bool(forKey: adsRemoveKey)
+            
+        }
+        
+        return adsRemoveDefaultValue
+        
+    }
+    func setAdsRemove(_ isAdsRemove:Bool) -> Void {
+        setting.set(isAdsRemove, forKey: adsRemoveKey)
+    }
+    
+    
+}
+
+class SettingsTableViewController: UITableViewController ,UIGestureRecognizerDelegate, SKProductsRequestDelegate, SKPaymentTransactionObserver {
+   let settings=Settings()
+    let setting=UserDefaults.standard
+    let bundleID=Bundle.main.bundleIdentifier! as String
+    var productIdentifiers = Set(["thealllatestnews.CroatiaNewspapers"])
+    var product: SKProduct?
+    var productsArray = Array<SKProduct>()
+    @IBOutlet weak var lbRemoveAds: UILabel!
+    
+    @IBOutlet weak var lbRestorePurchase: UILabel!
+    @IBOutlet weak var lbDeleteData: UILabel!
+    @IBOutlet weak var lbExpand: UILabel!
+    @IBOutlet weak var lbNoImage: UILabel!
+    
+    @IBOutlet weak var lbDeleteAllNewspapers: UILabel!
+    @IBAction func slTextSize(_ sender: UISlider) {
+        let senderValue = CGFloat(sender.value)
+        lbTextSize.font = UIFont(name: lbTextSize.font.fontName, size: senderValue)
+        setting.set(sender.value, forKey: sliderTextSizeKey)
+    }
+    @IBOutlet weak var slTextSize: UISlider!
+    
+    @IBOutlet weak var lbTextSize: UILabel!
+    fileprivate  let swDescriptionExpandKey:String="swDescriptionKey"
+    fileprivate  let swDownloadImageKey:String="swDownloadImageKey"
+    fileprivate  let sliderTextSizeKey:String="sliderTextSizeKey"
+    
+    
+    @IBAction func swDescriptionExpand(_ sender: AnyObject) {
+        if swDescriptionExpand.isOn
+        {
+            setting.set(true, forKey: swDescriptionExpandKey)
+        }
+        else
+        {
+            setting.set(false, forKey: swDescriptionExpandKey)
+        }
+    }
+    @IBOutlet weak var swDescriptionExpand: UISwitch!
+    @IBAction func swBlockImage(_ sender: AnyObject) {
+        if swBlockImage.isOn
+        {
+            setting.set(true, forKey: swDownloadImageKey)
+        }
+        else
+        {
+            setting.set(false, forKey: swDownloadImageKey)
+        }
+    }
+    @IBOutlet weak var swBlockImage: UISwitch!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if(bundleID.contains("thealllatestnews.czechnews"))
+        {
+             productIdentifiers = Set(["1163212138"])
+        }
+        else
+        {
+            productIdentifiers = Set([bundleID])
+        }
+        requestProductData()
+        lbExpand.text=NSLocalizedString("description_expand", comment: "")
+        lbNoImage.text=NSLocalizedString("block_image", comment: "")
+        lbTextSize.text=NSLocalizedString("text_size", comment: "")
+        lbDeleteAllNewspapers.text=NSLocalizedString("delete_all_newspaper", comment: "")
+        if(settings.getAdsRemove()==true)
+        {
+            lbRemoveAds.isEnabled=false
+            lbRemoveAds.text=NSLocalizedString("ads_purchased", comment: "")
+        }
+        else
+        {
+            SKPaymentQueue.default().add(self)
+            lbRemoveAds.text=NSLocalizedString("remove_ads", comment: "")
+            lbRemoveAds.isEnabled=true
+        }
+        lbRestorePurchase.text=NSLocalizedString("restore_purchase", comment: "")
+        lbDeleteData.text=NSLocalizedString("clear_cache", comment: "")
+        
+        
+        let taplbDeleteDataAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SettingsTableViewController.taplbDeleteDataAction(_:)))
+        lbDeleteData.addGestureRecognizer(taplbDeleteDataAction)
+        lbDeleteData.isUserInteractionEnabled=true
+        taplbDeleteDataAction.delegate = self // Remember to extend your class with
+        
+        let taplbRemoveAdsAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SettingsTableViewController.taplbRemoveAdsAction(_:)))
+        lbRemoveAds.addGestureRecognizer(taplbRemoveAdsAction)
+        lbRemoveAds.isUserInteractionEnabled=true
+        taplbRemoveAdsAction.delegate = self // Remember to extend your class with
+        
+        let taplbRestorePurchaseAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SettingsTableViewController.taplbRestorePurchaseAction(_:)))
+        lbRestorePurchase.addGestureRecognizer(taplbRestorePurchaseAction)
+        lbRestorePurchase.isUserInteractionEnabled=true
+        taplbRestorePurchaseAction.delegate = self // Remember to extend your class with
+        
+        let taplbDeleteAllNewspapersAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SettingsTableViewController.taplbDeleteAllNewspapersAction(_:)))
+        lbDeleteAllNewspapers.addGestureRecognizer(taplbDeleteAllNewspapersAction)
+        lbDeleteAllNewspapers.isUserInteractionEnabled=true
+        taplbDeleteAllNewspapersAction.delegate = self
+        
+
+        
+        if(setting.object(forKey: swDownloadImageKey) != nil)
+        {
+            swBlockImage.isOn=setting.bool(forKey: swDownloadImageKey)
+        }
+        
+        
+        if(setting.object(forKey: swDescriptionExpandKey) != nil)
+        {
+            
+            swDescriptionExpand.isOn=setting.bool(forKey: swDescriptionExpandKey)
+        }
+        
+        if(setting.object(forKey: sliderTextSizeKey) != nil)
+        {
+            let value=setting.float(forKey: sliderTextSizeKey)
+            slTextSize.value=value
+            lbTextSize.font = UIFont(name: lbTextSize.font.fontName, size: CGFloat(value))
+        }
+        
+    }
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        if(bundleID.contains("thealllatestnews.czechnews"))
+        {
+            return 1
+        }
+        else
+        {
+            return 2
+        }
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        SKPaymentQueue.default().remove(self)
+    }
+    func taplbDeleteAllNewspapersAction(_ gr:UITapGestureRecognizer)
+    {
+       
+
+        
+        let alert = UIAlertController(title: NSLocalizedString("delete_all_newspaper", comment: ""), message: NSLocalizedString("confirm_delete_all_newspaper", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+            switch action.style{
+            case .default:
+                FIRMessaging.messaging().unsubscribe(fromTopic: "/topics/"+self.settings.getCountryCodeSelectedKey())
+                
+                let siteController=SiteController.shareInstance
+                let siteItemController=SiteItemController.shareInstance
+                let feedDataController=FeedDataController.shareInstance
+                siteController.deleteAllSite()
+                siteItemController.deleteAllSiteItem()
+                feedDataController.deleteAllFeedData()
+                self.settings.setdatabaseVersionIgnoreKey(0)
+                
+                let alertMess = UIAlertController(title: NSLocalizedString("clear_success", comment: ""), message: "", preferredStyle: UIAlertControllerStyle.alert)
+                alertMess.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alertMess, animated: true, completion: nil)
+                
+                let menuVC : CountryComboBoxListViewController = self.storyboard!.instantiateViewController(withIdentifier: "CountryListStoryBoard") as! CountryComboBoxListViewController
+                
+                // self.tableView.separatorStyle=UITableViewCellSeparatorStyle.None
+                
+                self.view.addSubview(menuVC.view)
+                self.addChildViewController(menuVC)
+               
+                
+                
+                //menuVC.view.frame=CGRect(x: 0 - UIScreen.main.bounds.size.width, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height);
+                
+               // UIView.animate(withDuration: 0.3, animations: { () -> Void in
+                //    menuVC.view.frame=CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height);
+                    
+              //  }, completion:nil)
+            case .cancel:
+                print("cancel")
+                
+            case .destructive:
+                print("destructive")
+            }
+        }))
+        
+    }
+
+    func taplbRemoveAdsAction(_ gr:UITapGestureRecognizer)
+    {
+        let payment = SKPayment(product: productsArray[0])
+        SKPaymentQueue.default().add(payment)
+    }
+    // In-App Purchase Methods
+    func taplbRestorePurchaseAction(_ gr:UITapGestureRecognizer)
+    {
+        SKPaymentQueue.default().add(self)
+        SKPaymentQueue.default().restoreCompletedTransactions()
+    }
+    func requestProductData()
+    {
+        if SKPaymentQueue.canMakePayments() {
+            let request = SKProductsRequest(productIdentifiers:
+                self.productIdentifiers as Set<String>)
+            request.delegate = self
+            request.start()
+        } else {
+            let alert = UIAlertController(title: "In-App Purchases Not Enabled", message: "Please enable In App Purchase in Settings", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Settings", style: UIAlertActionStyle.default, handler: { alertAction in
+                alert.dismiss(animated: true, completion: nil)
+                
+                let url: URL? = URL(string: UIApplicationOpenSettingsURLString)
+                if url != nil
+                {
+                    UIApplication.shared.openURL(url!)
+                }
+                
+            }))
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { alertAction in
+                alert.dismiss(animated: true, completion: nil)
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+        
+        var products = response.products
+        
+        if (products.count != 0) {
+            for i in 0 ..< products.count
+            {
+                self.product = products[i] as? SKProduct
+                
+                self.productsArray.append(product!)
+                
+                
+            }
+            if(settings.getAdsRemove()==false)
+            {
+                let locale = Locale.current
+                let currencySymbol = locale.currencySymbol
+                let currencyCode = locale.currencyCode
+                
+                lbRemoveAds.text = String.localizedStringWithFormat("%@ : %@  %@", (product?.localizedTitle)!,(product?.price)!,currencyCode!)
+                lbRemoveAds.isEnabled=true
+            }
+            
+            
+        } else {
+            print("No products found")
+        }
+        
+        self.tableView.reloadData()    }
+    
+    
+    
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        
+        for transaction in transactions {
+            
+            switch transaction.transactionState {
+                
+            case SKPaymentTransactionState.purchased:
+                settings.setAdsRemove(true)
+                print("Transaction Approved")
+                print("Product Identifier: \(transaction.payment.productIdentifier)")
+                //self.deliverProduct(transaction)
+                SKPaymentQueue.default().finishTransaction(transaction)
+                self.lbRemoveAds.isEnabled=false
+            case SKPaymentTransactionState.failed:
+                print("Transaction Failed")
+                print("Product Identifier: \(transaction.payment.productIdentifier)")
+                SKPaymentQueue.default().finishTransaction(transaction)
+            default:
+                break
+            }
+        }
+    }
+    
+    
+    func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
+        print("Transactions Restored")
+        settings.setAdsRemove(true)
+        let alert = UIAlertView(title: "Thank You", message: "Your purchase(s) were restored.", delegate: nil, cancelButtonTitle: "OK")
+        alert.show()
+    }
+    
+    func taplbDeleteDataAction(_ gr:UITapGestureRecognizer)
+    {
+        let alert = UIAlertController(title: NSLocalizedString("clear_cache", comment: ""), message: NSLocalizedString("clear_cache_confirm", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+            switch action.style{
+            case .default:
+                
+                //Update SiteItem LoadTime
+                let siteItemController=SiteItemController.shareInstance
+                // siteItemController.updateResetAllLoadTime()
+                
+                let siteItemList=siteItemController.getAllSiteItem(false, sortAscending: false)
+                
+                let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+                
+                let loadTime : Date? = (calendar as NSCalendar).date(era: 1, year: 1, month: 1, day: 1, hour: 0, minute: 0, second: 0, nanosecond: 0)
+                
+                for item in siteItemList
+                {
+                    let newSiteItemUpdate:Dictionary<String,AnyObject> = [SiteItemAttributes.loadTime.rawValue : loadTime! as AnyObject]
+                    siteItemController.updateSiteItem(item, newSiteItemDetails: newSiteItemUpdate)
+                }
+                
+                //Delete All feeds
+                let feedController=FeedDataController.shareInstance
+                feedController.deleteAllFeedData()
+                
+                
+                let alertMess = UIAlertController(title: NSLocalizedString("clear_success", comment: ""), message: "", preferredStyle: UIAlertControllerStyle.alert)
+                alertMess.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alertMess, animated: true, completion: nil)
+                
+                
+            case .cancel:
+                print("cancel")
+                
+            case .destructive:
+                print("destructive")
+            }
+        }))
+        
+        
+    }
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        var selectionName:String
+        switch section {
+        case 0:
+            selectionName=NSLocalizedString("feed_setting", comment: "")
+        case 1:
+            selectionName=NSLocalizedString("app_setting", comment: "")
+        case 2:
+            selectionName=NSLocalizedString("newspapers_management", comment: "")
+        default:
+            selectionName=""
+        }
+        return selectionName
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
+}

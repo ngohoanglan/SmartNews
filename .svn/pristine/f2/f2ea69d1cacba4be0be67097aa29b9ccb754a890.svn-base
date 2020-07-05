@@ -1,0 +1,520 @@
+//
+//  FeedDataController.swift
+//  VietNamNewspapers
+//
+//  Created by admin on 2/22/16.
+//  Copyright © 2016 admin. All rights reserved.
+//
+
+import UIKit
+import CoreData
+class FeedDataController {
+    fileprivate let persistenceManager: PersistenceManager!
+    fileprivate var mainContextInstance: NSManagedObjectContext!
+    
+    class var shareInstance:FeedDataController{
+        struct Singleton {
+            static let instance=FeedDataController()
+        }
+        return Singleton.instance
+    }
+    
+    init(){
+        self.persistenceManager=PersistenceManager.sharedInstance
+        self.mainContextInstance=persistenceManager.getMainContextInstance()
+    }
+    func saveFeedData(_ feedDataDetails: Dictionary<String, AnyObject>) {
+        
+        //Minion Context worker with Private Concurrency type.
+        let minionManagedObjectContextWorker:NSManagedObjectContext =
+        NSManagedObjectContext.init(concurrencyType: NSManagedObjectContextConcurrencyType.privateQueueConcurrencyType)
+        minionManagedObjectContextWorker.parent = self.mainContextInstance
+        
+        //Create new Object of Event entity
+        let feed = NSEntityDescription.insertNewObject(forEntityName: FeedData.description(),
+            into: minionManagedObjectContextWorker) as NSManagedObject
+        
+        //Assign field values
+        for (key, value) in feedDataDetails {
+            for attribute in FeedDataAttributes.getAll {
+                if (key == attribute.rawValue) {
+                    feed.setValue(value, forKey: key)
+                }
+            }
+        }
+        
+        
+        
+        
+        //Save current work on Minion workers
+        self.persistenceManager.saveWorkerContext(minionManagedObjectContextWorker)
+        
+        //Save and merge changes from Minion workers with Main context
+     //   self.persistenceManager.mergeWithMainContext()
+        
+        //Post notification to update datasource of a given Viewcontroller/UITableView
+        self.postUpdateNotification()
+    }
+    
+    func getAllFeedData(_ sortedByDate:Bool = true, sortAscending:Bool = true) -> Array<FeedData> {
+        var fetchedResults:Array<FeedData> = Array<FeedData>()
+        
+        // Create request on Event entity
+        let fetchRequest = NSFetchRequest<FeedData>(entityName: FeedData.description())
+        
+        //Create sort descriptor to sort retrieved Events by Date, ascending
+        if sortedByDate {
+            let sortDescriptor = NSSortDescriptor(key: FeedDataAttributes.feedID.rawValue,
+                ascending: sortAscending)
+            let sortDescriptors = [sortDescriptor]
+            fetchRequest.sortDescriptors = sortDescriptors
+        }
+        
+        //Execute Fetch request
+        do {
+            fetchedResults = try  self.mainContextInstance.fetch(fetchRequest) as! [FeedData]
+        } catch let fetchError as NSError {
+            print("retrieveById error: \(fetchError.localizedDescription)")
+            fetchedResults = Array<FeedData>()
+        }
+        
+        return fetchedResults
+    }
+    func getFeedDataById(_ FeedDataId: NSString) -> Array<FeedData> {
+        var fetchedResults:Array<FeedData> = Array<FeedData>()
+        
+        // Create request on Event entity
+        let fetchRequest = NSFetchRequest<FeedData>(entityName: FeedData.description())
+        
+        //Add a predicate to filter by eventId
+        let findByIdPredicate =
+        NSPredicate(format: "\(FeedDataAttributes.feedID) = %@", FeedDataId)
+        fetchRequest.predicate = findByIdPredicate
+        
+        //Execute Fetch request
+        do {
+            fetchedResults = try self.mainContextInstance.fetch(fetchRequest) as! [FeedData]
+        } catch let fetchError as NSError {
+            print("retrieveById error: \(fetchError.localizedDescription)")
+            fetchedResults = Array<FeedData>()
+        }
+        
+        return fetchedResults
+    }
+    
+    func getFeedDataBySiteItemId(_ SiteItemId: NSString) -> Array<FeedData> {
+        var fetchedResults:Array<FeedData> = Array<FeedData>()
+        
+        // Create request on Event entity
+        let fetchRequest = NSFetchRequest<FeedData>(entityName: FeedData.description())
+        
+        //Add a predicate to filter by eventId
+        let findByIdPredicate =
+        NSPredicate(format: "\(FeedDataAttributes.siteItemID) = %@", SiteItemId)
+        fetchRequest.predicate = findByIdPredicate
+        
+        //add sort
+
+        let loadTimeSort=NSSortDescriptor(key: FeedDataAttributes.loadTime.rawValue, ascending: false)
+        let timeStampSort=NSSortDescriptor(key: FeedDataAttributes.timeStamp.rawValue, ascending: true)
+        
+        fetchRequest.sortDescriptors=[loadTimeSort,timeStampSort]
+        //Execute Fetch request
+        do {
+            fetchedResults = try self.mainContextInstance.fetch(fetchRequest) as! [FeedData]
+        } catch let fetchError as NSError {
+            print("retrieveById error: \(fetchError.localizedDescription)")
+            fetchedResults = Array<FeedData>()
+        }
+        
+        return fetchedResults
+    }
+    
+    func getFeedDataByTitleAndDescriptionKeyWord(keyWord: NSString, description:NSString) -> Array<FeedData> {
+        var fetchedResults:Array<FeedData> = Array<FeedData>()
+        
+        // Create request on Event entity
+        let fetchRequest = NSFetchRequest<FeedData>(entityName: FeedData.description())
+        
+        //Add a predicate to filter by eventId
+        let findByIdPredicate =
+            NSPredicate(format: "\(FeedDataAttributes.title) CONTAINS[cd] %@ OR \(FeedDataAttributes.feedDescription) CONTAINS[cd] %@", keyWord,description)
+        fetchRequest.predicate = findByIdPredicate
+        
+        //add sort
+        
+        let loadTimeSort=NSSortDescriptor(key: FeedDataAttributes.loadTime.rawValue, ascending: false)
+        let timeStampSort=NSSortDescriptor(key: FeedDataAttributes.timeStamp.rawValue, ascending: true)
+        
+        fetchRequest.sortDescriptors=[loadTimeSort,timeStampSort]
+        //Execute Fetch request
+        do {
+            fetchedResults = try self.mainContextInstance.fetch(fetchRequest) as! [FeedData]
+        } catch let fetchError as NSError {
+            print("retrieveById error: \(fetchError.localizedDescription)")
+            fetchedResults = Array<FeedData>()
+        }
+        
+        return fetchedResults
+    }
+
+    func getFeedDataBySiteItemIdAndLink(_ SiteItemId: NSString, link:NSString) -> Array<FeedData> {
+        var fetchedResults:Array<FeedData> = Array<FeedData>()
+        
+        // Create request on Event entity
+        let fetchRequest = NSFetchRequest<FeedData>(entityName: FeedData.description())
+        
+        //Add a predicate to filter by eventId
+        let findByIdPredicate =
+        NSPredicate(format: "\(FeedDataAttributes.siteItemID) = %@ AND \(FeedDataAttributes.link) = %@", SiteItemId, link)
+        fetchRequest.predicate = findByIdPredicate
+        
+        //Execute Fetch request
+        do {
+            fetchedResults = try self.mainContextInstance.fetch(fetchRequest) as! [FeedData]
+        } catch let fetchError as NSError {
+            print("retrieveById error: \(fetchError.localizedDescription)")
+            fetchedResults = Array<FeedData>()
+        }
+        
+        return fetchedResults
+    }
+    func getFeedByRead(_ siteItemID:NSString) -> Array<FeedData> {
+        
+        var fetchedResults:Array<FeedData> = Array<FeedData>()
+        
+        // Create request on Event entity
+        let fetchRequest = NSFetchRequest<FeedData>(entityName: FeedData.description())
+        
+        //Add a predicate to filter by eventId
+        let findByIdPredicate =
+            NSPredicate(format: "\(FeedDataAttributes.siteItemID) = %@ AND \(FeedDataAttributes.isRead) = 1",siteItemID)
+        fetchRequest.predicate = findByIdPredicate
+        
+        //Execute Fetch request
+        do {
+            fetchedResults = try self.mainContextInstance.fetch(fetchRequest) as! [FeedData]
+        } catch let fetchError as NSError {
+            print("retrieveById error: \(fetchError.localizedDescription)")
+            fetchedResults = Array<FeedData>()
+        }
+        return fetchedResults
+
+    }
+    func getFeedStatusBySiteItemID(_ siteItemID: NSString) -> String {
+        let total:Int=getFeedDataBySiteItemId(siteItemID).count
+        let read:Int=getFeedByRead(siteItemID).count
+        let unRead=total-read
+        var feedStatus:String!
+        feedStatus=NSString(format: "%02d/%02d", unRead, total) as String
+        
+        return feedStatus
+    }
+    
+    func getFeedDataByFavorites() -> Array<FeedData> {
+        var fetchedResults:Array<FeedData> = Array<FeedData>()
+        
+        // Create request on Event entity
+        let fetchRequest = NSFetchRequest<FeedData>(entityName: FeedData.description())
+        //Add a predicate to filter by eventId
+        let findByIdPredicate =
+            NSPredicate(format: "\(FeedDataAttributes.isFavorite) = 1 ", 1)
+        fetchRequest.predicate = findByIdPredicate
+        
+        //Execute Fetch request
+        do {
+            fetchedResults = try self.mainContextInstance.fetch(fetchRequest) as! [FeedData]
+        } catch let fetchError as NSError {
+            print("retrieveById error: \(fetchError.localizedDescription)")
+            fetchedResults = Array<FeedData>()
+        }
+        
+        return fetchedResults
+    }
+
+    func updateFeedData(_ feedDataToUpdate: FeedData, newFeedDataDetails: Dictionary<String, AnyObject>){
+        
+        let minionManagedObjectContextWorker: NSManagedObjectContext =
+        NSManagedObjectContext.init(concurrencyType: NSManagedObjectContextConcurrencyType.privateQueueConcurrencyType)
+        minionManagedObjectContextWorker.parent = self.mainContextInstance
+        
+        //Assign field values
+        for (key, value) in newFeedDataDetails {
+            for attribute in FeedDataAttributes.getAll {
+                if (key == attribute.rawValue) {
+                    feedDataToUpdate.setValue(value, forKey: key)
+                }
+            }
+        }
+        
+        //Persist new Event to datastore (via Managed Object Context Layer).
+        self.persistenceManager.saveWorkerContext(minionManagedObjectContextWorker)
+        self.persistenceManager.mergeWithMainContext()
+        
+        self.postUpdateNotification()
+    }
+    func deleteAllFeedData()
+    {
+        
+        let minionManagedObjectContextWorker: NSManagedObjectContext =
+            NSManagedObjectContext.init(concurrencyType: NSManagedObjectContextConcurrencyType.privateQueueConcurrencyType)
+        minionManagedObjectContextWorker.parent = self.mainContextInstance
+        
+        //Add a predicate to filter by eventId
+        let findByIdPredicate =
+            NSPredicate(format: "\(FeedDataAttributes.isFavorite) = %@ ", 0)
+       
+        
+        // Create Fetch Request
+        let fetchRequest = NSFetchRequest<FeedData>(entityName: FeedData.description())
+         fetchRequest.predicate = findByIdPredicate
+        // Create Batch Delete Request
+        if #available(iOS 9.0, *) {
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest as! NSFetchRequest<NSFetchRequestResult>)
+            do {
+                try minionManagedObjectContextWorker.execute(batchDeleteRequest)
+                
+            } catch let fetchError as NSError  {
+                
+                print("retrieveById error: \(fetchError.localizedDescription)")
+            }
+        } else {
+            // Fallback on earlier versions
+            do{
+             let feedList=try minionManagedObjectContextWorker.fetch(fetchRequest) as NSArray
+                var obj:NSManagedObject
+                for obj in feedList{
+                    minionManagedObjectContextWorker.delete(obj as! NSManagedObject)
+                
+            }
+               try minionManagedObjectContextWorker.save()
+            }catch let fetchError as NSError  {
+                
+                print("retrieveById error: \(fetchError.localizedDescription)")
+            }
+            
+        }
+        
+       
+    }
+    
+    func deleteFeedDataBySiteID(_ siteID:NSString)
+    {
+        let minionManagedObjectContextWorker: NSManagedObjectContext =
+            NSManagedObjectContext.init(concurrencyType: NSManagedObjectContextConcurrencyType.privateQueueConcurrencyType)
+        minionManagedObjectContextWorker.parent = self.mainContextInstance
+        
+        //Add a predicate to filter by eventId
+        let findByIdPredicate =
+            NSPredicate(format: "\(FeedDataAttributes.siteID) = %@ ", siteID)
+        
+        
+        // Create Fetch Request
+        let fetchRequest = NSFetchRequest<FeedData>(entityName: FeedData.description())
+        fetchRequest.predicate = findByIdPredicate
+        // Create Batch Delete Request
+        if #available(iOS 9.0, *) {
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest as! NSFetchRequest<NSFetchRequestResult>)
+            
+            do {
+                try minionManagedObjectContextWorker.execute(batchDeleteRequest)
+                
+            } catch let fetchError as NSError  {
+                
+                print("retrieveById error: \(fetchError.localizedDescription)")
+            }
+        } else {
+            // Fallback on earlier versions
+            
+            do{
+                let feedList=try minionManagedObjectContextWorker.fetch(fetchRequest) as NSArray
+                var _:NSManagedObject
+                for obj in feedList{
+                    minionManagedObjectContextWorker.delete(obj as! NSManagedObject)
+                    
+                }
+                try minionManagedObjectContextWorker.save()
+            }catch let fetchError as NSError  {
+                
+                print("retrieveById error: \(fetchError.localizedDescription)")
+            }
+            
+
+            
+        }
+       
+    }
+    func deleteFeedDataBySiteItemID(_ siteItemID:NSString)
+    {
+        let minionManagedObjectContextWorker: NSManagedObjectContext =
+            NSManagedObjectContext.init(concurrencyType: NSManagedObjectContextConcurrencyType.privateQueueConcurrencyType)
+        minionManagedObjectContextWorker.parent = self.mainContextInstance
+        
+        //Add a predicate to filter by eventId
+        let findByIdPredicate =
+            NSPredicate(format: "\(FeedDataAttributes.siteItemID) = %@ ", siteItemID)
+        
+        
+        // Create Fetch Request
+        let fetchRequest = NSFetchRequest<FeedData>(entityName: FeedData.description())
+        fetchRequest.predicate = findByIdPredicate
+        // Create Batch Delete Request
+        if #available(iOS 9.0, *) {
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest as! NSFetchRequest<NSFetchRequestResult>)
+            do {
+                try minionManagedObjectContextWorker.execute(batchDeleteRequest)
+                
+            } catch let fetchError as NSError  {
+                
+                print("retrieveById error: \(fetchError.localizedDescription)")
+            }
+        } else {
+            // Fallback on earlier versions
+            do{
+                var feedList=try minionManagedObjectContextWorker.fetch(fetchRequest) as NSArray
+                var obj:NSManagedObject
+                for obj in feedList{
+                    minionManagedObjectContextWorker.delete(obj as! NSManagedObject)
+                    
+                }
+                try minionManagedObjectContextWorker.save()
+            }catch let fetchError as NSError  {
+                
+                print("retrieveById error: \(fetchError.localizedDescription)")
+            }
+
+        }
+        
+        
+    }
+    func deleteFeedDataAfterDay(_ afterDay:Int)
+    {
+        let minionManagedObjectContextWorker: NSManagedObjectContext =
+            NSManagedObjectContext.init(concurrencyType: NSManagedObjectContextConcurrencyType.privateQueueConcurrencyType)
+        minionManagedObjectContextWorker.parent = self.mainContextInstance
+        
+        //Add a predicate to filter by eventId
+        let currentTimeAdded=(Calendar.current as NSCalendar).date(byAdding: NSCalendar.Unit.day, value: -afterDay, to: Date(), options: NSCalendar.Options.init(rawValue: 0))
+        
+        let findByIdPredicate =
+            NSPredicate(format: "\(FeedDataAttributes.loadTime) < %@ ", currentTimeAdded! as CVarArg)
+        
+        
+        // Create Fetch Request
+        let fetchRequest = NSFetchRequest<FeedData>(entityName: FeedData.description())
+        fetchRequest.predicate = findByIdPredicate
+        // Create Batch Delete Request
+        if #available(iOS 9.0, *) {
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest as! NSFetchRequest<NSFetchRequestResult>)
+            do {
+                try minionManagedObjectContextWorker.execute(batchDeleteRequest)
+                
+            } catch let fetchError as NSError  {
+                
+                print("retrieveById error: \(fetchError.localizedDescription)")
+            }
+        } else {
+            // Fallback on earlier versions
+            do{
+                var feedList=try minionManagedObjectContextWorker.fetch(fetchRequest) as NSArray
+                var obj:NSManagedObject
+                for obj in feedList{
+                    minionManagedObjectContextWorker.delete(obj as! NSManagedObject)
+                    
+                }
+                try minionManagedObjectContextWorker.save()
+            }catch let fetchError as NSError  {
+                
+                print("retrieveById error: \(fetchError.localizedDescription)")
+            }
+            
+        }
+        
+        
+    }
+    func updateClearAllImage(_ afterDay:Int)
+    {
+        
+        let minionManagedObjectContextWorker: NSManagedObjectContext =
+            NSManagedObjectContext.init(concurrencyType: NSManagedObjectContextConcurrencyType.privateQueueConcurrencyType)
+        minionManagedObjectContextWorker.parent = self.mainContextInstance
+        
+        // Create Fetch Request
+        
+        let entityDescription = NSEntityDescription.entity(forEntityName: FeedData.description(), in: minionManagedObjectContextWorker)
+        
+        let currentTimeAdded=(Calendar.current as NSCalendar).date(byAdding: NSCalendar.Unit.day, value: -afterDay, to: Date(), options: NSCalendar.Options.init(rawValue: 0))
+        
+        let findByIdPredicate =
+            NSPredicate(format: "\(FeedDataAttributes.loadTime) < %@ ", currentTimeAdded! as CVarArg)
+        
+        // Initialize Batch Update Request
+        let batchUpdateRequest = NSBatchUpdateRequest(entity: entityDescription!)
+        
+        batchUpdateRequest.predicate=findByIdPredicate
+        
+        let img=Data()
+        batchUpdateRequest.propertiesToUpdate = [FeedDataAttributes.imageArray.rawValue: img]
+        
+        do {
+            // Execute Batch Request
+            try minionManagedObjectContextWorker.execute(batchUpdateRequest) as! NSBatchUpdateResult
+            
+            
+        } catch {
+            let updateError = error as NSError
+            print("\(updateError), \(updateError.userInfo)")
+        }
+    }
+
+    func deleteFeedData(_ feedData: FeedData) {
+        //Delete event item from persistance layer
+        let minionManagedObjectContextWorker: NSManagedObjectContext =
+            NSManagedObjectContext.init(concurrencyType: NSManagedObjectContextConcurrencyType.privateQueueConcurrencyType)
+        minionManagedObjectContextWorker.parent = self.mainContextInstance
+        
+        //Add a predicate to filter by eventId
+        let findByIdPredicate =
+            NSPredicate(format: "\(FeedDataAttributes.feedID) = %@ ", feedData.feedID!)
+        
+        
+        // Create Fetch Request
+        let fetchRequest = NSFetchRequest<FeedData>(entityName: FeedData.description())
+        
+        fetchRequest.predicate = findByIdPredicate
+        // Create Batch Delete Request
+        if #available(iOS 9.0, *) {
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest as! NSFetchRequest<NSFetchRequestResult>)
+            do {
+                try minionManagedObjectContextWorker.execute(batchDeleteRequest)
+                
+            } catch let fetchError as NSError  {
+                
+                print("retrieveById error: \(fetchError.localizedDescription)")
+            }
+
+        } else {
+            // Fallback on earlier versions
+            do{
+                let feedList=try minionManagedObjectContextWorker.fetch(fetchRequest) as NSArray
+                var obj:NSManagedObject
+                for obj in feedList{
+                    minionManagedObjectContextWorker.delete(obj as! NSManagedObject)
+                    
+                }
+                try minionManagedObjectContextWorker.save()
+            }catch let fetchError as NSError  {
+                
+                print("retrieveById error: \(fetchError.localizedDescription)")
+            }
+
+        }
+        
+                self.postUpdateNotification()
+
+    }
+    
+    fileprivate func postUpdateNotification(){
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "updateFeedDataTableData"), object: nil)
+    }
+}

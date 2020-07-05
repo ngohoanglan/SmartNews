@@ -1,0 +1,500 @@
+//
+//  SearchResultController.swift
+//  VietNamNewspapers
+//
+//  Created by Ngô Lân on 9/10/17.
+//  Copyright © 2017 admin. All rights reserved.
+//
+
+import Foundation
+import UIKit
+
+class SearchResultController : UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate,UISearchBarDelegate,UISearchResultsUpdating
+{
+    fileprivate var feedDataController:FeedDataController!
+    fileprivate var feedDataList:Array<FeedData>=[]
+    var feedTableView: UITableView = UITableView()
+    var textSize:CGFloat=0.0
+    var isExpandDescription:Bool=false
+     let setting = Settings()
+     var shouldShowSearchResults = false
+    var rightBarItem:UIBarButtonItem=UIBarButtonItem()
+    var leftBarItem:UIBarButtonItem=UIBarButtonItem()
+    var searchController: UISearchController = ({
+        
+        let controller = UISearchController(searchResultsController: nil)
+        controller.hidesNavigationBarDuringPresentation = false
+        controller.dimsBackgroundDuringPresentation = false
+        controller.searchBar.searchBarStyle = .minimal
+        controller.searchBar.sizeToFit()
+        return controller
+    })()
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+          feedDataController=FeedDataController.shareInstance
+        textSize=CGFloat(setting.getTextSize())
+         isExpandDescription=setting.getExpandDescription()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+       
+        // Get main screen bounds
+        let barHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
+        let displayWidth: CGFloat = self.view.frame.width
+        let displayHeight: CGFloat = self.view.frame.height
+        
+        
+        feedTableView = UITableView(frame: CGRect(x: 0, y: barHeight, width: displayWidth, height: displayHeight - barHeight))
+        
+        feedTableView.dataSource = self
+        feedTableView.delegate = self
+        feedTableView.estimatedRowHeight = 154
+        feedTableView.rowHeight = UITableViewAutomaticDimension
+        feedTableView.separatorStyle = .none
+        feedTableView.register(UINib(nibName: "FeedImageViewCell", bundle: nil), forCellReuseIdentifier: "CellNotDesc")
+        feedTableView.register(UINib(nibName: "FeedViewCell", bundle: nil), forCellReuseIdentifier: "CellNotImage")
+        
+       
+        self.feedTableView.tableHeaderView=nil
+        self.feedTableView.reloadData()
+
+        self.view.addSubview(feedTableView)
+        
+        //Constraints
+        feedTableView.translatesAutoresizingMaskIntoConstraints=false
+        let leading = NSLayoutConstraint(item: feedTableView,
+                                         attribute: .leading,
+                                         relatedBy: .equal,
+                                         toItem: self.view,
+                                         attribute: .leading,
+                                         multiplier: 1.0,
+                                         constant: 0.0)
+        
+        let trailing = NSLayoutConstraint(item: feedTableView,
+                                          attribute: .trailing,
+                                          relatedBy: .equal,
+                                          toItem: self.view,
+                                          attribute: .trailing,
+                                          multiplier: 1.0,
+                                          constant: -0.0)
+        
+        let top = NSLayoutConstraint(item: feedTableView,
+                                     attribute: .top,
+                                     relatedBy: .equal,
+                                     toItem: self.view,
+                                     attribute: .top,
+                                     multiplier: 1.0,
+                                     constant: 0.0)
+        let bottom = NSLayoutConstraint(item: feedTableView,
+                                        attribute: .bottomMargin,
+                                        relatedBy: .equal,
+                                        toItem: self.view,
+                                        attribute: .bottom,
+                                        multiplier: 1.0,
+                                        constant: -0.0)
+        
+        //NSLayoutConstraint.activate([leading, trailing, top])
+        NSLayoutConstraint.activate([leading, trailing, top, bottom])
+        //End constraint
+        
+
+        
+        
+        if(UIDevice.current.userInterfaceIdiom == .phone)
+        {
+            self.navigationItem.titleView=searchController.searchBar
+        }
+        else //iPad
+        {
+            searchController.searchBar.showsCancelButton=true
+            let uiViewSearchBar=UIView()
+            uiViewSearchBar.frame=searchController.searchBar.bounds
+            uiViewSearchBar.addSubview(searchController.searchBar)
+            navigationItem.titleView=uiViewSearchBar
+        }
+     
+
+        searchController.searchBar.delegate=self
+        searchController.searchResultsUpdater=self
+        self.searchController.searchBar.placeholder="Search"
+
+        
+        
+    }
+    
+    //Begin Search Bar
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+       
+      
+        
+        self.navigationItem.rightBarButtonItem=nil
+        self.navigationItem.leftBarButtonItem=nil
+        self.navigationItem.backBarButtonItem=nil
+        return true
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        shouldShowSearchResults = true
+        // tableViewFeedList.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
+        
+        shouldShowSearchResults = false
+        feedTableView.reloadData()
+        
+    }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if !shouldShowSearchResults {
+            shouldShowSearchResults = true
+            feedTableView.reloadData()
+        }
+        
+        
+        let searchString = searchController.searchBar.text
+        
+        feedDataList=feedDataController.getFeedDataByTitleAndDescriptionKeyWord(keyWord: searchString as! NSString, description: searchString as! NSString)
+        feedTableView.reloadData()
+        
+        searchController.searchBar.resignFirstResponder()
+    }
+    func updateSearchResults(for searchController: UISearchController) {
+        /*
+        let searchString = searchController.searchBar.text
+        
+        // Filter the data array and get only those countries that match the search text.
+        
+        feedDataList = feedDataList.filter() {
+            return ($0.title!.lowercased().range(of: (searchString?.lowercased())!) != nil || $0.feedDescription!.lowercased().range(of: (searchString?.lowercased())!) != nil)
+        }
+        
+        // Reload the tableview.
+        feedTableView.reloadData()*/
+    }
+    
+    //End Search Bar
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        
+        return 1
+        
+    }
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        
+        return feedDataList.count
+    }
+    var btnExpandTapped:Bool=false
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        var feedData:FeedData
+        
+        feedData=feedDataList[(indexPath as NSIndexPath).row]
+        if(!btnExpandTapped)
+        {
+            feedData.isExpand=isExpandDescription
+        }
+        
+        
+        if((feedData.linkImage != nil ) && (feedData.linkImage?.characters.count)!>10 && setting.getBlockImage()==true)
+        {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CellNotDesc", for: indexPath)
+                as! FeedNotDescriptionViewCell
+            
+            
+            if(feedData.imageArray != nil && (feedData.imageArray?.count)!>0)
+            {
+                cell.feedImageCell.image=UIImage(data: feedData.imageArray! as Data)
+            }
+            else
+            {
+                
+                //
+                cell.feedImageCell.image=nil
+                //
+                
+                
+                let myCompletionHandler: (URL?, UIImage?, NSError?,CacheType?) -> Void = { (data, response, error,cachtype) in
+                    // this is where the completion handler code goes
+                    if response != nil{
+                        //convert NSData->Image
+                        let image : UIImage = Utils.resizeImage(response!, maxWidth: 75, maxHeight: 75)
+                        // let image : UIImage = self.RBSquareImageTo(response!, size: CGSize(width: 90, height: 90))
+                        feedData.imageArray=UIImagePNGRepresentation(image)
+                        let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.imageArray.rawValue : feedData.imageArray! as AnyObject]
+                        self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
+                    }
+                }
+                cell.feedImageCell.load(feedData.linkImage!, placeholder: cell.feedImageCell.image, completionHandler: myCompletionHandler)
+            }
+            
+            if(feedData.isRead==1)
+            {
+                
+                cell.lbTitleCell.font = UIFont.systemFont(ofSize: textSize)
+            }
+            else
+            {
+                cell.lbTitleCell.font = UIFont.boldSystemFont(ofSize: textSize)
+            }
+            cell.lbTitleCell.text=feedData.title
+            // cell.lbDescription.text=feedData.feedDescription
+            cell.lbDescription.font=UIFont.systemFont(ofSize: textSize-2)
+            cell.lbPubdate.text=feedData.pubDateString
+            if(!feedData.isExpand )
+            {
+                let image = UIImage(named: "expand") as UIImage?
+                cell.btnExpand.setImage(image, for: UIControlState())
+                //cell.csDescriptionHeight.constant=0.0
+                cell.lbDescription.text=""
+            }
+            else
+            {
+                let image = UIImage(named: "collpase") as UIImage?
+                cell.btnExpand.setImage(image, for: UIControlState())
+                //cell.csDescriptionHeight.constant=70.0
+                cell.lbDescription.text=feedData.feedDescription
+            }
+            
+            cell.btnExpandTapped = {
+                self.btnExpandTapped=true
+                if(!feedData.isExpand)
+                {
+                    feedData.isExpand = true
+                    // cell.csDescriptionHeight.constant=70.0
+                }
+                else
+                {
+                    feedData.isExpand = false
+                    //cell.csDescriptionHeight.constant=0.0
+                }
+                let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
+                self.feedTableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.none)
+            }
+            cell.btnShareTapped =
+                {
+                    if let name = URL(string: feedData.link!) {
+                        let objectsToShare = [name]
+                        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                        
+                        self.present(activityVC, animated: true, completion: nil)
+                    }
+            }
+            if(feedData.isFavorite == 1)
+            {
+                let image = UIImage(named: "importan") as UIImage?
+                cell.btImportan.setImage(image, for: UIControlState())
+            }
+            else
+            {
+                let image = UIImage(named: "not_importan") as UIImage?
+                cell.btImportan.setImage(image, for: UIControlState())
+            }
+            cell.btnImportanTapped =
+                {
+                    if(feedData.isFavorite == 1)
+                    {
+                        let image = UIImage(named: "not_importan") as UIImage?
+                        cell.btImportan.setImage(image, for: UIControlState())
+                        feedData.isFavorite=0
+                    }
+                    else
+                    {
+                        let image = UIImage(named: "importan") as UIImage?
+                        cell.btImportan.setImage(image, for: UIControlState())
+                        feedData.isFavorite=1
+                    }
+                    let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.isFavorite.rawValue : feedData.isFavorite!]
+                    self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
+                    let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
+                    self.feedTableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.none)
+            }
+            
+            
+            let taplabeTitlelAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SiteDetailTableViewController.labeTitlelAction(_:)))
+            cell.lbTitleCell.addGestureRecognizer(taplabeTitlelAction)
+            cell.lbTitleCell.tag=(indexPath as NSIndexPath).row
+            cell.lbTitleCell.isUserInteractionEnabled=true
+            taplabeTitlelAction.delegate = self // Remember to extend your class with UIGestureRecognizerDelegate
+            
+            let taplabeDesciptionAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SiteDetailTableViewController.labeTitlelAction(_:)))
+            cell.lbDescription.addGestureRecognizer(taplabeDesciptionAction)
+            cell.lbDescription.tag=(indexPath as NSIndexPath).row
+            cell.lbDescription.isUserInteractionEnabled=true
+            taplabeDesciptionAction.delegate = self // Remember to extend your class with UIGestureRecognizerDelegate
+            
+            return cell
+        }
+            
+        else
+        {
+            let cellNotImage = tableView.dequeueReusableCell(withIdentifier: "CellNotImage", for: indexPath)
+                as! FeedDataTableViewCell
+            if(feedData.isRead==1)
+            {
+                cellNotImage.lbTitle.font = UIFont.systemFont(ofSize: textSize)
+            }
+            else
+            {
+                cellNotImage.lbTitle.font = UIFont.boldSystemFont(ofSize: textSize)
+            }
+            cellNotImage.lbTitle.text=feedData.title
+            //cellNotImage.lbDescription.text=feedData.feedDescription
+            cellNotImage.lbDescription.font=UIFont.systemFont(ofSize: textSize-2)
+            cellNotImage.lbPubDate.text=feedData.pubDateString
+            
+            //
+            if(!feedData.isExpand)
+            {
+                let image = UIImage(named: "expand") as UIImage?
+                cellNotImage.btnExpand.setImage(image, for: UIControlState())
+                //  cellNotImage.csHeightDescription.constant=0.0
+                cellNotImage.lbDescription.text = ""
+            }
+            else
+            {
+                let image = UIImage(named: "collpase") as UIImage?
+                cellNotImage.btnExpand.setImage(image, for: UIControlState())
+                //cellNotImage.csHeightDescription.constant=70.0
+                cellNotImage.lbDescription.text = feedData.feedDescription
+                
+            }
+            cellNotImage.btnExpandTapped = {
+                self.btnExpandTapped=true
+                if(!feedData.isExpand)
+                {
+                    feedData.isExpand = true
+                    //  cellNotImage.csHeightDescription.constant=70.0
+                }
+                else
+                {
+                    feedData.isExpand = false
+                    // cellNotImage.csHeightDescription.constant=0.0
+                }
+                let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
+                self.feedTableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.none)
+            }
+            cellNotImage.btnShareTapped =
+                {
+                    
+                    if let name = URL(string: feedData.link!) {
+                        let objectsToShare = [name]
+                        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
+                        {
+                            if ( activityVC.responds(to: #selector(getter: UIViewController.popoverPresentationController)) ) {
+                                activityVC.popoverPresentationController?.sourceView = cellNotImage.btnShare
+                            }
+                        }
+                        self.present(activityVC, animated: true, completion: nil)
+                    }
+                    
+                    
+                    
+            }
+            if(feedData.isFavorite == 1)
+            {
+                let image = UIImage(named: "importan") as UIImage?
+                cellNotImage.btnImportan.setImage(image, for: UIControlState())
+            }
+            else
+            {
+                let image = UIImage(named: "not_importan") as UIImage?
+                cellNotImage.btnImportan.setImage(image, for: UIControlState())
+            }
+            cellNotImage.btnImportanTapped =
+                {
+                    if(feedData.isFavorite == 1)
+                    {
+                        let image = UIImage(named: "not_importan") as UIImage?
+                        cellNotImage.btnImportan.setImage(image, for: UIControlState())
+                        feedData.isFavorite=0
+                    }
+                    else
+                    {
+                        let image = UIImage(named: "importan") as UIImage?
+                        cellNotImage.btnImportan.setImage(image, for: UIControlState())
+                        feedData.isFavorite=1
+                    }
+                    let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.isFavorite.rawValue : feedData.isFavorite!]
+                    self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
+                    let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
+                    self.feedTableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.none)
+            }
+            
+            //
+            let taplabeTitlelAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SiteDetailTableViewController.labeTitlelAction(_:)))
+            cellNotImage.lbTitle.addGestureRecognizer(taplabeTitlelAction)
+            cellNotImage.lbTitle.tag=(indexPath as NSIndexPath).row
+            cellNotImage.lbTitle.isUserInteractionEnabled=true
+            taplabeTitlelAction.delegate = self // Remember to extend your class with UIGestureRecognizerDelegate
+            
+            let taplabeDesciptionAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SiteDetailTableViewController.labeTitlelAction(_:)))
+            cellNotImage.lbDescription.addGestureRecognizer(taplabeDesciptionAction)
+            cellNotImage.lbDescription.tag=(indexPath as NSIndexPath).row
+            cellNotImage.lbDescription.isUserInteractionEnabled=true
+            taplabeDesciptionAction.delegate = self // Remember to extend your class with UIGestureRecognizerDelegate
+            
+            
+            return cellNotImage
+            
+            
+        }
+        
+    }
+    func labeTitlelAction(_ gr:UITapGestureRecognizer)
+    {
+        
+        
+        openWebView(gr.view?.tag)
+        
+    }
+    func openWebView(_ tag:Int!)
+    {
+        var feedData:FeedData
+        feedData=feedDataList[tag]
+        
+        feedData.isRead=1
+        let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.isRead.rawValue : feedData.isRead!]
+        self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
+        let indexPath=IndexPath(item: tag, section: 0)
+        self.feedTableView.reloadRows(at: [indexPath], with: .none)
+        let url=feedData.link
+        
+        
+        let nsUrl=URL(string: url!)
+        UIApplication.shared.openURL(nsUrl!)
+        
+        
+        
+    }
+    
+    func getFullURL(url:String,domainURL:String)->String
+    {
+        var domain=domainURL
+        if(!domainURL.contains("http"))
+        {
+            domain=Utils.deCryptString2(domainURL)
+        }
+        var hostname=url
+        let baseURL=NSURL(string: domain)
+        
+        if(url.contains("http")==false){
+            hostname=(baseURL?.host)!+url
+        }
+        return hostname
+        
+        
+    }
+    // MARK: - Private instance methods
+    
+    
+}
+
+

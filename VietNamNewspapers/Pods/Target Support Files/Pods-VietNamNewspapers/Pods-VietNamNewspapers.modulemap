@@ -1,0 +1,6 @@
+framework module Pods_VietNamNewspapers {
+  umbrella header "Pods-VietNamNewspapers-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,27 @@
+
+# Firebase Cloud Messaging (FCM)
+
+#use_frameworks!
+#platform :ios, '8.0'
+
+
+#pod 'Firebase/Core'
+#pod 'Firebase/Messaging'
+
+#target 'VietNamNewspapers' do
+#end
+
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+pod 'Firebase/Core'
+pod 'Firebase/Messaging'
+#pod 'DJKFlipper'
+
+
+
+pod 'ImageLoader'
+
+target 'VietNamNewspapers' do
+end

@@ -1,0 +1,1 @@
+link ../../../FirebaseMessaging/Sources/FIRMessaging.h

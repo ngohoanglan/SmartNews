@@ -1,0 +1,913 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00DDFA5E1E273D440D56D993E703404B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
+		05E000BB4AA15A3C817B288B6454105A /* ImageLoader-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C114BC2D90EA133776B1B16D70621C /* ImageLoader-dummy.m */; };
+		085C6B901D78187981FF705A7379A196 /* Pods-VietNamNewspapers-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0712177EEA51BEA17B7F0BB420AEF50C /* Pods-VietNamNewspapers-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0A3F2027D840637C251C195B0268BEEB /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945BECF68B28F99F542DBD61B9336C42 /* Option.swift */; };
+		0FF8F27F896850DB2973C4E26EC1F7EE /* GTMLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = E1978645126C1CE344862E4E67C65471 /* GTMLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		10B001A6BADACFDEFF0D92F91F012F0C /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965B01C2EDB4FD34E3E4574CB2EE2540 /* Loader.swift */; };
+		1F26F5FFC4A42EF89A6E9CB83017322B /* Pods-VietNamNewspapers-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1A0C4927D4E5ACDDED0FEF42A79093 /* Pods-VietNamNewspapers-dummy.m */; };
+		378409D4B120DB191348A8B0C9B61F88 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
+		3E3B4CF239527A39CD308EBA9676FD8F /* GTMDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 631027074D8327397E42BD5955B2E2CA /* GTMDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4999648E92603D4B19C4A8166DBBB813 /* Operative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124C757F0F23ED7B180F3F5B5B39F546 /* Operative.swift */; };
+		591A148C1668DAF26F0CF586633ACE0E /* HashStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF92FF4CAC3E5850090C44864742F7B8 /* HashStorage.swift */; };
+		64418457D16D9A2F28F496AC75FC7DBD /* GoogleToolboxForMac-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C5761A4CAF082BCD231C9F0389CE39 /* GoogleToolboxForMac-dummy.m */; };
+		731880194255822ACBDF02E8336DE5B0 /* ImageLoader-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B373C113C53292ACF51345990CF99C34 /* ImageLoader-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		736E0A9292449D178DEF1D94F83D4642 /* URLLiteralConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B779A1375AE2DC52FD689FD8088E3F5 /* URLLiteralConvertible.swift */; };
+		755F55A7D577254B73EA7FEABA8E98E0 /* GTMNSData+zlib.h in Headers */ = {isa = PBXBuildFile; fileRef = 4429746B2E71C4DAA770B4D0E347C0DA /* GTMNSData+zlib.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		87D517C07EB2BDE7B19CD00F77CE85CA /* UIImage+ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F087CB96FEACCC1C38574DFEC958DF4F /* UIImage+ImageLoader.swift */; };
+		9101CEA8562055177732244271008BBB /* GTMNSData+zlib.m in Sources */ = {isa = PBXBuildFile; fileRef = 02806156E4A5B693D44B39D6A542E226 /* GTMNSData+zlib.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		A7A8D48DD1152C070FB992F8BF216DB5 /* Disk.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0576E145A0480F19AAEB48FC255F675 /* Disk.swift */; };
+		AB4F0970071E34D0384341466E0468EF /* GTMLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = C767DF7A601463F2908A7E758CEAE0EF /* GTMLogger.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B731AB31C96C2A57AF07022DA76946C6 /* UIImageView+ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780025D2813516301D064279F8A554D3 /* UIImageView+ImageLoader.swift */; };
+		D2E43570CA3ED687026F68F6D09D0A60 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
+		ECE25598E94443644BD95789B578E0B2 /* Loadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E789B5BF457B34BB2F4D899500B818C /* Loadable.swift */; };
+		ED66F8BD1D43065D931F2C8890806447 /* GoogleToolboxForMac-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 50D1B31FCEF20A82CC2DCC0DE0EA0385 /* GoogleToolboxForMac-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F6CA497431BC3988A2ED930009EC8B37 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E72A32F54665F3D3573438B0FDF6B6 /* ImageLoader.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4F5098B37513DEC6076041CA9239A786 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 632A766EEE68A7A0C10B0AC0649A99DF;
+			remoteInfo = ImageLoader;
+		};
+		DFE7A9CDB7F032ED6EB1EA4C7CAE3233 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C5B80060FE8C664DF08841000F41D515;
+			remoteInfo = GoogleToolboxForMac;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		02806156E4A5B693D44B39D6A542E226 /* GTMNSData+zlib.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "GTMNSData+zlib.m"; path = "Foundation/GTMNSData+zlib.m"; sourceTree = "<group>"; };
+		0712177EEA51BEA17B7F0BB420AEF50C /* Pods-VietNamNewspapers-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-VietNamNewspapers-umbrella.h"; sourceTree = "<group>"; };
+		0C8DD12FA778BD6358A735E67E729B3E /* Pods-VietNamNewspapers-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-VietNamNewspapers-acknowledgements.markdown"; sourceTree = "<group>"; };
+		124C757F0F23ED7B180F3F5B5B39F546 /* Operative.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Operative.swift; path = ImageLoader/Core/Operative.swift; sourceTree = "<group>"; };
+		13A79621F23E60C1167D17A111BE7AE0 /* GoogleToolboxForMac.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GoogleToolboxForMac.xcconfig; sourceTree = "<group>"; };
+		15C114BC2D90EA133776B1B16D70621C /* ImageLoader-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ImageLoader-dummy.m"; sourceTree = "<group>"; };
+		208E9A00A74E3333985053A0F14CDCE2 /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = Frameworks/FirebaseCore.framework; sourceTree = "<group>"; };
+		22D876D1AF0FC1013C3BB6CE0FFBBE2C /* FirebaseMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseMessaging.framework; path = Frameworks/frameworks/FirebaseMessaging.framework; sourceTree = "<group>"; };
+		28E72A32F54665F3D3573438B0FDF6B6 /* ImageLoader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageLoader.swift; path = ImageLoader/Core/ImageLoader.swift; sourceTree = "<group>"; };
+		294314A6FFFAEE34074DDDDA0BBFB6C9 /* ImageLoader.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = ImageLoader.modulemap; sourceTree = "<group>"; };
+		32C2E2662DE1B96023D055F8749D3CC1 /* GoogleToolboxForMac-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GoogleToolboxForMac-prefix.pch"; sourceTree = "<group>"; };
+		3BE64068CA4FAF6871480C7459398C6D /* Pods_VietNamNewspapers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VietNamNewspapers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4429746B2E71C4DAA770B4D0E347C0DA /* GTMNSData+zlib.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "GTMNSData+zlib.h"; path = "Foundation/GTMNSData+zlib.h"; sourceTree = "<group>"; };
+		4509F0D9B163C32C579C2B38634D482E /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseInstanceID.framework; path = Frameworks/frameworks/FirebaseInstanceID.framework; sourceTree = "<group>"; };
+		4A4F9DA53EC9057E3BAC94A1119A3433 /* ImageLoader-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ImageLoader-prefix.pch"; sourceTree = "<group>"; };
+		4AF6FFAAFB1B4548CE79B5BFD6123CCD /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4B198E70FF25313518A831BF5F3F44B6 /* GoogleToolboxForMac.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = GoogleToolboxForMac.modulemap; sourceTree = "<group>"; };
+		50D1B31FCEF20A82CC2DCC0DE0EA0385 /* GoogleToolboxForMac-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GoogleToolboxForMac-umbrella.h"; sourceTree = "<group>"; };
+		53E64103424C6BB5615359D75F0F2294 /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSymbolUtilities.framework; path = Frameworks/frameworks/GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
+		6148A5B04F4A81263D7917AAEBD64042 /* Pods-VietNamNewspapers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VietNamNewspapers.release.xcconfig"; sourceTree = "<group>"; };
+		631027074D8327397E42BD5955B2E2CA /* GTMDefines.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		64E97A2C3DDEF0B359B8FC2F742E26A3 /* FIRInstanceID.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FIRInstanceID.h; path = Sources/FIRInstanceID.h; sourceTree = "<group>"; };
+		68C5761A4CAF082BCD231C9F0389CE39 /* GoogleToolboxForMac-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "GoogleToolboxForMac-dummy.m"; sourceTree = "<group>"; };
+		6D1A0C4927D4E5ACDDED0FEF42A79093 /* Pods-VietNamNewspapers-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-VietNamNewspapers-dummy.m"; sourceTree = "<group>"; };
+		6E789B5BF457B34BB2F4D899500B818C /* Loadable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Loadable.swift; path = ImageLoader/Core/Loadable.swift; sourceTree = "<group>"; };
+		6EFCF76A38584D7EA6DC71BA10A194BB /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAnalytics.framework; path = Frameworks/frameworks/FirebaseAnalytics.framework; sourceTree = "<group>"; };
+		71053FA4DC25DD2EE67AEA6582C8F26A /* ImageLoader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ImageLoader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		780025D2813516301D064279F8A554D3 /* UIImageView+ImageLoader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIImageView+ImageLoader.swift"; path = "ImageLoader/Extension/UIImageView+ImageLoader.swift"; sourceTree = "<group>"; };
+		791E129BAA9537A8D568D555D8632AB0 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7A06B29EBA3B4926A70B7F9CF52FE9D4 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7FAF720CA3242C5147065AB796BB883D /* FIRMessaging.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FIRMessaging.h; path = Sources/FIRMessaging.h; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		945BECF68B28F99F542DBD61B9336C42 /* Option.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Option.swift; path = ImageLoader/Core/Option.swift; sourceTree = "<group>"; };
+		9595A683192A4A2364CA7614C48B6352 /* Pods-VietNamNewspapers.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-VietNamNewspapers.modulemap"; sourceTree = "<group>"; };
+		965B01C2EDB4FD34E3E4574CB2EE2540 /* Loader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Loader.swift; path = ImageLoader/Core/Loader.swift; sourceTree = "<group>"; };
+		9ABEF4609679247CD91CEC5BBDFF5E44 /* GoogleInterchangeUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleInterchangeUtilities.framework; path = Frameworks/frameworks/GoogleInterchangeUtilities.framework; sourceTree = "<group>"; };
+		9B779A1375AE2DC52FD689FD8088E3F5 /* URLLiteralConvertible.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = URLLiteralConvertible.swift; path = ImageLoader/Core/URLLiteralConvertible.swift; sourceTree = "<group>"; };
+		A0576E145A0480F19AAEB48FC255F675 /* Disk.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Disk.swift; path = ImageLoader/Core/Disk.swift; sourceTree = "<group>"; };
+		A9C1B8EAA2C2E6C75CF9F4CDB53602C8 /* Firebase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Firebase.h; path = Core/Sources/Firebase.h; sourceTree = "<group>"; };
+		B373C113C53292ACF51345990CF99C34 /* ImageLoader-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ImageLoader-umbrella.h"; sourceTree = "<group>"; };
+		C34B4CE18C4BA80722A4F0471CB4A6A9 /* Pods-VietNamNewspapers-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-VietNamNewspapers-acknowledgements.plist"; sourceTree = "<group>"; };
+		C767DF7A601463F2908A7E758CEAE0EF /* GTMLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GTMLogger.m; path = Foundation/GTMLogger.m; sourceTree = "<group>"; };
+		CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		CF92FF4CAC3E5850090C44864742F7B8 /* HashStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HashStorage.swift; path = ImageLoader/Core/HashStorage.swift; sourceTree = "<group>"; };
+		CFB6E51B486563D950EF12EBBE187DEB /* Pods-VietNamNewspapers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VietNamNewspapers.debug.xcconfig"; sourceTree = "<group>"; };
+		D50F71F1C1AEEA1605DCA2ACECF55EC8 /* Pods-VietNamNewspapers-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-VietNamNewspapers-resources.sh"; sourceTree = "<group>"; };
+		DE26B67239C19D18CD2BDE9117E53C0A /* Pods-VietNamNewspapers-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-VietNamNewspapers-frameworks.sh"; sourceTree = "<group>"; };
+		DF2DC08F12F393F5721261AE71113FE0 /* ImageLoader.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ImageLoader.xcconfig; sourceTree = "<group>"; };
+		E1978645126C1CE344862E4E67C65471 /* GTMLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTMLogger.h; path = Foundation/GTMLogger.h; sourceTree = "<group>"; };
+		F087CB96FEACCC1C38574DFEC958DF4F /* UIImage+ImageLoader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIImage+ImageLoader.swift"; path = "ImageLoader/Extension/UIImage+ImageLoader.swift"; sourceTree = "<group>"; };
+		FA774C1569DEB42AAC92CF44444F5BD9 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleToolboxForMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		17E13AD4EFD6EFC678B733EBE9016C00 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00DDFA5E1E273D440D56D993E703404B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		727ED628002B84264C3DB6E9DE98B086 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2E43570CA3ED687026F68F6D09D0A60 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C5FBD50589CE2C516975A62886A56E07 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				378409D4B120DB191348A8B0C9B61F88 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1BD2729E56E367C1CBDE9BA835BD9F1F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				53E64103424C6BB5615359D75F0F2294 /* GoogleSymbolUtilities.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3245414687916BE4EBDA01F8434D7599 /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				E1978645126C1CE344862E4E67C65471 /* GTMLogger.h */,
+				C767DF7A601463F2908A7E758CEAE0EF /* GTMLogger.m */,
+			);
+			name = Logger;
+			sourceTree = "<group>";
+		};
+		33DB8EB7C53F26FD50F6730FBDB187E8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4509F0D9B163C32C579C2B38634D482E /* FirebaseInstanceID.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3D159B3BDFED9547D19C1FEC8164198F /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				7E99D63DC779C9F3AA39C60DDD551E55 /* Pods-VietNamNewspapers */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		3F68C6B4E2644670DE03798875B115B1 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				4B198E70FF25313518A831BF5F3F44B6 /* GoogleToolboxForMac.modulemap */,
+				13A79621F23E60C1167D17A111BE7AE0 /* GoogleToolboxForMac.xcconfig */,
+				68C5761A4CAF082BCD231C9F0389CE39 /* GoogleToolboxForMac-dummy.m */,
+				32C2E2662DE1B96023D055F8749D3CC1 /* GoogleToolboxForMac-prefix.pch */,
+				50D1B31FCEF20A82CC2DCC0DE0EA0385 /* GoogleToolboxForMac-umbrella.h */,
+				7A06B29EBA3B4926A70B7F9CF52FE9D4 /* Info.plist */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/GoogleToolboxForMac";
+			sourceTree = "<group>";
+		};
+		4612CA565C17FF8119A3BFF901A8842A /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				294314A6FFFAEE34074DDDDA0BBFB6C9 /* ImageLoader.modulemap */,
+				DF2DC08F12F393F5721261AE71113FE0 /* ImageLoader.xcconfig */,
+				15C114BC2D90EA133776B1B16D70621C /* ImageLoader-dummy.m */,
+				4A4F9DA53EC9057E3BAC94A1119A3433 /* ImageLoader-prefix.pch */,
+				B373C113C53292ACF51345990CF99C34 /* ImageLoader-umbrella.h */,
+				4AF6FFAAFB1B4548CE79B5BFD6123CCD /* Info.plist */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/ImageLoader";
+			sourceTree = "<group>";
+		};
+		52C43F0966120B51D755AD23A30CE036 /* FirebaseCore */ = {
+			isa = PBXGroup;
+			children = (
+				7C313DF4378148C3D5D54885353215E9 /* Frameworks */,
+			);
+			path = FirebaseCore;
+			sourceTree = "<group>";
+		};
+		607228F17EA3B27FC01EB412AABE1C24 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				22D876D1AF0FC1013C3BB6CE0FFBBE2C /* FirebaseMessaging.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6E46A4E10C6265126AC3CD9F00F6014C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FA774C1569DEB42AAC92CF44444F5BD9 /* GoogleToolboxForMac.framework */,
+				71053FA4DC25DD2EE67AEA6582C8F26A /* ImageLoader.framework */,
+				3BE64068CA4FAF6871480C7459398C6D /* Pods_VietNamNewspapers.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7186719B2208A5867EB4E8D1156E677D /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				BB295371DBEBF4A898156D86ED5A97C4 /* Core */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		7531C8F8DE19F1AA3C8A7AC97A91DC29 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		7C313DF4378148C3D5D54885353215E9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				208E9A00A74E3333985053A0F14CDCE2 /* FirebaseCore.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				85266F5603EBA9FA4EA620A1278A4782 /* Pods */,
+				6E46A4E10C6265126AC3CD9F00F6014C /* Products */,
+				3D159B3BDFED9547D19C1FEC8164198F /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		7E99D63DC779C9F3AA39C60DDD551E55 /* Pods-VietNamNewspapers */ = {
+			isa = PBXGroup;
+			children = (
+				791E129BAA9537A8D568D555D8632AB0 /* Info.plist */,
+				9595A683192A4A2364CA7614C48B6352 /* Pods-VietNamNewspapers.modulemap */,
+				0C8DD12FA778BD6358A735E67E729B3E /* Pods-VietNamNewspapers-acknowledgements.markdown */,
+				C34B4CE18C4BA80722A4F0471CB4A6A9 /* Pods-VietNamNewspapers-acknowledgements.plist */,
+				6D1A0C4927D4E5ACDDED0FEF42A79093 /* Pods-VietNamNewspapers-dummy.m */,
+				DE26B67239C19D18CD2BDE9117E53C0A /* Pods-VietNamNewspapers-frameworks.sh */,
+				D50F71F1C1AEEA1605DCA2ACECF55EC8 /* Pods-VietNamNewspapers-resources.sh */,
+				0712177EEA51BEA17B7F0BB420AEF50C /* Pods-VietNamNewspapers-umbrella.h */,
+				CFB6E51B486563D950EF12EBBE187DEB /* Pods-VietNamNewspapers.debug.xcconfig */,
+				6148A5B04F4A81263D7917AAEBD64042 /* Pods-VietNamNewspapers.release.xcconfig */,
+			);
+			name = "Pods-VietNamNewspapers";
+			path = "Target Support Files/Pods-VietNamNewspapers";
+			sourceTree = "<group>";
+		};
+		84EA4EBF893B3EE7133E9CF305B4B900 /* NSData+zlib */ = {
+			isa = PBXGroup;
+			children = (
+				4429746B2E71C4DAA770B4D0E347C0DA /* GTMNSData+zlib.h */,
+				02806156E4A5B693D44B39D6A542E226 /* GTMNSData+zlib.m */,
+			);
+			name = "NSData+zlib";
+			sourceTree = "<group>";
+		};
+		85266F5603EBA9FA4EA620A1278A4782 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7186719B2208A5867EB4E8D1156E677D /* Firebase */,
+				A4CDDA9B00D3B02EF543723E60357350 /* FirebaseAnalytics */,
+				52C43F0966120B51D755AD23A30CE036 /* FirebaseCore */,
+				C9730A16BA9150A0D892792FCE799355 /* FirebaseInstanceID */,
+				9A6529889CC35D3C240855466EF716E5 /* FirebaseMessaging */,
+				C5C656B5ACD3049E2C4651D0C8E36F00 /* GoogleInterchangeUtilities */,
+				B0BD9266CFA896711064FE04B292603B /* GoogleSymbolUtilities */,
+				FAA003D3EA95A79750E90BFB8F969DD2 /* GoogleToolboxForMac */,
+				C5FA6D81CC15D892E82B367623D7797C /* ImageLoader */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		9558F87DDDEA81BBF1872B2C17EE0F06 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6EFCF76A38584D7EA6DC71BA10A194BB /* FirebaseAnalytics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9A6529889CC35D3C240855466EF716E5 /* FirebaseMessaging */ = {
+			isa = PBXGroup;
+			children = (
+				7FAF720CA3242C5147065AB796BB883D /* FIRMessaging.h */,
+				607228F17EA3B27FC01EB412AABE1C24 /* Frameworks */,
+			);
+			path = FirebaseMessaging;
+			sourceTree = "<group>";
+		};
+		A4CDDA9B00D3B02EF543723E60357350 /* FirebaseAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				9558F87DDDEA81BBF1872B2C17EE0F06 /* Frameworks */,
+			);
+			path = FirebaseAnalytics;
+			sourceTree = "<group>";
+		};
+		B0BD9266CFA896711064FE04B292603B /* GoogleSymbolUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				1BD2729E56E367C1CBDE9BA835BD9F1F /* Frameworks */,
+			);
+			path = GoogleSymbolUtilities;
+			sourceTree = "<group>";
+		};
+		BB295371DBEBF4A898156D86ED5A97C4 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				A9C1B8EAA2C2E6C75CF9F4CDB53602C8 /* Firebase.h */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7531C8F8DE19F1AA3C8A7AC97A91DC29 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C5C656B5ACD3049E2C4651D0C8E36F00 /* GoogleInterchangeUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				F63B144C4BC82974693CA4D876B11668 /* Frameworks */,
+			);
+			path = GoogleInterchangeUtilities;
+			sourceTree = "<group>";
+		};
+		C5FA6D81CC15D892E82B367623D7797C /* ImageLoader */ = {
+			isa = PBXGroup;
+			children = (
+				A0576E145A0480F19AAEB48FC255F675 /* Disk.swift */,
+				CF92FF4CAC3E5850090C44864742F7B8 /* HashStorage.swift */,
+				28E72A32F54665F3D3573438B0FDF6B6 /* ImageLoader.swift */,
+				6E789B5BF457B34BB2F4D899500B818C /* Loadable.swift */,
+				965B01C2EDB4FD34E3E4574CB2EE2540 /* Loader.swift */,
+				124C757F0F23ED7B180F3F5B5B39F546 /* Operative.swift */,
+				945BECF68B28F99F542DBD61B9336C42 /* Option.swift */,
+				F087CB96FEACCC1C38574DFEC958DF4F /* UIImage+ImageLoader.swift */,
+				780025D2813516301D064279F8A554D3 /* UIImageView+ImageLoader.swift */,
+				9B779A1375AE2DC52FD689FD8088E3F5 /* URLLiteralConvertible.swift */,
+				4612CA565C17FF8119A3BFF901A8842A /* Support Files */,
+			);
+			path = ImageLoader;
+			sourceTree = "<group>";
+		};
+		C9730A16BA9150A0D892792FCE799355 /* FirebaseInstanceID */ = {
+			isa = PBXGroup;
+			children = (
+				64E97A2C3DDEF0B359B8FC2F742E26A3 /* FIRInstanceID.h */,
+				33DB8EB7C53F26FD50F6730FBDB187E8 /* Frameworks */,
+			);
+			path = FirebaseInstanceID;
+			sourceTree = "<group>";
+		};
+		F4BBF0D12B33095357C78FFEFD918B85 /* Defines */ = {
+			isa = PBXGroup;
+			children = (
+				631027074D8327397E42BD5955B2E2CA /* GTMDefines.h */,
+			);
+			name = Defines;
+			sourceTree = "<group>";
+		};
+		F63B144C4BC82974693CA4D876B11668 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9ABEF4609679247CD91CEC5BBDFF5E44 /* GoogleInterchangeUtilities.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FAA003D3EA95A79750E90BFB8F969DD2 /* GoogleToolboxForMac */ = {
+			isa = PBXGroup;
+			children = (
+				F4BBF0D12B33095357C78FFEFD918B85 /* Defines */,
+				3245414687916BE4EBDA01F8434D7599 /* Logger */,
+				84EA4EBF893B3EE7133E9CF305B4B900 /* NSData+zlib */,
+				3F68C6B4E2644670DE03798875B115B1 /* Support Files */,
+			);
+			path = GoogleToolboxForMac;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		114AE98D4F6B11ADE691344054482470 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				731880194255822ACBDF02E8336DE5B0 /* ImageLoader-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8AB3E882A6768CF73C37855F338B45F5 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				085C6B901D78187981FF705A7379A196 /* Pods-VietNamNewspapers-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A65C674BC8B355E13D74FD423DC8F657 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED66F8BD1D43065D931F2C8890806447 /* GoogleToolboxForMac-umbrella.h in Headers */,
+				3E3B4CF239527A39CD308EBA9676FD8F /* GTMDefines.h in Headers */,
+				0FF8F27F896850DB2973C4E26EC1F7EE /* GTMLogger.h in Headers */,
+				755F55A7D577254B73EA7FEABA8E98E0 /* GTMNSData+zlib.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		2CFCD9B6A2C12F1E750719EF3C8F425B /* Pods-VietNamNewspapers */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 42C9F80FE9AB5F857BB574634C7C57A8 /* Build configuration list for PBXNativeTarget "Pods-VietNamNewspapers" */;
+			buildPhases = (
+				CDB6300A98D3DFE082725B6421877D36 /* Sources */,
+				17E13AD4EFD6EFC678B733EBE9016C00 /* Frameworks */,
+				8AB3E882A6768CF73C37855F338B45F5 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E07E5B26826A087A016023CCBC9D744A /* PBXTargetDependency */,
+				4A6E4B480B040628F769720D7A15235C /* PBXTargetDependency */,
+			);
+			name = "Pods-VietNamNewspapers";
+			productName = "Pods-VietNamNewspapers";
+			productReference = 3BE64068CA4FAF6871480C7459398C6D /* Pods_VietNamNewspapers.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		632A766EEE68A7A0C10B0AC0649A99DF /* ImageLoader */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4F23EAECFFF791E00FB9AAA45980D3FF /* Build configuration list for PBXNativeTarget "ImageLoader" */;
+			buildPhases = (
+				73FF7101A9A01542E1630EEBBF8DCC3F /* Sources */,
+				727ED628002B84264C3DB6E9DE98B086 /* Frameworks */,
+				114AE98D4F6B11ADE691344054482470 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ImageLoader;
+			productName = ImageLoader;
+			productReference = 71053FA4DC25DD2EE67AEA6582C8F26A /* ImageLoader.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		C5B80060FE8C664DF08841000F41D515 /* GoogleToolboxForMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A7DCD5CC93C327FAB5EAF73A7ECA9866 /* Build configuration list for PBXNativeTarget "GoogleToolboxForMac" */;
+			buildPhases = (
+				EF9AB148BBDF7952FC3CFBFF4694161B /* Sources */,
+				C5FBD50589CE2C516975A62886A56E07 /* Frameworks */,
+				A65C674BC8B355E13D74FD423DC8F657 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GoogleToolboxForMac;
+			productName = GoogleToolboxForMac;
+			productReference = FA774C1569DEB42AAC92CF44444F5BD9 /* GoogleToolboxForMac.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0700;
+				TargetAttributes = {
+					632A766EEE68A7A0C10B0AC0649A99DF = {
+						LastSwiftMigration = 1000;
+					};
+				};
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = 6E46A4E10C6265126AC3CD9F00F6014C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C5B80060FE8C664DF08841000F41D515 /* GoogleToolboxForMac */,
+				632A766EEE68A7A0C10B0AC0649A99DF /* ImageLoader */,
+				2CFCD9B6A2C12F1E750719EF3C8F425B /* Pods-VietNamNewspapers */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		73FF7101A9A01542E1630EEBBF8DCC3F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7A8D48DD1152C070FB992F8BF216DB5 /* Disk.swift in Sources */,
+				591A148C1668DAF26F0CF586633ACE0E /* HashStorage.swift in Sources */,
+				05E000BB4AA15A3C817B288B6454105A /* ImageLoader-dummy.m in Sources */,
+				F6CA497431BC3988A2ED930009EC8B37 /* ImageLoader.swift in Sources */,
+				ECE25598E94443644BD95789B578E0B2 /* Loadable.swift in Sources */,
+				10B001A6BADACFDEFF0D92F91F012F0C /* Loader.swift in Sources */,
+				4999648E92603D4B19C4A8166DBBB813 /* Operative.swift in Sources */,
+				0A3F2027D840637C251C195B0268BEEB /* Option.swift in Sources */,
+				87D517C07EB2BDE7B19CD00F77CE85CA /* UIImage+ImageLoader.swift in Sources */,
+				B731AB31C96C2A57AF07022DA76946C6 /* UIImageView+ImageLoader.swift in Sources */,
+				736E0A9292449D178DEF1D94F83D4642 /* URLLiteralConvertible.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDB6300A98D3DFE082725B6421877D36 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F26F5FFC4A42EF89A6E9CB83017322B /* Pods-VietNamNewspapers-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF9AB148BBDF7952FC3CFBFF4694161B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				64418457D16D9A2F28F496AC75FC7DBD /* GoogleToolboxForMac-dummy.m in Sources */,
+				AB4F0970071E34D0384341466E0468EF /* GTMLogger.m in Sources */,
+				9101CEA8562055177732244271008BBB /* GTMNSData+zlib.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4A6E4B480B040628F769720D7A15235C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ImageLoader;
+			target = 632A766EEE68A7A0C10B0AC0649A99DF /* ImageLoader */;
+			targetProxy = 4F5098B37513DEC6076041CA9239A786 /* PBXContainerItemProxy */;
+		};
+		E07E5B26826A087A016023CCBC9D744A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GoogleToolboxForMac;
+			target = C5B80060FE8C664DF08841000F41D515 /* GoogleToolboxForMac */;
+			targetProxy = DFE7A9CDB7F032ED6EB1EA4C7CAE3233 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		015A368F878AC3E2CEAE21DDE8026304 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		12A3FAA90BF03C68C8ABE95FAE17EB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6148A5B04F4A81263D7917AAEBD64042 /* Pods-VietNamNewspapers.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-VietNamNewspapers/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-VietNamNewspapers/Pods-VietNamNewspapers.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_VietNamNewspapers;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		32C5E0B8F572838B0519EDE72160E99D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF2DC08F12F393F5721261AE71113FE0 /* ImageLoader.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/ImageLoader/ImageLoader-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ImageLoader/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/ImageLoader/ImageLoader.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = ImageLoader;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		44CDBB6D11DE06DB64D6268622BDC47E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		48B8EF5125D58BA1BEC5AD1252EFF787 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 13A79621F23E60C1167D17A111BE7AE0 /* GoogleToolboxForMac.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/GoogleToolboxForMac/GoogleToolboxForMac-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/GoogleToolboxForMac/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/GoogleToolboxForMac/GoogleToolboxForMac.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = GoogleToolboxForMac;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		52146E69F48F129B368A7C8133DEED33 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CFB6E51B486563D950EF12EBBE187DEB /* Pods-VietNamNewspapers.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-VietNamNewspapers/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-VietNamNewspapers/Pods-VietNamNewspapers.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_VietNamNewspapers;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		6F79EA7209A81606E12A7A1E0B931899 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF2DC08F12F393F5721261AE71113FE0 /* ImageLoader.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/ImageLoader/ImageLoader-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ImageLoader/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/ImageLoader/ImageLoader.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = ImageLoader;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A32151AFE5B658C8AB05481B80BE36FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 13A79621F23E60C1167D17A111BE7AE0 /* GoogleToolboxForMac.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/GoogleToolboxForMac/GoogleToolboxForMac-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/GoogleToolboxForMac/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/GoogleToolboxForMac/GoogleToolboxForMac.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = GoogleToolboxForMac;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				015A368F878AC3E2CEAE21DDE8026304 /* Debug */,
+				44CDBB6D11DE06DB64D6268622BDC47E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		42C9F80FE9AB5F857BB574634C7C57A8 /* Build configuration list for PBXNativeTarget "Pods-VietNamNewspapers" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				52146E69F48F129B368A7C8133DEED33 /* Debug */,
+				12A3FAA90BF03C68C8ABE95FAE17EB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4F23EAECFFF791E00FB9AAA45980D3FF /* Build configuration list for PBXNativeTarget "ImageLoader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F79EA7209A81606E12A7A1E0B931899 /* Debug */,
+				32C5E0B8F572838B0519EDE72160E99D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A7DCD5CC93C327FAB5EAF73A7ECA9866 /* Build configuration list for PBXNativeTarget "GoogleToolboxForMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A32151AFE5B658C8AB05481B80BE36FE /* Debug */,
+				48B8EF5125D58BA1BEC5AD1252EFF787 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

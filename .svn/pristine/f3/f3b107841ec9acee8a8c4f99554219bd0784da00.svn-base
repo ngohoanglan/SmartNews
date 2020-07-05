@@ -1,0 +1,51 @@
+/* 
+  Localizable.strings
+  VietNamNewspapers
+
+  Created by admin on 3/28/16.
+  Copyright © 2016 admin. All rights reserved.
+*/
+"country_code"="DE";
+"country_name"="Germany";
+"app_name"="Nachrichten";
+"app_id"="1293126733";
+
+"check_all"="check all";
+"uncheck_all"="uncheck all";
+"import_newspapers"="IMPORT NEWSPAPERS";
+"select_country"="Select your country";
+"next"="NEXT";
+"search_article"="Search Articles";
+"favorite_article"="Bookmarked articles";
+"add_more_newspaper"="Change country";
+"share_app"="Share this app";
+"rate_app"="Rate this app";
+"contact_us"="Contact us";
+"newspapers_management"="Newspaper Management";
+"feed_setting"="Feed setting";
+"app_setting"="App setting";
+"block_image"="Download Images";
+"description_expand"="Expand Description";
+"text_size"="Text Size";
+"clear_cache"="Clear cache";
+"delete_item"="Delete Item";
+"delete_newspaper"="Delete Newspaper";
+"confirm_delete_newspaper"="Are you sure you want to delete %@ ?";
+"clear_success"="All data has been cleared";
+"cancel"="Cancel";
+"clear_cache_confirm"="Are you sure you want to clear all ?";
+"remove_ads"="Remove Advertisement!";
+"error_message"="An error occurred. Please try again";
+"restore_purchase"="Restore Purchases";
+"ads_purchased"="Ads Purchased";
+"rate_now"="Rate now";
+"no_thanks"="No, thanks";
+"late"="Remind later";
+"rate_message"="Thank you for using %@";
+"update_database"="Update Database";
+"update_now"="Update Now";
+"update_message"="A new version of database is available. Are you sure you want to update ?";
+"error"="Error";
+"no_connection_message"="Please check your internet connection and try again";
+"delete_all_newspaper"="Delete all newspapers";
+"confirm_delete_all_newspaper"="Are you sure you want to delete all newspapers?";

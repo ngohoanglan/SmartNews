@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>711742871428-qcvb2c3f7v7jqng79b0258241vqp6a4k.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.711742871428-qcvb2c3f7v7jqng79b0258241vqp6a4k</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAkhJZgCfNtA9XEg1pN9eUCLZYDcZFi4X8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>711742871428</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>thealllatestnews.nigerianewspapers</string>
+	<key>PROJECT_ID</key>
+	<string>nigeria-3aaa9</string>
+	<key>STORAGE_BUCKET</key>
+	<string>nigeria-3aaa9.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:711742871428:ios:0c0d98fc685bd85c</string>
+	<key>DATABASE_URL</key>
+	<string>https://nigeria-3aaa9.firebaseio.com</string>
+</dict>
+</plist>
