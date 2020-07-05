@@ -719,24 +719,24 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                     cell.feedImageCell.image=nil
                     //
                     
-                    /*
+                    
                     cell.feedImageCell.load.request(with: feedData.linkImage!, onCompletion: { image, error, operation in
                         
                         if operation == .network {
                             let myImage : UIImage = Utils.resizeImage(image!, maxWidth: self.imageSize, maxHeight: self.imageSize)
                             let transition = CATransition()
                             transition.duration = 0.5
-                            transition.type = kCATransitionFade
+                            transition.type = CATransitionType.fade
                             cell.feedImageCell.layer.add(transition, forKey: nil)
                             cell.feedImageCell.image = myImage
                             
-                            feedData.imageArray=UIImagePNGRepresentation(myImage)
+                            feedData.imageArray=myImage.pngData()
                             let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.imageArray.rawValue : feedData.imageArray! as AnyObject]
                             self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
                         }
                     })
                   
-                    */
+                    
                 }
                 
                 if(feedData.isRead==1)
