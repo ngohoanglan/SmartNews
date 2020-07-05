@@ -5,7 +5,7 @@
 //  Created by Ngô Lân on 12/27/16.
 //  Copyright © 2016 admin. All rights reserved.
 //
-
+import ObjectMapper
 import Foundation
 class Feeds//:Mappable
 {
@@ -14,12 +14,12 @@ class Feeds//:Mappable
     required init?(map: Map) {
         
     }
-    /*
+    
     func mapping(map: Map) {
         
         feedsJson    <- map["feeds"]
     }
-    */
+    
 }
 
 class FeedJson//:Mappable
@@ -35,7 +35,7 @@ class FeedJson//:Mappable
         // super.init(map)
         
     }
-    /*
+    
     func mapping(map: Map) {
        
         Title    <- map["Title"]
@@ -45,5 +45,5 @@ class FeedJson//:Mappable
         PubDate    <- map["PubDate"]
         
     }
-    */
+    
 }

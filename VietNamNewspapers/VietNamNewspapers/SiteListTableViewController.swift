@@ -5,7 +5,7 @@
 //  Created by admin on 2/22/16.
 //  Copyright © 2016 admin. All rights reserved.
 //
-
+import ObjectMapper
 import UIKit
 import MessageUI
 import Firebase

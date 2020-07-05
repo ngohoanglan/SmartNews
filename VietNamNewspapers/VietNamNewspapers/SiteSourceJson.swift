@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import ObjectMapper
 
 class SitesSource:Mappable{
        var siteSource: [SiteSource]?
@@ -16,9 +16,9 @@ class SitesSource:Mappable{
         
     }
     func mapping(map: Map) {
-       // version    <- map["version"]
+        version    <- map["version"]
         
-       //  siteSource    <- map["sites"]
+         siteSource    <- map["sites"]
     }
 }
 class SiteSource//:Mappable
@@ -44,7 +44,7 @@ class SiteSource//:Mappable
        // super.init(map)
     
     }
-    /*
+    
      func mapping(map: Map) {
       siteItemSource   <- map["feeds"]
          name    <- map["name"]
@@ -62,7 +62,7 @@ class SiteSource//:Mappable
         _default    <- map["default"]
        
     }
-    */
+    
 }
 class SiteItemSource:SiteSource
 {

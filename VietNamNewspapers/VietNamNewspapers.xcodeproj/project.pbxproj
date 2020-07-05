@@ -41,20 +41,6 @@
 		84BF82541C7AF773005F339F /* SiteListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BF82531C7AF773005F339F /* SiteListTableViewController.swift */; };
 		84CA79F01CAF896500F69FF9 /* SelectNewspapersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CA79EF1CAF896500F69FF9 /* SelectNewspapersTableViewCell.swift */; };
 		84CA79F41CAFC22D00F69FF9 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CA79F31CAFC22D00F69FF9 /* CheckBox.swift */; };
-		84ECB7C81CAE53EF008F6A0A /* FromJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ECB7C21CAE53EF008F6A0A /* FromJSON.swift */; };
-		84ECB7C91CAE53EF008F6A0A /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ECB7C31CAE53EF008F6A0A /* Map.swift */; };
-		84ECB7CA1CAE53EF008F6A0A /* Mappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ECB7C41CAE53EF008F6A0A /* Mappable.swift */; };
-		84ECB7CB1CAE53EF008F6A0A /* Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ECB7C51CAE53EF008F6A0A /* Mapper.swift */; };
-		84ECB7CC1CAE53EF008F6A0A /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ECB7C61CAE53EF008F6A0A /* Operators.swift */; };
-		84ECB7CD1CAE53EF008F6A0A /* ToJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ECB7C71CAE53EF008F6A0A /* ToJSON.swift */; };
-		84ECB7D61CAE53FF008F6A0A /* CustomDateFormatTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ECB7CE1CAE53FF008F6A0A /* CustomDateFormatTransform.swift */; };
-		84ECB7D71CAE53FF008F6A0A /* DateFormatterTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ECB7CF1CAE53FF008F6A0A /* DateFormatterTransform.swift */; };
-		84ECB7D81CAE53FF008F6A0A /* DateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ECB7D01CAE53FF008F6A0A /* DateTransform.swift */; };
-		84ECB7D91CAE53FF008F6A0A /* EnumTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ECB7D11CAE53FF008F6A0A /* EnumTransform.swift */; };
-		84ECB7DA1CAE53FF008F6A0A /* ISO8601DateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ECB7D21CAE53FF008F6A0A /* ISO8601DateTransform.swift */; };
-		84ECB7DB1CAE53FF008F6A0A /* TransformOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ECB7D31CAE53FF008F6A0A /* TransformOf.swift */; };
-		84ECB7DC1CAE53FF008F6A0A /* TransformType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ECB7D41CAE53FF008F6A0A /* TransformType.swift */; };
-		84ECB7DD1CAE53FF008F6A0A /* URLTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ECB7D51CAE53FF008F6A0A /* URLTransform.swift */; };
 		84ECB7E01CAE5846008F6A0A /* SiteSourceJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ECB7DF1CAE5846008F6A0A /* SiteSourceJson.swift */; };
 		DA0237011F64E168000D8806 /* SearchResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0237001F64E168000D8806 /* SearchResultController.swift */; };
 		DA08E4971D52C1520092C53F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA08E4961D52C1520092C53F /* StoreKit.framework */; };
@@ -176,20 +162,6 @@
 		84BF82531C7AF773005F339F /* SiteListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiteListTableViewController.swift; sourceTree = "<group>"; };
 		84CA79EF1CAF896500F69FF9 /* SelectNewspapersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectNewspapersTableViewCell.swift; sourceTree = "<group>"; };
 		84CA79F31CAFC22D00F69FF9 /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
-		84ECB7C21CAE53EF008F6A0A /* FromJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FromJSON.swift; path = ObjectMapper/Core/FromJSON.swift; sourceTree = "<group>"; };
-		84ECB7C31CAE53EF008F6A0A /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Map.swift; path = ObjectMapper/Core/Map.swift; sourceTree = "<group>"; };
-		84ECB7C41CAE53EF008F6A0A /* Mappable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Mappable.swift; path = ObjectMapper/Core/Mappable.swift; sourceTree = "<group>"; };
-		84ECB7C51CAE53EF008F6A0A /* Mapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Mapper.swift; path = ObjectMapper/Core/Mapper.swift; sourceTree = "<group>"; };
-		84ECB7C61CAE53EF008F6A0A /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Operators.swift; path = ObjectMapper/Core/Operators.swift; sourceTree = "<group>"; };
-		84ECB7C71CAE53EF008F6A0A /* ToJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToJSON.swift; path = ObjectMapper/Core/ToJSON.swift; sourceTree = "<group>"; };
-		84ECB7CE1CAE53FF008F6A0A /* CustomDateFormatTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomDateFormatTransform.swift; path = ObjectMapper/Transforms/CustomDateFormatTransform.swift; sourceTree = "<group>"; };
-		84ECB7CF1CAE53FF008F6A0A /* DateFormatterTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateFormatterTransform.swift; path = ObjectMapper/Transforms/DateFormatterTransform.swift; sourceTree = "<group>"; };
-		84ECB7D01CAE53FF008F6A0A /* DateTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateTransform.swift; path = ObjectMapper/Transforms/DateTransform.swift; sourceTree = "<group>"; };
-		84ECB7D11CAE53FF008F6A0A /* EnumTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EnumTransform.swift; path = ObjectMapper/Transforms/EnumTransform.swift; sourceTree = "<group>"; };
-		84ECB7D21CAE53FF008F6A0A /* ISO8601DateTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ISO8601DateTransform.swift; path = ObjectMapper/Transforms/ISO8601DateTransform.swift; sourceTree = "<group>"; };
-		84ECB7D31CAE53FF008F6A0A /* TransformOf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransformOf.swift; path = ObjectMapper/Transforms/TransformOf.swift; sourceTree = "<group>"; };
-		84ECB7D41CAE53FF008F6A0A /* TransformType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransformType.swift; path = ObjectMapper/Transforms/TransformType.swift; sourceTree = "<group>"; };
-		84ECB7D51CAE53FF008F6A0A /* URLTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = URLTransform.swift; path = ObjectMapper/Transforms/URLTransform.swift; sourceTree = "<group>"; };
 		84ECB7DF1CAE5846008F6A0A /* SiteSourceJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiteSourceJson.swift; sourceTree = "<group>"; };
 		A33CB3927A5B5FB9848F7277 /* Pods-VietNamNewspapers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VietNamNewspapers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VietNamNewspapers/Pods-VietNamNewspapers.debug.xcconfig"; sourceTree = "<group>"; };
 		BBDCB78975A228E2B83ED31D /* Pods_VietNamNewspapers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VietNamNewspapers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -318,7 +290,6 @@
 				DAA80E071D431E8E00CE653E /* GoogleMobileAds.framework */,
 				DA1545481D30EA850059E7C0 /* SideMenu */,
 				DA1545361D309F990059E7C0 /* KRProgressHUD */,
-				84ECB7C11CAE53D6008F6A0A /* ObjectMapper */,
 				844887971C7B47410007B8E3 /* HTTPClient */,
 				84BF824F1C7AF1D5005F339F /* Views */,
 				84BF82281C7A981A005F339F /* Models */,
@@ -412,27 +383,6 @@
 				DA0237001F64E168000D8806 /* SearchResultController.swift */,
 			);
 			name = Views;
-			sourceTree = "<group>";
-		};
-		84ECB7C11CAE53D6008F6A0A /* ObjectMapper */ = {
-			isa = PBXGroup;
-			children = (
-				84ECB7CE1CAE53FF008F6A0A /* CustomDateFormatTransform.swift */,
-				84ECB7CF1CAE53FF008F6A0A /* DateFormatterTransform.swift */,
-				84ECB7D01CAE53FF008F6A0A /* DateTransform.swift */,
-				84ECB7D11CAE53FF008F6A0A /* EnumTransform.swift */,
-				84ECB7D21CAE53FF008F6A0A /* ISO8601DateTransform.swift */,
-				84ECB7D31CAE53FF008F6A0A /* TransformOf.swift */,
-				84ECB7D41CAE53FF008F6A0A /* TransformType.swift */,
-				84ECB7D51CAE53FF008F6A0A /* URLTransform.swift */,
-				84ECB7C21CAE53EF008F6A0A /* FromJSON.swift */,
-				84ECB7C31CAE53EF008F6A0A /* Map.swift */,
-				84ECB7C41CAE53EF008F6A0A /* Mappable.swift */,
-				84ECB7C51CAE53EF008F6A0A /* Mapper.swift */,
-				84ECB7C61CAE53EF008F6A0A /* Operators.swift */,
-				84ECB7C71CAE53EF008F6A0A /* ToJSON.swift */,
-			);
-			name = ObjectMapper;
 			sourceTree = "<group>";
 		};
 		A4A65512BB15A0112AA81F07 /* Frameworks */ = {
@@ -573,7 +523,6 @@
 				844B9C671C78AE860047ED2F /* Frameworks */,
 				844B9C681C78AE860047ED2F /* Resources */,
 				F2477C36BE6A6282B540A490 /* [CP] Embed Pods Frameworks */,
-				813A1B55C9CC049A6BB7F61F /* [CP] Copy Pods Resources */,
 				DA0EE9111F289391009A86C9 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -681,34 +630,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		813A1B55C9CC049A6BB7F61F /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VietNamNewspapers/Pods-VietNamNewspapers-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		A6782237BF7E930819EB7F32 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VietNamNewspapers-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F2477C36BE6A6282B540A490 /* [CP] Embed Pods Frameworks */ = {
@@ -717,13 +654,20 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VietNamNewspapers/Pods-VietNamNewspapers-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/ImageLoader/ImageLoader.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageLoader.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VietNamNewspapers/Pods-VietNamNewspapers-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VietNamNewspapers/Pods-VietNamNewspapers-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -733,34 +677,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84ECB7D61CAE53FF008F6A0A /* CustomDateFormatTransform.swift in Sources */,
 				844B9C891C78B1A00047ED2F /* DatastoreCoordinator.swift in Sources */,
 				DAB5E1C91F3477D50092259D /* DJKStaticView.swift in Sources */,
-				84ECB7DC1CAE53FF008F6A0A /* TransformType.swift in Sources */,
 				84BF82471C7A9C51005F339F /* SiteItem.swift in Sources */,
 				844B9C8B1C78B1E70047ED2F /* PersistenceManager.swift in Sources */,
 				DAB5E1C81F3477D50092259D /* DJKScreenShotExtension.swift in Sources */,
 				DA27C4FB1F2781D8002D2FB4 /* BaseViewController.swift in Sources */,
-				84ECB7D71CAE53FF008F6A0A /* DateFormatterTransform.swift in Sources */,
-				84ECB7CB1CAE53EF008F6A0A /* Mapper.swift in Sources */,
 				DA0EE8D21F2880F6009A86C9 /* FeedsViewController.swift in Sources */,
 				844B9C841C78B1160047ED2F /* DateFormatter.swift in Sources */,
 				844B9C871C78B1690047ED2F /* ContextManager.swift in Sources */,
-				84ECB7CA1CAE53EF008F6A0A /* Mappable.swift in Sources */,
 				844CFBA61CB2AA2E00EAC49C /* SiteListTableViewCell.swift in Sources */,
 				DA1545421D309F990059E7C0 /* KRActivityIndicatorViewStyle.swift in Sources */,
 				DAB1EC631D250610005FE6EC /* SettingsTableViewController.swift in Sources */,
-				84ECB7D81CAE53FF008F6A0A /* DateTransform.swift in Sources */,
 				DA27C4F81F2779B2002D2FB4 /* PMKPageMenuItemTab.swift in Sources */,
 				84BF824E1C7ABC05005F339F /* FeedDataController.swift in Sources */,
 				DA0237011F64E168000D8806 /* SearchResultController.swift in Sources */,
 				844B9C761C78AE870047ED2F /* VietNamNewspapers.xcdatamodeld in Sources */,
 				DADF55EA1D07B8F40048E67C /* FeedNotDescriptionViewCellTableViewCell.swift in Sources */,
 				DA27C4F21F2779B2002D2FB4 /* PMKPageMenuItemHacka.swift in Sources */,
-				84ECB7D91CAE53FF008F6A0A /* EnumTransform.swift in Sources */,
 				DA27C4F61F2779B2002D2FB4 /* PMKPageMenuItemSmart.swift in Sources */,
 				84BF824A1C7ABBE5005F339F /* SiteController.swift in Sources */,
-				84ECB7CC1CAE53EF008F6A0A /* Operators.swift in Sources */,
 				84885AB81CDDDA9C00D9CED1 /* SearchArticleViewController.swift in Sources */,
 				DAD121351E55EDD4000B1521 /* HtmlLinkExtraction.swift in Sources */,
 				84BF82441C7A9C51005F339F /* Site+CoreDataProperties.swift in Sources */,
@@ -772,7 +708,6 @@
 				843B2F7C1C80AE0F00E956C8 /* CountryTableViewCell.swift in Sources */,
 				844887A11C7B56C90007B8E3 /* ImportDataController.swift in Sources */,
 				844B9C6E1C78AE870047ED2F /* AppDelegate.swift in Sources */,
-				84ECB7DA1CAE53FF008F6A0A /* ISO8601DateTransform.swift in Sources */,
 				DA1545451D309F990059E7C0 /* KRProgressHUDIconType.swift in Sources */,
 				8448879D1C7B48D20007B8E3 /* StringExtension.swift in Sources */,
 				DA27C4F51F2779B2002D2FB4 /* PMKPageMenuItemPlain.swift in Sources */,
@@ -783,7 +718,6 @@
 				DAFAF3001DAB6A0A00778781 /* Utils.swift in Sources */,
 				DAB5E1C71F3477D50092259D /* DJKFlipperView.swift in Sources */,
 				DAB5E1C41F3477D50092259D /* DJKAnimationLayer.swift in Sources */,
-				84ECB7C81CAE53EF008F6A0A /* FromJSON.swift in Sources */,
 				848BF0C91CC378A800FF107C /* FeedDataTableViewCell.swift in Sources */,
 				DA1545A21D30EADA0059E7C0 /* ENSideMenuNavigationController.swift in Sources */,
 				DA1545A11D30EADA0059E7C0 /* ENSideMenu.swift in Sources */,
@@ -801,9 +735,6 @@
 				DAD4965C1D16344200A0CFD0 /* FavoriteArticleViewController.swift in Sources */,
 				DA27C4F01F2779B2002D2FB4 /* PMKPageMenuItem.swift in Sources */,
 				DA27C4F71F2779B2002D2FB4 /* PMKPageMenuItemSuite.swift in Sources */,
-				84ECB7C91CAE53EF008F6A0A /* Map.swift in Sources */,
-				84ECB7CD1CAE53EF008F6A0A /* ToJSON.swift in Sources */,
-				84ECB7DD1CAE53FF008F6A0A /* URLTransform.swift in Sources */,
 				84A15A291CA913DF00215454 /* CountryComboBoxListViewController.swift in Sources */,
 				844887991C7B47780007B8E3 /* HTTPClient.swift in Sources */,
 				DA3906151D351E8B0094CD23 /* ControllerMainMenuViewController.swift in Sources */,
@@ -816,7 +747,6 @@
 				DA27C4F11F2779B2002D2FB4 /* PMKPageMenuItemEllipse.swift in Sources */,
 				8448879B1C7B47940007B8E3 /* HTTPStatusCode.swift in Sources */,
 				DAC193AA1D3C6A1900A6B8D8 /* ENSiteDetailMenuViewController.swift in Sources */,
-				84ECB7DB1CAE53FF008F6A0A /* TransformOf.swift in Sources */,
 				DA3906171D351F060094CD23 /* ENMainMenuViewController.swift in Sources */,
 				DA27615D1F750DF900B03DEA /* FeedNotDescriptionViewCellIPad.swift in Sources */,
 				844A1DA81CABBB24001FEDA5 /* SelectNewspapersViewController.swift in Sources */,
