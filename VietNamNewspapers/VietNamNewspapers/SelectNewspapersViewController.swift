@@ -48,8 +48,13 @@ UITableViewDataSource, DownloadDelegate {
     var currentSiteName :String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        btImportNewspapers.backgroundColor=UIColor(red: 51/255, green: 90/255, blue: 149/255, alpha: 1)
-        
+       
+        btImportNewspapers.configure(color:  .white,
+                                  font:  UIFont.systemFont(ofSize: 16),
+                                  cornerRadius: 8,
+                                  borderColor:  UIColor(red: 51/255, green: 90/255, blue: 149/255, alpha: 1),
+                                  backgroundColor:  UIColor(red: 51/255, green: 90/255, blue: 149/255, alpha: 1),
+                                  borderWidth: 2.0)
         passOject=UserDefaults()
         
         btImportNewspapers.setTitle(NSLocalizedString("import_newspapers", comment: ""), for: UIControl.State())

@@ -96,6 +96,7 @@
 		DAC193AA1D3C6A1900A6B8D8 /* ENSiteDetailMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC193A91D3C6A1900A6B8D8 /* ENSiteDetailMenuViewController.swift */; };
 		DAD121351E55EDD4000B1521 /* HtmlLinkExtraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD121341E55EDD4000B1521 /* HtmlLinkExtraction.swift */; };
 		DAD4965C1D16344200A0CFD0 /* FavoriteArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD4965B1D16344200A0CFD0 /* FavoriteArticleViewController.swift */; };
+		DADAC05B24B55C5900086CEA /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADAC05A24B55C5900086CEA /* UIButton.swift */; };
 		DADF55EA1D07B8F40048E67C /* FeedNotDescriptionViewCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADF55E91D07B8F40048E67C /* FeedNotDescriptionViewCellTableViewCell.swift */; };
 		DAF4EC391F2D7C9C00B67CA6 /* FeedViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAF4EC381F2D7C9C00B67CA6 /* FeedViewCell.xib */; };
 		DAF4EC3B1F2D7D4F00B67CA6 /* FeedImageViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAF4EC3A1F2D7D4F00B67CA6 /* FeedImageViewCell.xib */; };
@@ -226,6 +227,7 @@
 		DAD121341E55EDD4000B1521 /* HtmlLinkExtraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HtmlLinkExtraction.swift; sourceTree = "<group>"; };
 		DAD4965B1D16344200A0CFD0 /* FavoriteArticleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteArticleViewController.swift; sourceTree = "<group>"; };
 		DAD556A71E4C609B005FEFB3 /* Nachrichten aktuell.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Nachrichten aktuell.entitlements"; sourceTree = "<group>"; };
+		DADAC05A24B55C5900086CEA /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		DADF55E91D07B8F40048E67C /* FeedNotDescriptionViewCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedNotDescriptionViewCellTableViewCell.swift; sourceTree = "<group>"; };
 		DAF4EC381F2D7C9C00B67CA6 /* FeedViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedViewCell.xib; sourceTree = "<group>"; };
 		DAF4EC3A1F2D7D4F00B67CA6 /* FeedImageViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedImageViewCell.xib; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 				84CA79F31CAFC22D00F69FF9 /* CheckBox.swift */,
 				DAFAF2FF1DAB6A0A00778781 /* Utils.swift */,
 				DAD121341E55EDD4000B1521 /* HtmlLinkExtraction.swift */,
+				DADAC05A24B55C5900086CEA /* UIButton.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -737,6 +740,7 @@
 				DA0D065E1D1E2EF7007A0288 /* WebViewViewController.swift in Sources */,
 				84CA79F41CAFC22D00F69FF9 /* CheckBox.swift in Sources */,
 				DA27C4EF1F2779B2002D2FB4 /* PMKPageMenuControllerDelegate.swift in Sources */,
+				DADAC05B24B55C5900086CEA /* UIButton.swift in Sources */,
 				C5656BA924B1CE6D00B33025 /* SelectNewspaperTableViewCell.swift in Sources */,
 				DA27C4EE1F2779B2002D2FB4 /* PMKPageMenuController.swift in Sources */,
 				DA27C4FD1F278236002D2FB4 /* DataViewController.swift in Sources */,
