@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		03505C76EA7054595E01EC54 /* Pods_VietNamNewspapers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7228BF145B43AB1C15149D00 /* Pods_VietNamNewspapers.framework */; };
+		3AD227D8DD55705F8C273A7C /* Pods_VietNamNewspapers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F247E800CE2CB5C9593702C2 /* Pods_VietNamNewspapers.framework */; };
 		843B2F7C1C80AE0F00E956C8 /* CountryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B2F7B1C80AE0F00E956C8 /* CountryTableViewCell.swift */; };
 		844887991C7B47780007B8E3 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844887981C7B47780007B8E3 /* HTTPClient.swift */; };
 		8448879B1C7B47940007B8E3 /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8448879A1C7B47940007B8E3 /* HTTPStatusCode.swift */; };
@@ -131,8 +131,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2CA00577C39A06FC4F2C2C61 /* Pods-VietNamNewspapers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VietNamNewspapers.debug.xcconfig"; path = "Target Support Files/Pods-VietNamNewspapers/Pods-VietNamNewspapers.debug.xcconfig"; sourceTree = "<group>"; };
-		7228BF145B43AB1C15149D00 /* Pods_VietNamNewspapers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VietNamNewspapers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DF0B1520959001459B86090 /* Pods-VietNamNewspapers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VietNamNewspapers.release.xcconfig"; path = "Target Support Files/Pods-VietNamNewspapers/Pods-VietNamNewspapers.release.xcconfig"; sourceTree = "<group>"; };
 		843B2F7B1C80AE0F00E956C8 /* CountryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryTableViewCell.swift; sourceTree = "<group>"; };
 		844887981C7B47780007B8E3 /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		8448879A1C7B47940007B8E3 /* HTTPStatusCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
@@ -169,7 +168,7 @@
 		84CA79EF1CAF896500F69FF9 /* SelectNewspapersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectNewspapersTableViewCell.swift; sourceTree = "<group>"; };
 		84CA79F31CAFC22D00F69FF9 /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		84ECB7DF1CAE5846008F6A0A /* SiteSourceJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiteSourceJson.swift; sourceTree = "<group>"; };
-		92803E8710225F525F29DA9C /* Pods-VietNamNewspapers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VietNamNewspapers.release.xcconfig"; path = "Target Support Files/Pods-VietNamNewspapers/Pods-VietNamNewspapers.release.xcconfig"; sourceTree = "<group>"; };
+		95843E377AB2ED6629936B65 /* Pods-VietNamNewspapers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VietNamNewspapers.debug.xcconfig"; path = "Target Support Files/Pods-VietNamNewspapers/Pods-VietNamNewspapers.debug.xcconfig"; sourceTree = "<group>"; };
 		C5656BA724B1CE6D00B33025 /* SelectNewspaperTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectNewspaperTableViewCell.swift; sourceTree = "<group>"; };
 		C5656BA824B1CE6D00B33025 /* SelectNewspaperTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectNewspaperTableViewCell.xib; sourceTree = "<group>"; };
 		DA0237001F64E168000D8806 /* SearchResultController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultController.swift; sourceTree = "<group>"; };
@@ -237,6 +236,7 @@
 		DAF4EC3A1F2D7D4F00B67CA6 /* FeedImageViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedImageViewCell.xib; sourceTree = "<group>"; };
 		DAF4EC411F2D88E500B67CA6 /* DataViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataViewController.xib; sourceTree = "<group>"; };
 		DAFAF2FF1DAB6A0A00778781 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		F247E800CE2CB5C9593702C2 /* Pods_VietNamNewspapers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VietNamNewspapers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,7 +247,7 @@
 				DAA80E081D431E8E00CE653E /* GoogleMobileAds.framework in Frameworks */,
 				DA08E4971D52C1520092C53F /* StoreKit.framework in Frameworks */,
 				DA0EE90C1F289391009A86C9 /* PageMenuKit.framework in Frameworks */,
-				03505C76EA7054595E01EC54 /* Pods_VietNamNewspapers.framework in Frameworks */,
+				3AD227D8DD55705F8C273A7C /* Pods_VietNamNewspapers.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,17 +264,16 @@
 		0B4FEEF353A05C2A78C2D7F4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2CA00577C39A06FC4F2C2C61 /* Pods-VietNamNewspapers.debug.xcconfig */,
-				92803E8710225F525F29DA9C /* Pods-VietNamNewspapers.release.xcconfig */,
+				95843E377AB2ED6629936B65 /* Pods-VietNamNewspapers.debug.xcconfig */,
+				3DF0B1520959001459B86090 /* Pods-VietNamNewspapers.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		20C5301D77F396AAA3B095EF /* Frameworks */ = {
+		7E70D1C64CD1D9B35ACA8ACD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7228BF145B43AB1C15149D00 /* Pods_VietNamNewspapers.framework */,
+				F247E800CE2CB5C9593702C2 /* Pods_VietNamNewspapers.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -296,7 +295,7 @@
 				DA0EE9061F289391009A86C9 /* PageMenuKit */,
 				844B9C6B1C78AE860047ED2F /* Products */,
 				0B4FEEF353A05C2A78C2D7F4 /* Pods */,
-				20C5301D77F396AAA3B095EF /* Frameworks */,
+				7E70D1C64CD1D9B35ACA8ACD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -534,12 +533,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 844B9C7F1C78AE880047ED2F /* Build configuration list for PBXNativeTarget "VietNamNewspapers" */;
 			buildPhases = (
-				D363E4AFDF7755E1390ECE85 /* [CP] Check Pods Manifest.lock */,
+				0F5D9C06BEF446B4B55FF22C /* [CP] Check Pods Manifest.lock */,
 				844B9C661C78AE860047ED2F /* Sources */,
 				844B9C671C78AE860047ED2F /* Frameworks */,
 				844B9C681C78AE860047ED2F /* Resources */,
 				DA0EE9111F289391009A86C9 /* Embed Frameworks */,
-				1154D2B5F26612483E9A4DA7 /* [CP] Embed Pods Frameworks */,
+				2E4FA3FB37BA1577B27FD325 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -648,7 +647,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1154D2B5F26612483E9A4DA7 /* [CP] Embed Pods Frameworks */ = {
+		0F5D9C06BEF446B4B55FF22C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VietNamNewspapers-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2E4FA3FB37BA1577B27FD325 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -674,28 +695,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VietNamNewspapers/Pods-VietNamNewspapers-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D363E4AFDF7755E1390ECE85 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-VietNamNewspapers-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -945,17 +944,14 @@
 		};
 		844B9C801C78AE880047ED2F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2CA00577C39A06FC4F2C2C61 /* Pods-VietNamNewspapers.debug.xcconfig */;
+			baseConfigurationReference = 95843E377AB2ED6629936B65 /* Pods-VietNamNewspapers.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "VietNamNewspapers/Nachrichten aktuell.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 6VU566M8RD;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/VietNamNewspapers",
-				);
 				INFOPLIST_FILE = VietNamNewspapers/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -970,17 +966,14 @@
 		};
 		844B9C811C78AE880047ED2F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 92803E8710225F525F29DA9C /* Pods-VietNamNewspapers.release.xcconfig */;
+			baseConfigurationReference = 3DF0B1520959001459B86090 /* Pods-VietNamNewspapers.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "VietNamNewspapers/Nachrichten aktuell.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 6VU566M8RD;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/VietNamNewspapers",
-				);
 				INFOPLIST_FILE = VietNamNewspapers/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
