@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		112C9B8D804710C1CF5315F5 /* Pods_VietNamNewspapers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBDCB78975A228E2B83ED31D /* Pods_VietNamNewspapers.framework */; };
+		03505C76EA7054595E01EC54 /* Pods_VietNamNewspapers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7228BF145B43AB1C15149D00 /* Pods_VietNamNewspapers.framework */; };
 		843B2F7C1C80AE0F00E956C8 /* CountryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843B2F7B1C80AE0F00E956C8 /* CountryTableViewCell.swift */; };
 		844887991C7B47780007B8E3 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844887981C7B47780007B8E3 /* HTTPClient.swift */; };
 		8448879B1C7B47940007B8E3 /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8448879A1C7B47940007B8E3 /* HTTPStatusCode.swift */; };
@@ -80,6 +80,8 @@
 		DA3906151D351E8B0094CD23 /* ControllerMainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3906141D351E8B0094CD23 /* ControllerMainMenuViewController.swift */; };
 		DA3906171D351F060094CD23 /* ENMainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3906161D351F060094CD23 /* ENMainMenuViewController.swift */; };
 		DA4DA7F51D6A092300A8F131 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA4DA7F71D6A092300A8F131 /* Localizable.strings */; };
+		DA644BE624BAA64B0033DB26 /* SiteListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA644BE424BAA64B0033DB26 /* SiteListCell.swift */; };
+		DA644BE724BAA64B0033DB26 /* SiteListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA644BE524BAA64B0033DB26 /* SiteListCell.xib */; };
 		DA6CB20A1E12293E00D88C21 /* FeedJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6CB2091E12293E00D88C21 /* FeedJson.swift */; };
 		DA74EC311D502E9F00B367E8 /* SiteSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA74EC301D502E9F00B367E8 /* SiteSettingTableViewController.swift */; };
 		DA74EC371D5094FC00B367E8 /* SiteSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA74EC361D5094FC00B367E8 /* SiteSettingTableViewCell.swift */; };
@@ -129,7 +131,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4D7B6FD4AA8115227C320680 /* Pods-VietNamNewspapers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VietNamNewspapers.release.xcconfig"; path = "Pods/Target Support Files/Pods-VietNamNewspapers/Pods-VietNamNewspapers.release.xcconfig"; sourceTree = "<group>"; };
+		2CA00577C39A06FC4F2C2C61 /* Pods-VietNamNewspapers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VietNamNewspapers.debug.xcconfig"; path = "Target Support Files/Pods-VietNamNewspapers/Pods-VietNamNewspapers.debug.xcconfig"; sourceTree = "<group>"; };
+		7228BF145B43AB1C15149D00 /* Pods_VietNamNewspapers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VietNamNewspapers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		843B2F7B1C80AE0F00E956C8 /* CountryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryTableViewCell.swift; sourceTree = "<group>"; };
 		844887981C7B47780007B8E3 /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		8448879A1C7B47940007B8E3 /* HTTPStatusCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
@@ -166,8 +169,7 @@
 		84CA79EF1CAF896500F69FF9 /* SelectNewspapersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectNewspapersTableViewCell.swift; sourceTree = "<group>"; };
 		84CA79F31CAFC22D00F69FF9 /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		84ECB7DF1CAE5846008F6A0A /* SiteSourceJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiteSourceJson.swift; sourceTree = "<group>"; };
-		A33CB3927A5B5FB9848F7277 /* Pods-VietNamNewspapers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VietNamNewspapers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VietNamNewspapers/Pods-VietNamNewspapers.debug.xcconfig"; sourceTree = "<group>"; };
-		BBDCB78975A228E2B83ED31D /* Pods_VietNamNewspapers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VietNamNewspapers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		92803E8710225F525F29DA9C /* Pods-VietNamNewspapers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VietNamNewspapers.release.xcconfig"; path = "Target Support Files/Pods-VietNamNewspapers/Pods-VietNamNewspapers.release.xcconfig"; sourceTree = "<group>"; };
 		C5656BA724B1CE6D00B33025 /* SelectNewspaperTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectNewspaperTableViewCell.swift; sourceTree = "<group>"; };
 		C5656BA824B1CE6D00B33025 /* SelectNewspaperTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectNewspaperTableViewCell.xib; sourceTree = "<group>"; };
 		DA0237001F64E168000D8806 /* SearchResultController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultController.swift; sourceTree = "<group>"; };
@@ -207,6 +209,8 @@
 		DA3906161D351F060094CD23 /* ENMainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ENMainMenuViewController.swift; sourceTree = "<group>"; };
 		DA4DA7F61D6A092300A8F131 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA4DA7F81D6A092D00A8F131 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DA644BE424BAA64B0033DB26 /* SiteListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteListCell.swift; sourceTree = "<group>"; };
+		DA644BE524BAA64B0033DB26 /* SiteListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SiteListCell.xib; sourceTree = "<group>"; };
 		DA6CB2091E12293E00D88C21 /* FeedJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedJson.swift; path = Modules/FeedJson.swift; sourceTree = "<group>"; };
 		DA74EC301D502E9F00B367E8 /* SiteSettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiteSettingTableViewController.swift; sourceTree = "<group>"; };
 		DA74EC361D5094FC00B367E8 /* SiteSettingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiteSettingTableViewCell.swift; sourceTree = "<group>"; };
@@ -242,8 +246,8 @@
 			files = (
 				DAA80E081D431E8E00CE653E /* GoogleMobileAds.framework in Frameworks */,
 				DA08E4971D52C1520092C53F /* StoreKit.framework in Frameworks */,
-				112C9B8D804710C1CF5315F5 /* Pods_VietNamNewspapers.framework in Frameworks */,
 				DA0EE90C1F289391009A86C9 /* PageMenuKit.framework in Frameworks */,
+				03505C76EA7054595E01EC54 /* Pods_VietNamNewspapers.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,6 +261,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B4FEEF353A05C2A78C2D7F4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2CA00577C39A06FC4F2C2C61 /* Pods-VietNamNewspapers.debug.xcconfig */,
+				92803E8710225F525F29DA9C /* Pods-VietNamNewspapers.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		20C5301D77F396AAA3B095EF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7228BF145B43AB1C15149D00 /* Pods_VietNamNewspapers.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		844887971C7B47410007B8E3 /* HTTPClient */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,8 +295,8 @@
 				844B9C6C1C78AE860047ED2F /* VietNamNewspapers */,
 				DA0EE9061F289391009A86C9 /* PageMenuKit */,
 				844B9C6B1C78AE860047ED2F /* Products */,
-				BDE5E8F2FE828A93082B8D7A /* Pods */,
-				A4A65512BB15A0112AA81F07 /* Frameworks */,
+				0B4FEEF353A05C2A78C2D7F4 /* Pods */,
+				20C5301D77F396AAA3B095EF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -392,23 +414,6 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		A4A65512BB15A0112AA81F07 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				BBDCB78975A228E2B83ED31D /* Pods_VietNamNewspapers.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		BDE5E8F2FE828A93082B8D7A /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				A33CB3927A5B5FB9848F7277 /* Pods-VietNamNewspapers.debug.xcconfig */,
-				4D7B6FD4AA8115227C320680 /* Pods-VietNamNewspapers.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		DA0EE9061F289391009A86C9 /* PageMenuKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -496,6 +501,8 @@
 				DA27615C1F750DF900B03DEA /* FeedNotDescriptionViewCellIPad.swift */,
 				C5656BA724B1CE6D00B33025 /* SelectNewspaperTableViewCell.swift */,
 				C5656BA824B1CE6D00B33025 /* SelectNewspaperTableViewCell.xib */,
+				DA644BE424BAA64B0033DB26 /* SiteListCell.swift */,
+				DA644BE524BAA64B0033DB26 /* SiteListCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -527,12 +534,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 844B9C7F1C78AE880047ED2F /* Build configuration list for PBXNativeTarget "VietNamNewspapers" */;
 			buildPhases = (
-				A6782237BF7E930819EB7F32 /* [CP] Check Pods Manifest.lock */,
+				D363E4AFDF7755E1390ECE85 /* [CP] Check Pods Manifest.lock */,
 				844B9C661C78AE860047ED2F /* Sources */,
 				844B9C671C78AE860047ED2F /* Frameworks */,
 				844B9C681C78AE860047ED2F /* Resources */,
-				F2477C36BE6A6282B540A490 /* [CP] Embed Pods Frameworks */,
 				DA0EE9111F289391009A86C9 /* Embed Frameworks */,
+				1154D2B5F26612483E9A4DA7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -622,6 +629,7 @@
 				DA4DA7F51D6A092300A8F131 /* Localizable.strings in Resources */,
 				DAF4EC391F2D7C9C00B67CA6 /* FeedViewCell.xib in Resources */,
 				DA9265351E29C57200D48E19 /* GoogleService-Info.plist in Resources */,
+				DA644BE724BAA64B0033DB26 /* SiteListCell.xib in Resources */,
 				DA2761571F750D7E00B03DEA /* FeedViewCellIPad.xib in Resources */,
 				844B9C781C78AE870047ED2F /* Assets.xcassets in Resources */,
 				DAF4EC3B1F2D7D4F00B67CA6 /* FeedImageViewCell.xib in Resources */,
@@ -640,44 +648,54 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		A6782237BF7E930819EB7F32 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-VietNamNewspapers-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F2477C36BE6A6282B540A490 /* [CP] Embed Pods Frameworks */ = {
+		1154D2B5F26612483E9A4DA7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-VietNamNewspapers/Pods-VietNamNewspapers-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/ImageLoader/ImageLoader.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageLoader.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VietNamNewspapers/Pods-VietNamNewspapers-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D363E4AFDF7755E1390ECE85 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VietNamNewspapers-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -719,6 +737,7 @@
 				844887A11C7B56C90007B8E3 /* ImportDataController.swift in Sources */,
 				844B9C6E1C78AE870047ED2F /* AppDelegate.swift in Sources */,
 				DA1545451D309F990059E7C0 /* KRProgressHUDIconType.swift in Sources */,
+				DA644BE624BAA64B0033DB26 /* SiteListCell.swift in Sources */,
 				8448879D1C7B48D20007B8E3 /* StringExtension.swift in Sources */,
 				DA27C4F51F2779B2002D2FB4 /* PMKPageMenuItemPlain.swift in Sources */,
 				84BF824C1C7ABBF6005F339F /* SiteItemController.swift in Sources */,
@@ -926,7 +945,7 @@
 		};
 		844B9C801C78AE880047ED2F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A33CB3927A5B5FB9848F7277 /* Pods-VietNamNewspapers.debug.xcconfig */;
+			baseConfigurationReference = 2CA00577C39A06FC4F2C2C61 /* Pods-VietNamNewspapers.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "VietNamNewspapers/Nachrichten aktuell.entitlements";
@@ -951,7 +970,7 @@
 		};
 		844B9C811C78AE880047ED2F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4D7B6FD4AA8115227C320680 /* Pods-VietNamNewspapers.release.xcconfig */;
+			baseConfigurationReference = 92803E8710225F525F29DA9C /* Pods-VietNamNewspapers.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "VietNamNewspapers/Nachrichten aktuell.entitlements";

@@ -9,7 +9,7 @@ import ObjectMapper
 import UIKit
 import MessageUI
 import Firebase
-import FirebaseInstanceID
+
 import FirebaseMessaging
 import ImageLoader
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
@@ -80,12 +80,8 @@ class SiteListTableViewController: UIViewController,UITableViewDelegate, UITable
        
     }
     override func viewWillAppear(_ animated: Bool) {
-        let token = FIRInstanceID.instanceID().token()
-        if(token != nil)
-        {
-            print("InstanceID token: \(token!)")
-        }
-        FIRMessaging.messaging().subscribe(toTopic: "/topics/"+self.setting.getCountryCodeSelectedKey())
+       
+        Messaging.messaging().subscribe(toTopic: "/topics/"+self.setting.getCountryCodeSelectedKey())
        print("Subscribed to "+setting.getCountryCodeSelectedKey()+" topic")
 
         self.siteList=siteController.getAllSitesByCountry(self.setting.getCountryCodeSelectedKey())

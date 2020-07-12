@@ -29,10 +29,11 @@ Requirements
 
 ImageLoader | Xcode | Swift
 ----------- | ----- | -----
-0.9.x       | 7.3.1 | 2.2
-0.10.0      | 8.0+  | 2.3
+0.13.+      | 9.0+  | 4.0
+0.12.+      | 8.1+  | 3.0
 0.11.+      | 8.0+  | 3.0
-0.12.+      | 8.1+  | 3.0.1
+0.10.0      | 8.0+  | 2.3
+0.9.x       | 7.3.1 | 2.2
 
 If your project's target need to support iOS5.x or 6.x, use [ImageLoader](https://github.com/hirohisa/ImageLoader). It's A lightweight and fast image loader for iOS written in Objective-C.
 
@@ -41,34 +42,11 @@ Installation
 
 ### CocoaPods
 
-[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects.
-
-To integrate ImageLoader into your Xcode project using CocoaPods, specify it in your `Podfile`:
-
 ```ruby
-source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
-use_frameworks!
-
 pod 'ImageLoader'
 ```
 
-Then, run the following command:
-
-```bash
-$ pod install
-```
-
 ### Carthage
-
-[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that automates the process of adding frameworks to your Cocoa application.
-
-You can install Carthage with [Homebrew](http://brew.sh/) using the following command:
-
-```bash
-$ brew update
-$ brew install carthage
-```
 
 To integrate ImageLoader into your Xcode project using Carthage, specify it in your `Cartfile`:
 

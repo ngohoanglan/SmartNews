@@ -53,6 +53,8 @@
 	</array>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>App would like to use blutooth</string>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-5248543874026007~6267153276</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

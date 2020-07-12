@@ -56,7 +56,7 @@ class CountryComboBoxListViewController: UIViewController,UIPickerViewDataSource
         else
         {
             country_code_selected = setting.getCountryCodeSelectedKey()
-            FIRMessaging.messaging().unsubscribe(fromTopic: "/topics/"+setting.getCountryCodeSelectedKey()+"")
+            Messaging.messaging().unsubscribe(fromTopic: "/topics/"+setting.getCountryCodeSelectedKey()+"")
             print("UnSubscribed to "+setting.getCountryCodeSelectedKey()+" topic")
             
         }

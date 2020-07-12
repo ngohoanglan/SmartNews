@@ -472,7 +472,7 @@ class SettingsTableViewController: UITableViewController ,UIGestureRecognizerDel
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
             switch action.style{
             case .default:
-                FIRMessaging.messaging().unsubscribe(fromTopic: "/topics/"+self.settings.getCountryCodeSelectedKey())
+                Messaging.messaging().unsubscribe(fromTopic: "/topics/"+self.settings.getCountryCodeSelectedKey())
                 
                 let siteController=SiteController.shareInstance
                 let siteItemController=SiteItemController.shareInstance

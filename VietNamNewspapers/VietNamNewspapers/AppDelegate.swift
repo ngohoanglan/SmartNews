@@ -11,7 +11,7 @@ import CoreData
 import GoogleMobileAds
 import UserNotifications
 import Firebase
-import FirebaseInstanceID
+
 import FirebaseMessaging
 import SafariServices
 @UIApplicationMain
@@ -26,39 +26,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GADInterstitialDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
        
         
-       
-        // Register for remote notifications. This shows a permission dialog on first run, to
-        // show the dialog at a more appropriate time move this registration accordingly.
-        // [START register_for_notifications]
-        if #available(iOS 10.0, *) {
-            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-            UNUserNotificationCenter.current().requestAuthorization(
-                options: authOptions,
-                completionHandler: {_, _ in })
-            
-            // For iOS 10 display notification (sent via APNS)
-            UNUserNotificationCenter.current().delegate = self
-            // For iOS 10 data message (sent via FCM)
-            FIRMessaging.messaging().remoteMessageDelegate = self
-            
-        } else {
-            let settings: UIUserNotificationSettings =
-                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-            application.registerUserNotificationSettings(settings)
-        }
-        
-        application.registerForRemoteNotifications()
-        
-        // [END register_for_notifications]
-        FIRApp.configure()
-        
-        // [START add_token_refresh_observer]
-        // Add observer for InstanceID token refresh callback.
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.tokenRefreshNotification),
-                                               name: .firInstanceIDTokenRefresh,
-                                               object: nil)
-        // [END add_token_refresh_observer]
+        // Override point for customization after application launch.
+        FirebaseApp.initialize()
+              FirebaseApp.configure()
+              
+              // [START set_messaging_delegate]
+              Messaging.messaging().delegate = self
+              
+              // [END set_messaging_delegate]
+              // Register for remote notifications. This shows a permission dialog on first run, to
+              // show the dialog at a more appropriate time move this registration accordingly.
+              // [START register_for_notifications]
+              if #available(iOS 10.0, *) {
+                  // For iOS 10 display notification (sent via APNS)
+                  UNUserNotificationCenter.current().delegate = self
+                  
+                  let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+                  UNUserNotificationCenter.current().requestAuthorization(
+                      options: authOptions,
+                      completionHandler: {_, _ in })
+              } else {
+                  let settings: UIUserNotificationSettings =
+                      UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+                  application.registerUserNotificationSettings(settings)
+              }
+              
+              application.registerForRemoteNotifications()
+              
+              // [END register_for_notifications]
         
         
         
@@ -114,7 +109,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GADInterstitialDelegate {
         
        
  
-         FIRMessaging.messaging().disconnect()
+       
         print("Disconnected from FCM.")
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
@@ -238,9 +233,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GADInterstitialDelegate {
     // [END receive_message]
     // [START refresh_token]
     @objc func tokenRefreshNotification(_ notification: Notification) {
-        if let refreshedToken = FIRInstanceID.instanceID().token() {
-            print("InstanceID token: \(refreshedToken)")
-        }
+        
         
         // Connect to FCM since connection may have failed when attempted before having a token.
         connectToFcm()
@@ -249,20 +242,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GADInterstitialDelegate {
     // [START connect_to_fcm]
     func connectToFcm() {
         // Won't connect since there is no token
-        guard FIRInstanceID.instanceID().token() != nil else {
-            return;
-        }
+       
         
-        // Disconnect previous FCM connection if it exists.
-        FIRMessaging.messaging().disconnect()
-        
-        FIRMessaging.messaging().connect { (error) in
-            if error != nil {
-                print("Unable to connect with FCM. \(error)")
-            } else {
-                print("Connected to FCM.")
-            }
-        }
+       
     }
     // [END connect_to_fcm]
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
@@ -338,9 +320,9 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 }
 // [END ios_10_message_handling]
 // [START ios_10_data_message_handling]
-extension AppDelegate : FIRMessagingDelegate {
+extension AppDelegate : MessagingDelegate {
     // Receive data message on iOS 10 devices while app is in the foreground.
-    func applicationReceivedRemoteMessage(_ remoteMessage: FIRMessagingRemoteMessage) {
+    func applicationReceivedRemoteMessage(_ remoteMessage: MessagingRemoteMessage) {
        // print(remoteMessage.appData)
     }
 }

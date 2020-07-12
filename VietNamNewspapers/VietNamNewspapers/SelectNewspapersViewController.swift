@@ -198,7 +198,7 @@ UITableViewDataSource, DownloadDelegate {
         siteController=SiteController.shareInstance
         var siteItemController:SiteItemController
         siteItemController=SiteItemController.shareInstance
-        FIRMessaging.messaging().unsubscribe(fromTopic: "/topics/"+self.setting.getCountryCodeSelectedKey())
+        Messaging.messaging().unsubscribe(fromTopic: "/topics/"+self.setting.getCountryCodeSelectedKey())
         
         
         do {
