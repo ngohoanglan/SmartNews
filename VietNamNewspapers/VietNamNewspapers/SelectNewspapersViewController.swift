@@ -48,7 +48,7 @@ UITableViewDataSource, DownloadDelegate {
     var currentSiteName :String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        self.title=NSLocalizedString("select_newspapers", comment: "")
         btImportNewspapers.configure(color:  .white,
                                   font:  UIFont.systemFont(ofSize: 16),
                                   cornerRadius: 8,

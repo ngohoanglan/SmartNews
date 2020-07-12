@@ -14,6 +14,7 @@
 "uncheck_all"="uncheck all";
 "import_newspapers"="IMPORT NEWSPAPERS";
 "select_country"="Select your country";
+"select_newspapers"="Import Newspapers";
 "next"="NEXT";
 "search_article"="Search articles";
 "favorite_article"="Bookmarked articles";
