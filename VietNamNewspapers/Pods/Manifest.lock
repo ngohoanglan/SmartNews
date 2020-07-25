@@ -1,4 +1,7 @@
 PODS:
+  - FBAudienceNetwork (5.10.0):
+    - FBSDKCoreKit/Basics (>= 5.6.0)
+  - FBSDKCoreKit/Basics (7.1.1)
   - Firebase/Analytics (6.27.1):
     - Firebase/Core
   - Firebase/Core (6.27.1):
@@ -99,6 +102,7 @@ PODS:
   - Protobuf (3.12.0)
 
 DEPENDENCIES:
+  - FBAudienceNetwork
   - Firebase/Analytics
   - Firebase/Core
   - Firebase/Messaging
@@ -109,6 +113,8 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
+    - FBAudienceNetwork
+    - FBSDKCoreKit
     - Firebase
     - FirebaseABTesting
     - FirebaseAnalytics
@@ -130,6 +136,8 @@ SPEC REPOS:
     - Protobuf
 
 SPEC CHECKSUMS:
+  FBAudienceNetwork: 9feb7563093d6c87671f5a08ae2d134ba097084f
+  FBSDKCoreKit: b46507dc8b8cefed31d644e74d7cc30e2a715ef8
   Firebase: 919186c8e119dd9372a45fd1dd17a8a942bc1892
   FirebaseABTesting: b7f8b6c8c9398e98bb30c4195f697b5b73a330d0
   FirebaseAnalytics: 5fa308e1b13f838d0f6dc74719ac2a72e8c5afc4
@@ -150,6 +158,6 @@ SPEC CHECKSUMS:
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
   Protobuf: 2793fcd0622a00b546c60e7cbbcc493e043e9bb9
 
-PODFILE CHECKSUM: 59e9a9aaa2076ee7d210e4a8156802f8bc97830d
+PODFILE CHECKSUM: 14246ceabf935bf0156b050321f7e6bf48714e8a
 
 COCOAPODS: 1.9.3

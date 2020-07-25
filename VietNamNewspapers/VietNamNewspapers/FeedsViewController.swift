@@ -5,12 +5,12 @@
 //  Created by Ngô Lân on 7/26/17.
 //  Copyright © 2017 admin. All rights reserved.
 //
-
+import  FBAudienceNetwork
 import GoogleMobileAds
 import Foundation
 import UIKit
 import PageMenuKit
-class FeedsViewController : BaseViewController
+class FeedsViewController : BaseViewController,FBInterstitialAdDelegate
     
 {  fileprivate var siteController:SiteController!
     fileprivate var siteItemController:SiteItemController!
@@ -23,6 +23,7 @@ class FeedsViewController : BaseViewController
     var adsBanner: GADBannerView = GADBannerView()
      let setting = Settings()
    var searchResultController: SearchResultController!
+    var interstitialAd: FBInterstitialAd!
     override func setup() {
         super.setup()
         
@@ -94,16 +95,15 @@ class FeedsViewController : BaseViewController
         
        
        
+        //FacebookAds
+        interstitialAd=FBInterstitialAd(placementID: "320895052423142_320897145756266")
+        interstitialAd.delegate=self
+        interstitialAd.load()
+        //
         //EndSearchBarButton
        
                //
-        //Ads banner
-        adsBanner.adUnitID = "ca-app-pub-3108267494433171/2104853242"
-        //setting.getAdmobKey()
-        adsBanner.rootViewController = self
-        adsBanner.load(GADRequest())
-      //  adsBanner.adSize=kGADAdSizeSmartBannerPortrait
-         adsBanner.adSize=kGADAdSizeFullBanner
+       
         
         adsBanner.translatesAutoresizingMaskIntoConstraints = false
          self.view.addSubview(adsBanner)
@@ -121,22 +121,22 @@ class FeedsViewController : BaseViewController
         
         NSLayoutConstraint(item: adsBanner, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1.0, constant: 0.0).isActive = true
         
-        NSLayoutConstraint(item: adsBanner, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: 350.0).isActive = true
-        var uuiD = UIDevice.current.identifierForVendor!.uuidString
-        if  (uuiD == "626C91C9-7008-4303-A82A-6F97EC9059AC" || uuiD == "DBD7BD45-4FB2-44BA-9DB2-4F3A8963D610")
-        {
+        NSLayoutConstraint(item: adsBanner, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: 0.0).isActive = true
+        
             NSLayoutConstraint(item: adsBanner, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 0.0).isActive = true
-        }
-        else
-        {
-            NSLayoutConstraint(item: adsBanner, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 50.0).isActive = true
-        }
+        
+        
         
         var backBarButton:UIBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem=backBarButton
 
     }
-    
+    func interstitialAdDidLoad(_ interstitialAd: FBInterstitialAd) {
+        if interstitialAd.isAdValid
+        {
+            interstitialAd.show(fromRootViewController: self)
+        }
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //self.navigationController?.navigationBar.isHidden = false

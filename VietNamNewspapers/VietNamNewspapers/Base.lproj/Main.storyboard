@@ -646,7 +646,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Restore Purchases" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yy0-ux-OId">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restore Purchases" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yy0-ux-OId">
                                                     <rect key="frame" x="13" y="11" width="293" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.11651418099999999" green="0.2015708242" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -654,9 +654,9 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="Yy0-ux-OId" secondAttribute="trailing" constant="6" id="J2c-GA-AYO"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Yy0-ux-OId" secondAttribute="trailing" constant="88" id="J2c-GA-AYO"/>
                                                 <constraint firstItem="Yy0-ux-OId" firstAttribute="centerY" secondItem="vAd-2i-zk7" secondAttribute="centerY" id="cXJ-De-MaB"/>
-                                                <constraint firstItem="Yy0-ux-OId" firstAttribute="leading" secondItem="vAd-2i-zk7" secondAttribute="leadingMargin" constant="5" id="eJZ-OX-nsX"/>
+                                                <constraint firstItem="Yy0-ux-OId" firstAttribute="leading" secondItem="vAd-2i-zk7" secondAttribute="leadingMargin" constant="-7" id="eJZ-OX-nsX"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -667,7 +667,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Delete All" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="brt-Ok-uHc">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete All" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="brt-Ok-uHc">
                                                     <rect key="frame" x="13" y="11" width="293" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.11651418099999999" green="0.2015708242" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -675,9 +675,9 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="brt-Ok-uHc" firstAttribute="leading" secondItem="Psy-Wa-ceq" secondAttribute="leadingMargin" constant="5" id="060-2F-p9z"/>
+                                                <constraint firstItem="brt-Ok-uHc" firstAttribute="leading" secondItem="Psy-Wa-ceq" secondAttribute="leadingMargin" constant="-7" id="060-2F-p9z"/>
                                                 <constraint firstItem="brt-Ok-uHc" firstAttribute="centerY" secondItem="Psy-Wa-ceq" secondAttribute="centerY" id="Rn1-4a-64V"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="brt-Ok-uHc" secondAttribute="trailing" constant="6" id="mhb-dM-cpc"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="brt-Ok-uHc" secondAttribute="trailing" constant="88" id="mhb-dM-cpc"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>

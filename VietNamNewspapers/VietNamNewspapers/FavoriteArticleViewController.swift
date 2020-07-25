@@ -102,11 +102,11 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
         self.view.addSubview(feedTableView)
         
         //Ads banner
-        adsBanner.adUnitID = "ca-app-pub-3108267494433171/2104853242"
+        //adsBanner.adUnitID = "ca-app-pub-3108267494433171/2104853242"
         //setting.getAdmobKey()
-        adsBanner.rootViewController = self
-        adsBanner.load(GADRequest())
-        adsBanner.adSize=kGADAdSizeFullBanner
+        //adsBanner.rootViewController = self
+       // adsBanner.load(GADRequest())
+       // adsBanner.adSize=kGADAdSizeFullBanner
         
         adsBanner.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(adsBanner)
@@ -123,9 +123,9 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
         
         NSLayoutConstraint(item: adsBanner, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1.0, constant: 0.0).isActive = true
         
-        NSLayoutConstraint(item: adsBanner, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: 350.0).isActive = true
+        NSLayoutConstraint(item: adsBanner, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: adsBanner, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 50.0).isActive = true
+        NSLayoutConstraint(item: adsBanner, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 0).isActive = true
         /*
         //Constraints
         feedTableView.translatesAutoresizingMaskIntoConstraints=false
