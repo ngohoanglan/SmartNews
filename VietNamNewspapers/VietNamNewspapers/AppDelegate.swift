@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GADInterstitialDelegate {
         
         let setting=Settings()
         setting.setAppLaunchCount(setting.getAppLaunchCount()+1)
-        
+        setting.setAdHasShow(false)
         
         UINavigationBar.appearance().barTintColor = UIColor(red: 51/255, green: 90/255, blue: 149/255, alpha: 1)
         UINavigationBar.appearance().titleTextAttributes = convertToOptionalNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue: UIColor.white])

@@ -24,6 +24,7 @@ class Settings
     fileprivate let adsRemoveKey="adsRemoveKey"
     fileprivate let admobKey="admobKey"
     fileprivate let adsTypeKey="adsTypeKey"
+     fileprivate let adHasShowKey="adHasShowKey"
     fileprivate var sliderTextSizeKeyDefaultValue:Float=16
     fileprivate  var swDownloadImageDefaultValue:Bool=true
     fileprivate  var swDescriptionExpanDefaultValue:Bool=false
@@ -64,7 +65,16 @@ class Settings
     func setNeedToUpdateBD(_ update:Bool) -> Void {
         setting.set(update, forKey: needToUpdateDBKey)
     }
-    
+    func getAdHasShow()->Bool{
+        if(setting.object(forKey: adHasShowKey) != nil)
+        {
+            return setting.bool(forKey: adHasShowKey)
+        }
+        return false
+    }
+    func setAdHasShow(_ update:Bool) -> Void {
+        setting.set(update, forKey: adHasShowKey)
+    }
     //Database version
     func getDatabaseVersion() -> Int {
         if(setting.object(forKey: databaseVersionKey) != nil)
