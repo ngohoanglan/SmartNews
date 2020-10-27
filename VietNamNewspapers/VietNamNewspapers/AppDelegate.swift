@@ -322,9 +322,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 // [START ios_10_data_message_handling]
 extension AppDelegate : MessagingDelegate {
     // Receive data message on iOS 10 devices while app is in the foreground.
-    func applicationReceivedRemoteMessage(_ remoteMessage: MessagingRemoteMessage) {
-       // print(remoteMessage.appData)
-    }
+    
 }
 // [END ios_10_data_message_handling]
 

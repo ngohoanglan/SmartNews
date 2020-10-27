@@ -5,12 +5,12 @@
 //  Created by Ngô Lân on 7/26/17.
 //  Copyright © 2017 admin. All rights reserved.
 //
-import  FBAudienceNetwork
+
 import GoogleMobileAds
 import Foundation
 import UIKit
 import PageMenuKit
-class FeedsViewController : BaseViewController,FBInterstitialAdDelegate
+class FeedsViewController : BaseViewController
     
 {  fileprivate var siteController:SiteController!
     fileprivate var siteItemController:SiteItemController!
@@ -23,7 +23,7 @@ class FeedsViewController : BaseViewController,FBInterstitialAdDelegate
     var adsBanner: GADBannerView = GADBannerView()
     let setting = Settings()
     var searchResultController: SearchResultController!
-    var interstitialAd: FBInterstitialAd!
+   
     override func setup() {
         super.setup()
         
@@ -96,9 +96,7 @@ class FeedsViewController : BaseViewController,FBInterstitialAdDelegate
         
         if(setting.getAdsRemove()==false && setting.getAdHasShow()==false)
         {
-            interstitialAd=FBInterstitialAd(placementID: "320895052423142_320897145756266")
-            interstitialAd.delegate=self
-            interstitialAd.load()
+           
         }
         //FacebookAds
         
@@ -134,13 +132,7 @@ class FeedsViewController : BaseViewController,FBInterstitialAdDelegate
         self.navigationItem.backBarButtonItem=backBarButton
         
     }
-    func interstitialAdDidLoad(_ interstitialAd: FBInterstitialAd) {
-        if interstitialAd.isAdValid
-        {
-            interstitialAd.show(fromRootViewController: self)
-            setting.setAdHasShow(true)
-        }
-    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //self.navigationController?.navigationBar.isHidden = false
