@@ -10,7 +10,7 @@ import UIKit
 import FirebaseMessaging
 import ImageLoader
 class CountryComboBoxListViewController: UIViewController,UIPickerViewDataSource, UIPickerViewDelegate{
-     private let textFieldFont = UIFont.systemFont(ofSize: 16)
+    private let textFieldFont = UIFont.systemFont(ofSize: 16)
     @IBOutlet weak var pickerCountryList: UIPickerView!
     var passOject:UserDefaults!
     let url:String="http://thealllatestnews.com/Resources/CountryList/list.txt"
@@ -37,16 +37,18 @@ class CountryComboBoxListViewController: UIViewController,UIPickerViewDataSource
         
         
         btImportNewspapers.configure(color:  .white,
-                           font:  UIFont.systemFont(ofSize: 16),
-                           cornerRadius: 8,
-                           borderColor:  UIColor(red: 51/255, green: 90/255, blue: 149/255, alpha: 1),
-                           backgroundColor:  UIColor(red: 51/255, green: 90/255, blue: 149/255, alpha: 1),
-                           borderWidth: 2.0)
-
+                                     font:  UIFont.systemFont(ofSize: 16),
+                                     cornerRadius: 8,
+                                     borderColor:  UIColor(red: 51/255, green: 90/255, blue: 149/255, alpha: 1),
+                                     backgroundColor:  UIColor(red: 51/255, green: 90/255, blue: 149/255, alpha: 1),
+                                     borderWidth: 2.0)
+        
         passOject=UserDefaults()
         
         if(setting.getCountryCodeSelectedKey()=="")
         {
+            let locale = Locale.current
+            print(locale.regionCode)
             country_code_selected=NSLocale.current.regionCode
             if(country_code_selected=="GB")
             {
@@ -131,7 +133,7 @@ class CountryComboBoxListViewController: UIViewController,UIPickerViewDataSource
                     }
                     DispatchQueue.main.async {
                         self.pickerCountryList.reloadAllComponents()
-                    self.pickerCountryList.selectRow(self.getIndexfromList(self.country_code_selected, arrayCountry: self.countryList), inComponent: 0, animated: true)
+                        self.pickerCountryList.selectRow(self.getIndexfromList(self.country_code_selected, arrayCountry: self.countryList), inComponent: 0, animated: true)
                         self.indicator.stopAnimating()
                     }
                     

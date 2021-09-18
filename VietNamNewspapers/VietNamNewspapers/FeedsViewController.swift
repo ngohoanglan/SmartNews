@@ -12,7 +12,9 @@ import UIKit
 import PageMenuKit
 class FeedsViewController : BaseViewController
     
-{  fileprivate var siteController:SiteController!
+{
+    let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
+    fileprivate var siteController:SiteController!
     fileprivate var siteItemController:SiteItemController!
     fileprivate var  feedDataController=FeedDataController.shareInstance
     var siteSelectedID:String!
@@ -73,8 +75,8 @@ class FeedsViewController : BaseViewController
         }
         
         
-        
-        pageMenuController = PMKPageMenuController(controllers: controllers, menuStyle: .Smart, menuColors: [], topBarHeight: 0,kMenuItemWidth: my_itemWidth)
+        pageMenuController = PMKPageMenuController(controllers: controllers, menuStyle: .smart, menuColors: [], startIndex: 0, topBarHeight: statusBarHeight)
+         
         //    pageMenuController = PMKPageMenuController(controllers: controllers, menuStyle: .Plain, menuColors: [.purple], topBarHeight: statusBarHeight)
         pageMenuController?.delegate = self
         self.addChild(pageMenuController!)

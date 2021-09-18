@@ -3,14 +3,14 @@
  * FILE:	PMKPageMenuItem.swift
  * DESCRIPTION:	PageMenuKit: Base MenuItem Class for PageMenuController
  * DATE:	Fri, Jun  2 2017
- * UPDATED:	Fri, Jun  9 2017
+ * UPDATED:	Thu, Nov 15 2018
  * AUTHOR:	Kouichi ABE (WALL) / 阿部康一
  * E-MAIL:	kouichi@MagickWorX.COM
  * URL:		http://www.MagickWorX.COM/
- * COPYRIGHT:	(c) 2017 阿部康一／Kouichi ABE (WALL), All rights reserved.
+ * COPYRIGHT:	(c) 2017-2018 阿部康一／Kouichi ABE (WALL), All rights reserved.
  * LICENSE:
  *
- *  Copyright (c) 2017 Kouichi ABE (WALL) <kouichi@MagickWorX.COM>,
+ *  Copyright (c) 2017-2018 Kouichi ABE (WALL) <kouichi@MagickWorX.COM>,
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -36,8 +36,6 @@
  *   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  *   THE POSSIBILITY OF SUCH DAMAGE.
  *
- * $Id$
- *
  *****************************************************************************/
 
 import UIKit
@@ -45,27 +43,30 @@ import QuartzCore
 
 // CUSTOM: Add your custom menu style here.
 public enum PMKPageMenuControllerStyle: Int {
-  case Plain   = 1 // NewsPass  [https://itunes.apple.com/jp/app/id1106788059]
-  case Tab     = 2 // Gunosy    [https://itunes.apple.com/jp/app/id590384791]
-  case Smart   = 3 // SmartNews [https://itunes.apple.com/jp/app/id579581125]
-  case Hacka   = 4 // Hackadoll [https://itunes.apple.com/jp/app/id888231424]
-  case Web     = 5 // JCNews    [https://jcnews.tokyo/)
-  case Ellipse = 6 // JCNews    [https://itunes.apple.com/jp/app/id1024341813]
-  case Suite   = 7 // NewsSuite [https://itunes.apple.com/jp/app/id1176431318]
-  case NetLab  = 8 // NLab      [https://itunes.apple.com/jp/app/id949325541]
-  case NHK     = 9 // NHK NEWS  [https://itunes.apple.com/jp/app/id1121104608]
+  case plain   = 1 // NewsPass  [https://itunes.apple.com/jp/app/id1106788059]
+  case tab     = 2 // Gunosy    [https://itunes.apple.com/jp/app/id590384791]
+  case smart   = 3 // SmartNews [https://itunes.apple.com/jp/app/id579581125]
+  case hacka   = 4 // Hackadoll [https://itunes.apple.com/jp/app/id888231424]
+  case web     = 5 // JCNews    [https://jcnews.tokyo/)
+  case ellipse = 6 // JCNews    [https://itunes.apple.com/jp/app/id1024341813]
+  case suite   = 7 // NewsSuite [https://itunes.apple.com/jp/app/id1176431318]
+  case netlab  = 8 // NLab      [https://itunes.apple.com/jp/app/id949325541]
+  case nhk     = 9 // NHK NEWS  [https://itunes.apple.com/jp/app/id1121104608]
 
+  /// メニュー画面のスタイル毎のクラス名を返す
+  ///
+  /// - Returns: クラス名
   func className() -> String {
     switch self {
-      case .Plain:   return "PMKPageMenuItemPlain"
-      case .Tab:     return "PMKPageMenuItemTab"
-      case .Smart:   return "PMKPageMenuItemSmart"
-      case .Hacka:   return "PMKPageMenuItemHacka"
-      case .Web:     return "PMKPageMenuItemWeb"
-      case .Ellipse: return "PMKPageMenuItemEllipse"
-      case .Suite:   return "PMKPageMenuItemSuite"
-      case .NetLab:  return "PMKPageMenuItemNetLab"
-      case .NHK:     return "PMKPageMenuItemNHK"
+      case .plain:   return "PMKPageMenuItemPlain"
+      case .tab:     return "PMKPageMenuItemTab"
+      case .smart:   return "PMKPageMenuItemSmart"
+      case .hacka:   return "PMKPageMenuItemHacka"
+      case .web:     return "PMKPageMenuItemWeb"
+      case .ellipse: return "PMKPageMenuItemEllipse"
+      case .suite:   return "PMKPageMenuItemSuite"
+      case .netlab:  return "PMKPageMenuItemNetLab"
+      case .nhk:     return "PMKPageMenuItemNHK"
     }
   }
 }
@@ -83,16 +84,19 @@ public class PMKPageMenuItemDesign: Design {
   var backgroundColor: UIColor = .clear
   var gradientColors: [CGColor] = []
 
-  struct inactiveStruct { // inactive を有効にする場合は isEnabled = true にする
+  struct InactiveDesign { // inactive を有効にする場合は isEnabled = true にする
     var isEnabled: Bool = false
     var titleColor: UIColor = .lightGray
     var backgroundColor: UIColor = .clear
   }
-  var inactive = PMKPageMenuItemDesign.inactiveStruct()
+  var inactive: InactiveDesign = PMKPageMenuItemDesign.InactiveDesign()
 
   public init(themeColor: UIColor) {
     self.themeColor = themeColor
     self.titleColor = themeColor
+  }
+
+  public init() {
   }
 }
 
@@ -107,16 +111,30 @@ protocol MenuItem: Item {
   var titleColor: UIColor { get set }
   var borderColor: UIColor { get set } // メニュー枠の色
   var isSelected: Bool { get set }
+
+  /// メニュー画面を装飾
+  ///
+  /// - Rarameters:
+  ///   - active: メニュー選択時 = true, 非選択時 = false
+  /// - Returns: なし
+  func render(active: Bool)
 }
 
 public class PMKPageMenuItem: UIView, MenuItem {
   let kBorderLayerKey: String = "kBorderLayerKey"
 
-  public internal(set) var color: UIColor = .clear
-  public internal(set) var design: PMKPageMenuItemDesign? = nil
-  public internal(set) var style: PMKPageMenuControllerStyle = .Plain
+  public internal(set) var  color: UIColor = .clear
+  public internal(set) var design: PMKPageMenuItemDesign = PMKPageMenuItemDesign()
+  public internal(set) var  style: PMKPageMenuControllerStyle = .plain
 
-  var label: UILabel? = nil
+  lazy var label: UILabel = {
+    let label = UILabel()
+    label.text = self.title
+    label.textAlignment = .center
+    label.backgroundColor = .clear
+    label.autoresizingMask = [ .flexibleWidth, .flexibleHeight ]
+    return label
+  }()
 
   public required init(coder  aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
@@ -133,22 +151,12 @@ public class PMKPageMenuItem: UIView, MenuItem {
     self.isUserInteractionEnabled = true
     self.autoresizesSubviews = true
 
-    let label: UILabel = UILabel(frame: self.bounds)
-    label.text = title
-    label.textAlignment = .center
-    label.backgroundColor = .clear
-    if(UIDevice.current.userInterfaceIdiom == .pad)
-    {
-        label.font = UIFont.boldSystemFont(ofSize: label.font.pointSize+4)
-    }
-    
-    label.autoresizingMask = [ .flexibleWidth, .flexibleHeight ]
-    self.addSubview(label)
-    self.label = label
-
     self.title = title
     self.color = design.themeColor
     self.design = design
+
+    label.frame = self.bounds
+    self.addSubview(label)
   }
 
 
@@ -158,21 +166,21 @@ public class PMKPageMenuItem: UIView, MenuItem {
   public var title: String = "" {
     willSet {
       if title != newValue {
-        self.label?.text = newValue
+        label.text = newValue
       }
     }
   }
 
   public var isEnabled: Bool = true {
     willSet {
-      self.label?.isUserInteractionEnabled = newValue
-      self.label?.alpha = newValue ? 1.0 : 0.5
+      label.isUserInteractionEnabled = newValue
+      label.alpha = newValue ? 1.0 : 0.5
     }
   }
 
   var titleColor: UIColor = .black {
     willSet {
-      self.label?.textColor = newValue
+      label.textColor = newValue
     }
   }
 
@@ -185,18 +193,13 @@ public class PMKPageMenuItem: UIView, MenuItem {
   }
 
   public var badgeValue: String? = nil // XXX: Override Point
-}
 
-// MARK: - Private Methods
-extension PMKPageMenuItem {
-  public var borderLayer: CAShapeLayer? {
-    get {
-      return self.label?.layer.value(forKey: kBorderLayerKey) as? CAShapeLayer
-    }
+  // MARK: - Overriden Functions
+  func render(active: Bool) {
   }
 
   // 左上と右上の角を丸める
-  func roundingCorners(of label: UILabel) {
+  func roundCorners(of label: UILabel) {
     autoreleasepool {
       let maskPath: UIBezierPath = UIBezierPath(roundedRect: label.bounds, byRoundingCorners: [ .topLeft, .topRight ], cornerRadii: CGSize(width: 5.0, height: 5.0))
       let maskLayer: CAShapeLayer = CAShapeLayer()
@@ -205,9 +208,16 @@ extension PMKPageMenuItem {
       label.layer.mask = maskLayer
     }
   }
+}
+
+// MARK: - Private Methods
+extension PMKPageMenuItem {
+  public var borderLayer: CAShapeLayer? {
+    return label.layer.value(forKey: kBorderLayerKey) as? CAShapeLayer
+  }
 
   // 左端と上と右端のみ枠線を付ける
-  func addBorders(of label: UILabel) {
+  func addBorders(to label: UILabel) {
     autoreleasepool {
       let w: CGFloat = label.frame.size.width
       let h: CGFloat = label.frame.size.height
@@ -232,11 +242,5 @@ extension PMKPageMenuItem {
       label.layer.addSublayer(shapeLayer)
       label.layer.setValue(shapeLayer, forKey:kBorderLayerKey)
     }
-  }
-}
-
-// MARK: - Override Points
-extension PMKPageMenuItem {
-  func render(active: Bool) {
   }
 }
