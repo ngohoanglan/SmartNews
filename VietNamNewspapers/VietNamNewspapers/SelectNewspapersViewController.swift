@@ -31,7 +31,7 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 
 class SelectNewspapersViewController: UIViewController, UITableViewDelegate,
-UITableViewDataSource, DownloadDelegate {
+                                      UITableViewDataSource, DownloadDelegate {
     var progressView: UIProgressView?
     var progressLabel: UILabel?
     
@@ -50,11 +50,11 @@ UITableViewDataSource, DownloadDelegate {
         super.viewDidLoad()
         self.title=NSLocalizedString("select_newspapers", comment: "")
         btImportNewspapers.configure(color:  .white,
-                                  font:  UIFont.systemFont(ofSize: 16),
-                                  cornerRadius: 8,
-                                  borderColor:  UIColor(red: 51/255, green: 90/255, blue: 149/255, alpha: 1),
-                                  backgroundColor:  UIColor(red: 51/255, green: 90/255, blue: 149/255, alpha: 1),
-                                  borderWidth: 2.0)
+                                     font:  UIFont.systemFont(ofSize: 16),
+                                     cornerRadius: 8,
+                                     borderColor:  UIColor(red: 51/255, green: 90/255, blue: 149/255, alpha: 1),
+                                     backgroundColor:  UIColor(red: 51/255, green: 90/255, blue: 149/255, alpha: 1),
+                                     borderWidth: 2.0)
         passOject=UserDefaults()
         
         btImportNewspapers.setTitle(NSLocalizedString("import_newspapers", comment: ""), for: UIControl.State())
@@ -142,6 +142,7 @@ UITableViewDataSource, DownloadDelegate {
         /*
          cell.btnCheckBox.addTarget(self, action: #selector(SelectNewspapersViewController.buttonClicked(_:)), for: UIControl.Event.touchUpInside)
          */
+        cell.switchSelect.addTarget(self, action:  #selector(swiftChanged(sender:)), for: .valueChanged)
         cell.switchSelect.tag=(indexPath as NSIndexPath).row
         cell.switchSelect.isOn=newspaper.isCheck
         //cell.imgNewspaper.load(iconURL)
@@ -167,7 +168,9 @@ UITableViewDataSource, DownloadDelegate {
         newspapersList[sender.tag].isCheck=sender.isChecked
         
     }
-    
+    @objc func swiftChanged(sender:UISwitch)  {
+        newspapersList[sender.tag].isCheck=sender.isOn
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
