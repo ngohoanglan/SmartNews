@@ -346,13 +346,13 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                 }
                 
                 
-                let taplabeTitlelAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SiteDetailTableViewController.labeTitlelAction(_:)))
+                let taplabeTitlelAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(labeTitlelAction(sender:)))
                 cell.lbTitleCell.addGestureRecognizer(taplabeTitlelAction)
                 cell.lbTitleCell.tag=(indexPath as NSIndexPath).row
                 cell.lbTitleCell.isUserInteractionEnabled=true
                 taplabeTitlelAction.delegate = self // Remember to extend your class with UIGestureRecognizerDelegate
                 
-                let taplabeDesciptionAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SiteDetailTableViewController.labeTitlelAction(_:)))
+                let taplabeDesciptionAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(labeTitlelAction(sender:)))
                 cell.lbDescription.addGestureRecognizer(taplabeDesciptionAction)
                 cell.lbDescription.tag=(indexPath as NSIndexPath).row
                 cell.lbDescription.isUserInteractionEnabled=true
@@ -458,13 +458,13 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                 }
                 
                 //
-                let taplabeTitlelAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SiteDetailTableViewController.labeTitlelAction(_:)))
+                let taplabeTitlelAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(labeTitlelAction(sender:)))
                 cellNotImage.lbTitle.addGestureRecognizer(taplabeTitlelAction)
                 cellNotImage.lbTitle.tag=(indexPath as NSIndexPath).row
                 cellNotImage.lbTitle.isUserInteractionEnabled=true
                 taplabeTitlelAction.delegate = self // Remember to extend your class with UIGestureRecognizerDelegate
                 
-                let taplabeDesciptionAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SiteDetailTableViewController.labeTitlelAction(_:)))
+                let taplabeDesciptionAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(labeTitlelAction(sender:)))
                 cellNotImage.lbDescription.addGestureRecognizer(taplabeDesciptionAction)
                 cellNotImage.lbDescription.tag=(indexPath as NSIndexPath).row
                 cellNotImage.lbDescription.isUserInteractionEnabled=true
@@ -602,13 +602,13 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                 }
                 
                 
-                let taplabeTitlelAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SiteDetailTableViewController.labeTitlelAction(_:)))
+                let taplabeTitlelAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(labeTitlelAction(sender:)))
                 cell.lbTitleCell.addGestureRecognizer(taplabeTitlelAction)
                 cell.lbTitleCell.tag=(indexPath as NSIndexPath).row
                 cell.lbTitleCell.isUserInteractionEnabled=true
                 taplabeTitlelAction.delegate = self // Remember to extend your class with UIGestureRecognizerDelegate
                 
-                let taplabeDesciptionAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SiteDetailTableViewController.labeTitlelAction(_:)))
+                let taplabeDesciptionAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(labeTitlelAction(sender:)))
                 cell.lbDescription.addGestureRecognizer(taplabeDesciptionAction)
                 cell.lbDescription.tag=(indexPath as NSIndexPath).row
                 cell.lbDescription.isUserInteractionEnabled=true
@@ -714,13 +714,13 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                 }
                 
                 //
-                let taplabeTitlelAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SiteDetailTableViewController.labeTitlelAction(_:)))
+                let taplabeTitlelAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(labeTitlelAction(sender:)))
                 cellNotImage.lbTitle.addGestureRecognizer(taplabeTitlelAction)
                 cellNotImage.lbTitle.tag=(indexPath as NSIndexPath).row
                 cellNotImage.lbTitle.isUserInteractionEnabled=true
                 taplabeTitlelAction.delegate = self // Remember to extend your class with UIGestureRecognizerDelegate
                 
-                let taplabeDesciptionAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SiteDetailTableViewController.labeTitlelAction(_:)))
+                let taplabeDesciptionAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(labeTitlelAction(sender:)))
                 cellNotImage.lbDescription.addGestureRecognizer(taplabeDesciptionAction)
                 cellNotImage.lbDescription.tag=(indexPath as NSIndexPath).row
                 cellNotImage.lbDescription.isUserInteractionEnabled=true
@@ -733,11 +733,11 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
             }
         }
     }
-    func labeTitlelAction(_ gr:UITapGestureRecognizer)
+   @objc func labeTitlelAction(sender:UITapGestureRecognizer)
     {
         
         
-        openWebView(gr.view?.tag)
+        openWebView(sender.view?.tag)
         
     }
     func openWebView(_ tag:Int!)
