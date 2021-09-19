@@ -6,7 +6,7 @@
 //  Copyright © 2016 admin. All rights reserved.
 //
 import ObjectMapper
-import ImageLoader
+import Nuke
 import FirebaseMessaging
 import UIKit
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
@@ -146,22 +146,7 @@ UITableViewDataSource, DownloadDelegate {
         cell.switchSelect.isOn=newspaper.isCheck
         //cell.imgNewspaper.load(iconURL)
         cell.lbName.text=newspaper.name
-        
-        cell.imgIcon.load.request(with: iconURL, onCompletion: { image, error, operation in
-            
-            if operation == .network {
-                
-                let transition = CATransition()
-                transition.duration = 0.5
-                transition.type = CATransitionType.fade
-                cell.imgIcon.layer.add(transition, forKey: nil)
-                cell.imgIcon.image = image
-                
-                self.newspapersList[(indexPath as NSIndexPath).row].iconArray=image!.pngData()
-                
-            }
-        })
-        
+        Nuke.loadImage(with: URL(string: iconURL), into: cell.imgIcon)
         
         /*
          let myCompletionHandler: (URL?, UIImage?, NSError?,CacheType?) -> Void = { (data, response, error,cachtype) in

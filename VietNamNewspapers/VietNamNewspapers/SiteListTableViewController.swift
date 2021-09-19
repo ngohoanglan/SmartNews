@@ -9,9 +9,9 @@ import ObjectMapper
 import UIKit
 import MessageUI
 import Firebase
-
+import Nuke
 import FirebaseMessaging
-import ImageLoader
+
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     switch (lhs, rhs) {
     case let (l?, r?):
@@ -381,41 +381,8 @@ class SiteListTableViewController: UIViewController,UITableViewDelegate, UITable
         
         let site=siteList[(indexPath as NSIndexPath).row]
         // Configure the cell...
-        if(site.iconArray?.count>0)
-        {
-            cell.imgIcon.image=UIImage(data: site.iconArray! as Data)
-        }
-        else
-        {
-            
-            cell.imgIcon.load.request(with: site.siteIconPath!, onCompletion: { image, error, operation in
-               
-                if operation == .network {
-                  
-                    let transition = CATransition()
-                    transition.duration = 0.5
-                    transition.type = CATransitionType.fade
-                    cell.imgIcon.layer.add(transition, forKey: nil)
-                    cell.imgIcon.image = image
-                    
-                    site.iconArray=image!.pngData()
-                    let newSiteUpdate:Dictionary<String,AnyObject> = [SiteAttributes.iconArray.rawValue : site.iconArray! as AnyObject]
-                    self.siteController.updateSite(site, newSiteDetails: newSiteUpdate)
-                }
-            })
-
-            /*
-            let myCompletionHandler: (URL?, UIImage?, NSError?,CacheType?) -> Void = { (data, response, error,cachtype) in
-                // this is where the completion handler code goes
-                if response != nil{
-                    site.iconArray=UIImagePNGRepresentation(response!)!
-                    let newSiteUpdate:Dictionary<String,AnyObject> = [SiteAttributes.iconArray.rawValue : site.iconArray! as AnyObject]
-                    self.siteController.updateSite(site, newSiteDetails: newSiteUpdate)
-                }
-            }
-            cell.imgIcon.load(site.siteIconPath!, placeholder: cell.imgIcon.image, completionHandler: myCompletionHandler)
-            */
-        }
+        Nuke.loadImage(with: URL(string: site.siteIconPath ?? ""), into: cell.imgIcon)
+        
         cell.lbSiteName.text=site.siteName
         cell.lbSiteName.font=UIFont(name: cell.lbSiteName.font.fontName, size: cellFontSize)
         return cell

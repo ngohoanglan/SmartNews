@@ -5,7 +5,7 @@
 //  Created by admin on 4/4/16.
 //  Copyright © 2016 admin. All rights reserved.
 //
-//import ImageLoader
+import Nuke
 import GoogleMobileAds
 import UIKit
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
@@ -343,47 +343,8 @@ class SiteDetailTableViewController: UIViewController, UITableViewDelegate, UITa
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "CellNotDesc", for: indexPath)
                 as! FeedNotDescriptionViewCell
-            if(feedData.imageArray?.count>0)
-            {
-                cell.feedImageCell.image=UIImage(data: feedData.imageArray! as Data)
-            }
-            else
-            {
-                
-                //
-                cell.feedImageCell.image=nil
-                //
-              
-                cell.feedImageCell.load.request(with: feedData.linkImage!, onCompletion: { image, error, operation in
-                    print("image \(image?.size), render-image \(cell.feedImageCell.image?.size)")
-                    if operation == .network {
-                        let myImage : UIImage = Utils.resizeImage(image!, maxWidth: 75, maxHeight: 75)
-                        let transition = CATransition()
-                        transition.duration = 0.5
-                        transition.type = CATransitionType.fade
-                        cell.feedImageCell.layer.add(transition, forKey: nil)
-                        cell.feedImageCell.image = myImage
-                        
-                        feedData.imageArray=myImage.pngData()
-                        let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.imageArray.rawValue : feedData.imageArray! as AnyObject]
-                        self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
-                    }
-                })
+            Nuke.loadImage(with: URL(string: feedData.linkImage ?? ""), into: cell.feedImageCell)
             
-                /*
-                let myCompletionHandler: (URL?, UIImage?, NSError?,CacheType?) -> Void = { (data, response, error,cachtype) in
-                    // this is where the completion handler code goes
-                    if response != nil{
-                        //convert NSData->Image
-                        let image : UIImage = Utils.resizeImage(response!, maxWidth: 75, maxHeight: 75)
-                        // let image : UIImage = self.RBSquareImageTo(response!, size: CGSize(width: 90, height: 90))
-                        feedData.imageArray=UIImagePNGRepresentation(image)
-                        let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.imageArray.rawValue : feedData.imageArray! as AnyObject]
-                        self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
-                    }
-                }
-                cell.feedImageCell.load(feedData.linkImage!, placeholder: cell.feedImageCell.image, completionHandler: myCompletionHandler)*/
-            }
             
             if(feedData.isRead==1)
             {

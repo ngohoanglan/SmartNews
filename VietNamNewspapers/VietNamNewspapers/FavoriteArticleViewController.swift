@@ -5,7 +5,7 @@
 //  Created by Ngô Lân on 6/19/16.
 //  Copyright © 2016 admin. All rights reserved.
 //
-import ImageLoader
+import Nuke
 import GoogleMobileAds
 import UIKit
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
@@ -321,26 +321,9 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                 }
                 else
                 {
+                     
+                    Nuke.loadImage(with: URL(string: feedData.linkImage ?? ""), into: cell.feedImageCell)
                     
-                    //
-                    cell.feedImageCell.image=nil
-                    //
-                  
-                    cell.feedImageCell.load.request(with: feedData.linkImage!, onCompletion: { image, error, operation in
-                        
-                        if operation == .network {
-                            let myImage : UIImage = Utils.resizeImage(image!, maxWidth: self.imageSize, maxHeight: self.imageSize)
-                            let transition = CATransition()
-                            transition.duration = 0.5
-                            transition.type = CATransitionType.fade
-                            cell.feedImageCell.layer.add(transition, forKey: nil)
-                            cell.feedImageCell.image = myImage
-                            
-                            feedData.imageArray=myImage.pngData()
-                            let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.imageArray.rawValue : feedData.imageArray! as AnyObject]
-                            self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
-                        }
-                    })
                    
                     
                 }
@@ -572,35 +555,7 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                     as! FeedNotDescriptionViewCellIPad
                 
                 
-                if(feedData.imageArray != nil && (feedData.imageArray?.count)!>0)
-                {
-                    cell.feedImageCell.image=UIImage(data: feedData.imageArray! as Data)
-                }
-                else
-                {
-                    
-                    //
-                    cell.feedImageCell.image=nil
-                    //
-                    
-                    cell.feedImageCell.load.request(with: feedData.linkImage!, onCompletion: { image, error, operation in
-                        
-                        if operation == .network {
-                            let myImage : UIImage = Utils.resizeImage(image!, maxWidth: self.imageSize+50, maxHeight: self.imageSize+50)
-                            let transition = CATransition()
-                            transition.duration = 0.5
-                            transition.type = CATransitionType.fade
-                            cell.feedImageCell.layer.add(transition, forKey: nil)
-                            cell.feedImageCell.image = myImage
-                            
-                            feedData.imageArray=myImage.pngData()
-                            let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.imageArray.rawValue : feedData.imageArray! as AnyObject]
-                            self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
-                        }
-                    })
-
-                    
-                }
+                Nuke.loadImage(with: URL(string: feedData.linkImage ?? ""), into: cell.feedImageCell)
                 
                 if(feedData.isRead==1)
                 {

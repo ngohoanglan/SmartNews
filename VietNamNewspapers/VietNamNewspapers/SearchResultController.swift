@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-//import ImageLoader
+ 
 
 class SearchResultController : UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate,UISearchBarDelegate,UISearchResultsUpdating
 {

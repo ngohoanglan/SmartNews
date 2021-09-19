@@ -8,7 +8,7 @@
 
 import UIKit
 import FirebaseMessaging
-import ImageLoader
+import Nuke
 class CountryComboBoxListViewController: UIViewController,UIPickerViewDataSource, UIPickerViewDelegate{
     private let textFieldFont = UIFont.systemFont(ofSize: 16)
     @IBOutlet weak var pickerCountryList: UIPickerView!
@@ -88,8 +88,7 @@ class CountryComboBoxListViewController: UIViewController,UIPickerViewDataSource
         
         let myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         //myImageView.load(countryList[row].imagePath)
-        
-        myImageView.load.request(with: countryList[row].imagePath)
+        Nuke.loadImage(with: URL(string: countryList[row].imagePath), into: myImageView)
         
         let myLabel = UILabel(frame: CGRect(x: 60, y: 0, width: pickerView.bounds.width - 90, height: 50 ))
         

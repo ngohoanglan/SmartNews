@@ -24,7 +24,7 @@ pod 'Firebase/RemoteConfig'
 pod 'ObjectMapper', '~> 3.5'
 
 
-pod 'ImageLoader'
+#pod 'ImageLoader'
 
 target 'VietNamNewspapers' do
 end
