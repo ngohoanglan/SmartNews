@@ -51,7 +51,7 @@ public extension UIColor {
   }
 }
 
-let   kMenuItemWidth: CGFloat = 90.0
+let   kMenuItemWidth: CGFloat = 120.0
 let  kMenuItemHeight: CGFloat = 40.0
 let  kMenuItemMargin: CGFloat = 10.0
 let  kSmartTabMargin: CGFloat =  8.0

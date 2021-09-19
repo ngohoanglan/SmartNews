@@ -74,9 +74,9 @@ class FeedsViewController : BaseViewController
             my_itemWidth=120.0
         }
         
+      
+        pageMenuController = PMKPageMenuController(controllers: controllers, menuStyle: .smart, menuColors: [], startIndex: 0, topBarHeight: 0)
         
-        pageMenuController = PMKPageMenuController(controllers: controllers, menuStyle: .smart, menuColors: [], startIndex: 0, topBarHeight: statusBarHeight)
-         
         //    pageMenuController = PMKPageMenuController(controllers: controllers, menuStyle: .Plain, menuColors: [.purple], topBarHeight: statusBarHeight)
         pageMenuController?.delegate = self
         self.addChild(pageMenuController!)
