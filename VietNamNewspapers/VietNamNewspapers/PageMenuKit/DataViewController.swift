@@ -465,8 +465,8 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                                             imgFeed=""
                                         }
                                         feedDescription=feedDescription.replacingOccurrences(of: "<[^>]+>", with: "",options: .regularExpression, range: nil)
-                                        feedDescription=String(htmlEncodedString: feedDescription)!
-                                        feedTitle=String(htmlEncodedString: feedTitle)!
+                                        feedDescription=String(htmlEncodedString: feedDescription) ?? ""
+                                        feedTitle=String(htmlEncodedString: feedTitle) ?? ""
                                         let feedIsExist=self.feedDataController.getFeedDataBySiteItemIdAndLink(self.siteItemSelected.siteItemID! as NSString, link: feedLink as NSString)
                                         if(feedIsExist.count==0 && !feedTitle.isEmpty && !feedLink.isEmpty)
                                         {

@@ -101,6 +101,8 @@
 		DAD4965C1D16344200A0CFD0 /* FavoriteArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD4965B1D16344200A0CFD0 /* FavoriteArticleViewController.swift */; };
 		DADAC05B24B55C5900086CEA /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADAC05A24B55C5900086CEA /* UIButton.swift */; };
 		DADF55EA1D07B8F40048E67C /* FeedNotDescriptionViewCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADF55E91D07B8F40048E67C /* FeedNotDescriptionViewCellTableViewCell.swift */; };
+		DAF107A226F8C57900F399C2 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = DAF107A126F8C57900F399C2 /* Realm */; };
+		DAF107A426F8C57900F399C2 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DAF107A326F8C57900F399C2 /* RealmSwift */; };
 		DAF4EC391F2D7C9C00B67CA6 /* FeedViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAF4EC381F2D7C9C00B67CA6 /* FeedViewCell.xib */; };
 		DAF4EC3B1F2D7D4F00B67CA6 /* FeedImageViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAF4EC3A1F2D7D4F00B67CA6 /* FeedImageViewCell.xib */; };
 		DAF4EC421F2D88E500B67CA6 /* DataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAF4EC411F2D88E500B67CA6 /* DataViewController.xib */; };
@@ -245,7 +247,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAF107A226F8C57900F399C2 /* Realm in Frameworks */,
 				DAA80E081D431E8E00CE653E /* GoogleMobileAds.framework in Frameworks */,
+				DAF107A426F8C57900F399C2 /* RealmSwift in Frameworks */,
 				DA08E4971D52C1520092C53F /* StoreKit.framework in Frameworks */,
 				DA0EE90C1F289391009A86C9 /* PageMenuKit.framework in Frameworks */,
 				3AD227D8DD55705F8C273A7C /* Pods_VietNamNewspapers.framework in Frameworks */,
@@ -550,6 +554,8 @@
 			name = VietNamNewspapers;
 			packageProductDependencies = (
 				DA66654526F6F1360043C462 /* Nuke */,
+				DAF107A126F8C57900F399C2 /* Realm */,
+				DAF107A326F8C57900F399C2 /* RealmSwift */,
 			);
 			productName = VietNamNewspapers;
 			productReference = 844B9C6A1C78AE860047ED2F /* LatestHeadline.app */;
@@ -614,6 +620,7 @@
 			mainGroup = 844B9C611C78AE850047ED2F;
 			packageReferences = (
 				DA66654426F6F1360043C462 /* XCRemoteSwiftPackageReference "Nuke" */,
+				DAF107A026F8C57900F399C2 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 			);
 			productRefGroup = 844B9C6B1C78AE860047ED2F /* Products */;
 			projectDirPath = "";
@@ -900,7 +907,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = LatestHeadline;
@@ -953,9 +960,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = LatestHeadline;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1035,7 +1042,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = PageMenuKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1067,7 +1074,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = PageMenuKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1123,6 +1130,14 @@
 				minimumVersion = 10.4.1;
 			};
 		};
+		DAF107A026F8C57900F399C2 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-cocoa.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.15.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1130,6 +1145,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DA66654426F6F1360043C462 /* XCRemoteSwiftPackageReference "Nuke" */;
 			productName = Nuke;
+		};
+		DAF107A126F8C57900F399C2 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DAF107A026F8C57900F399C2 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = Realm;
+		};
+		DAF107A326F8C57900F399C2 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DAF107A026F8C57900F399C2 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 
