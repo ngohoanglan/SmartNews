@@ -51,7 +51,7 @@ public extension UIColor {
   }
 }
 
-let   kMenuItemWidth: CGFloat = 120.0
+//var   kMenuItemWidth: CGFloat = 120.0
 let  kMenuItemHeight: CGFloat = 40.0
 let  kMenuItemMargin: CGFloat = 10.0
 let  kSmartTabMargin: CGFloat =  8.0
@@ -68,7 +68,7 @@ let kNHKNewsHexColor: UInt32 = 0x0387d2
 public class PMKPageMenuController: UIViewController, UIScrollViewDelegate
 {
   public weak var delegate: PMKPageMenuControllerDelegate? = nil
-
+    public internal(set) var   kMenuItemWidth: CGFloat = 120.0
   public internal(set) var menuStyle: PMKPageMenuControllerStyle = .plain
   public internal(set) var titles: [String] = []
   public internal(set) var childControllers: [UIViewController] = []
@@ -126,7 +126,7 @@ public class PMKPageMenuController: UIViewController, UIScrollViewDelegate
                 menuStyle: PMKPageMenuControllerStyle,
                menuColors: [UIColor] = PMKPageMenuController.standardColors,
                startIndex: Int = 1,
-             topBarHeight: CGFloat) {
+               topBarHeight: CGFloat,menuWidth:CGFloat) {
     super.init(nibName: nil, bundle: nil)
 
        self.menuStyle = menuStyle
@@ -136,7 +136,7 @@ public class PMKPageMenuController: UIViewController, UIScrollViewDelegate
                       : 0
     self.topBarHeight = topBarHeight
     self.currentIndex = 0
-
+    self.kMenuItemWidth=menuWidth
     self.childControllers = controllers
 
     self.titles = controllers.enumerated().map {

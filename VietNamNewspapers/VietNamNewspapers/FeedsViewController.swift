@@ -75,7 +75,7 @@ class FeedsViewController : BaseViewController
         }
         
       
-        pageMenuController = PMKPageMenuController(controllers: controllers, menuStyle: .smart, menuColors: [], startIndex: 0, topBarHeight: 0)
+        pageMenuController = PMKPageMenuController(controllers: controllers, menuStyle: .smart, menuColors: [], startIndex: 0, topBarHeight: 0, menuWidth: my_itemWidth)
         
         //    pageMenuController = PMKPageMenuController(controllers: controllers, menuStyle: .Plain, menuColors: [.purple], topBarHeight: statusBarHeight)
         pageMenuController?.delegate = self
