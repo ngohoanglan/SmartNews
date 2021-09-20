@@ -77,6 +77,14 @@ class SiteListTableViewController: UIViewController,UITableViewDelegate, UITable
         var backBarButton:UIBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem=backBarButton
      
+        Messaging.messaging().token { token, error in
+            if let error=error
+            {
+                print("Error fetching FCM registration token: \(error)")
+            }else if let token=token{
+                print("FCM token: \(token)")
+            }
+        }
        
     }
     override func viewWillAppear(_ animated: Bool) {
