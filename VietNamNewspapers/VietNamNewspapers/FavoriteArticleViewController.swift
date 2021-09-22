@@ -449,13 +449,17 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                         {
                             let image = UIImage(named: "ic_bookmark_border") as UIImage?
                             cell.btImportan.setImage(image, for: UIControl.State())
-                            feedData.isFavorite=0
+                            try! self.realm.write({
+                                feedData.isFavorite=0
+                            })
                         }
                         else
                         {
                             let image = UIImage(named: "ic_bookmark") as UIImage?
                             cell.btImportan.setImage(image, for: UIControl.State())
-                            feedData.isFavorite=1
+                            try! self.realm.write({
+                                feedData.isFavorite=1
+                            })
                         }
                         
                         let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
@@ -560,13 +564,17 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                         {
                             let image = UIImage(named: "ic_bookmark_border") as UIImage?
                             cellNotImage.btnImportan.setImage(image, for: UIControl.State())
-                            feedData.isFavorite=0
+                            try! self.realm.write({
+                                feedData.isFavorite=0
+                            })
                         }
                         else
                         {
                             let image = UIImage(named: "ic_bookmark") as UIImage?
                             cellNotImage.btnImportan.setImage(image, for: UIControl.State())
-                            feedData.isFavorite=1
+                            try! self.realm.write({
+                                feedData.isFavorite=1
+                            })
                         }
                       
                         let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
@@ -675,13 +683,17 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                         {
                             let image = UIImage(named: "ic_bookmark_border") as UIImage?
                             cell.btImportan.setImage(image, for: UIControl.State())
-                            feedData.isFavorite=0
+                            try! self.realm.write({
+                                feedData.isFavorite=0
+                            })
                         }
                         else
                         {
                             let image = UIImage(named: "ic_bookmark") as UIImage?
                             cell.btImportan.setImage(image, for: UIControl.State())
-                            feedData.isFavorite=1
+                            try! self.realm.write({
+                                feedData.isFavorite=1
+                            })
                         }
                        
                         let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
@@ -786,13 +798,17 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                         {
                             let image = UIImage(named: "ic_bookmark_border") as UIImage?
                             cellNotImage.btnImportan.setImage(image, for: UIControl.State())
-                            feedData.isFavorite=0
+                            try! self.realm.write({
+                                feedData.isFavorite=0
+                            })
                         }
                         else
                         {
                             let image = UIImage(named: "ic_bookmark") as UIImage?
                             cellNotImage.btnImportan.setImage(image, for: UIControl.State())
-                            feedData.isFavorite=1
+                            try! self.realm.write({
+                                feedData.isFavorite=1
+                            })
                         }
                        
                         let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
@@ -831,8 +847,10 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
     {
         var feedData:FeedData
         feedData=feedDataList[tag]
+        try! self.realm.write({
+            feedData.isRead=1
+        })
         
-        feedData.isRead=1
          
         let indexPath=IndexPath(item: tag, section: 0)
         self.feedTableView.reloadRows(at: [indexPath], with: .none)

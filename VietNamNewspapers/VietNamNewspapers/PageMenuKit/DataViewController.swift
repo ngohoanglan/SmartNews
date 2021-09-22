@@ -150,7 +150,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
             feedTableView.register(UINib(nibName: "FeedImageViewCellIPad", bundle: nil), forCellReuseIdentifier: "CellNotDescIPad")
             feedTableView.register(UINib(nibName: "FeedViewCellIPad", bundle: nil), forCellReuseIdentifier: "CellNotImageIPad")
         }
-        refreshControl.addTarget(self, action: #selector(SiteDetailTableViewController.refreshControlAction(_:)), for: UIControl.Event.valueChanged)
+        refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControl.Event.valueChanged)
         self.feedTableView.insertSubview(refreshControl, at: 0)
         
         
@@ -217,7 +217,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
         return 1
         
     }
-    func refreshControlAction(_ refreshControl: UIRefreshControl) {
+    @objc func refreshControlAction(_ refreshControl: UIRefreshControl) {
         
         SelectionChange(siteItemSelected, autoFreshing: true)
         
@@ -774,13 +774,18 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                         {
                             let image = UIImage(named: "ic_bookmark_border") as UIImage?
                             cell.btImportan.setImage(image, for: UIControl.State())
-                            feedData.isFavorite=0
+                            try! self.realm.write({
+                                feedData.isFavorite=0
+                            })
                         }
                         else
                         {
                             let image = UIImage(named: "ic_bookmark") as UIImage?
                             cell.btImportan.setImage(image, for: UIControl.State())
-                            feedData.isFavorite=1
+                            try! self.realm.write({
+                                feedData.isFavorite=1
+                            })
+                            
                         }
                         
                         let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
@@ -885,13 +890,17 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                         {
                             let image = UIImage(named: "ic_bookmark_border") as UIImage?
                             cellNotImage.btnImportan.setImage(image, for: UIControl.State())
-                            feedData.isFavorite=0
+                            try! self.realm.write({
+                                feedData.isFavorite=0
+                            })
                         }
                         else
                         {
                             let image = UIImage(named: "ic_bookmark") as UIImage?
                             cellNotImage.btnImportan.setImage(image, for: UIControl.State())
-                            feedData.isFavorite=1
+                            try! self.realm.write({
+                                feedData.isFavorite=1
+                            })
                         }
                         
                         let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
@@ -1001,13 +1010,17 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                         {
                             let image = UIImage(named: "ic_bookmark_border") as UIImage?
                             cell.btImportan.setImage(image, for: UIControl.State())
-                            feedData.isFavorite=0
+                            try! self.realm.write({
+                                feedData.isFavorite=0
+                            })
                         }
                         else
                         {
                             let image = UIImage(named: "ic_bookmark") as UIImage?
                             cell.btImportan.setImage(image, for: UIControl.State())
-                            feedData.isFavorite=1
+                            try! self.realm.write({
+                                feedData.isFavorite=1
+                            })
                         }
                         
                         let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
@@ -1112,13 +1125,17 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                         {
                             let image = UIImage(named: "ic_bookmark_border") as UIImage?
                             cellNotImage.btnImportan.setImage(image, for: UIControl.State())
-                            feedData.isFavorite=0
+                            try! self.realm.write({
+                                feedData.isFavorite=0
+                            })
                         }
                         else
                         {
                             let image = UIImage(named: "ic_bookmark") as UIImage?
                             cellNotImage.btnImportan.setImage(image, for: UIControl.State())
-                            feedData.isFavorite=1
+                            try! self.realm.write({
+                                feedData.isFavorite=1
+                            })
                         }
                         
                         let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
@@ -1156,8 +1173,9 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
     {
         var feedData:FeedData
         feedData=feedDataList[tag]
-        
-        feedData.isRead=1
+        try! realm.write({
+            feedData.isRead=1
+        })
         
         let indexPath=IndexPath(item: tag, section: 0)
         self.feedTableView.reloadRows(at: [indexPath], with: .none)
