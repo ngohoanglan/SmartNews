@@ -5,6 +5,7 @@
 //  Created by Ngô Lân on 6/19/16.
 //  Copyright © 2016 admin. All rights reserved.
 //
+import RealmSwift
 import Nuke
 import GoogleMobileAds
 import UIKit
@@ -49,9 +50,11 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
    
     // @IBOutlet weak var navigationbarTitle: UINavigationItem!
     var passOject:UserDefaults!
+    let realm: Realm
+    var notificationToken: NotificationToken?
+    var feedDataList: Results<FeedData>
+     
     
-    fileprivate var feedDataController:FeedDataController!
-    fileprivate var feedDataList:Array<FeedData>=[]
     fileprivate var feedDataFilteredList:Array<FeedData>=[]
     fileprivate var siteItemList:Array<SiteItem>=[]
     var isBlockImage:Bool=false
@@ -62,6 +65,50 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
     var cellIPadFontSize:CGFloat=17.0
     var imageSize:CGFloat=75.0
     var adsBanner: GADBannerView = GADBannerView()
+    required init() {
+        self.realm = try! Realm()
+        // Access all tasks in the realm, sorted by _id so that the ordering is defined.
+        feedDataList = realm.objects(FeedData.self).filter("isFavorite = %@",1).sorted(by: [SortDescriptor(keyPath: "loadTime",ascending: true),SortDescriptor(keyPath: "timeStamp",ascending: true)])
+
+        super.init(nibName: nil, bundle: nil)
+
+       
+
+        // Observe the tasks for changes. Hang on to the returned notification token.
+        notificationToken = feedDataList.observe { [weak self] (changes) in
+            guard let tableView = self?.feedTableView else { return }
+            switch changes {
+            case .initial:
+                // Results are now populated and can be accessed without blocking the UI
+                tableView.reloadData()
+            case .update(_, let deletions, let insertions, let modifications):
+                // Query results have changed, so apply them to the UITableView.
+                tableView.performBatchUpdates({
+                    // It's important to be sure to always update a table in this order:
+                    // deletions, insertions, then updates. Otherwise, you could be unintentionally
+                    // updating at the wrong index!
+                    tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0) }),
+                        with: .automatic)
+                    tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+                        with: .automatic)
+                    tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+                        with: .automatic)
+                })
+            case .error(let error):
+                // An error occurred while opening the Realm file on the background worker thread
+                fatalError("\(error)")
+            }
+        }
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    deinit {
+        // Always invalidate any notification tokens when you are done with them.
+        notificationToken?.invalidate()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -265,7 +312,7 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
     fileprivate func setup(){
         //siteController=SiteController.shareInstance
         //siteItemController=SiteItemController.shareInstance
-        feedDataController=FeedDataController.shareInstance
+        //feedDataController=FeedDataController.shareInstance
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -410,8 +457,7 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                             cell.btImportan.setImage(image, for: UIControl.State())
                             feedData.isFavorite=1
                         }
-                        let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.isFavorite.rawValue : feedData.isFavorite!]
-                        self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
+                        
                         let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
                         self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
                 }
@@ -522,8 +568,7 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                             cellNotImage.btnImportan.setImage(image, for: UIControl.State())
                             feedData.isFavorite=1
                         }
-                        let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.isFavorite.rawValue : feedData.isFavorite!]
-                        self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
+                      
                         let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
                         self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
                 }
@@ -638,8 +683,7 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                             cell.btImportan.setImage(image, for: UIControl.State())
                             feedData.isFavorite=1
                         }
-                        let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.isFavorite.rawValue : feedData.isFavorite!]
-                        self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
+                       
                         let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
                         self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
                 }
@@ -750,8 +794,7 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                             cellNotImage.btnImportan.setImage(image, for: UIControl.State())
                             feedData.isFavorite=1
                         }
-                        let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.isFavorite.rawValue : feedData.isFavorite!]
-                        self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
+                       
                         let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
                         self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
                 }
@@ -790,8 +833,7 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
         feedData=feedDataList[tag]
         
         feedData.isRead=1
-        let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.isRead.rawValue : feedData.isRead!]
-        self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
+         
         let indexPath=IndexPath(item: tag, section: 0)
         self.feedTableView.reloadRows(at: [indexPath], with: .none)
         let urlFeed=feedData.link!
@@ -812,7 +854,7 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
     }
     fileprivate func SelectionChange()
     {
-        feedDataList=feedDataController.getFeedDataByFavorites()
+        feedDataList = realm.objects(FeedData.self).filter("isFavorite = %@",1).sorted(by: [SortDescriptor(keyPath: "loadTime",ascending: true),SortDescriptor(keyPath: "timeStamp",ascending: true)])
         self.feedTableView.reloadData()
         
         

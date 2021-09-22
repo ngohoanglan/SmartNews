@@ -7,12 +7,12 @@
 //
 
 import UIKit
-
+import RealmSwift
 class SiteSettingTableViewController: UITableViewController {
     var passOject:UserDefaults!
     fileprivate var siteController:SiteController!
     fileprivate var siteItemController:SiteItemController!
-    fileprivate var feedDataController:FeedDataController!
+    //fileprivate var feedDataController:FeedDataController!
     fileprivate var siteItemList:Array<SiteItem>=[]
     fileprivate var siteSelected:Site!
     fileprivate var siteItemSelected:SiteItem!
@@ -25,7 +25,7 @@ class SiteSettingTableViewController: UITableViewController {
         sideMenuController()?.sideMenu?.allowPanGesture=false
         siteController=SiteController.shareInstance
         siteItemController=SiteItemController.shareInstance
-        feedDataController=FeedDataController.shareInstance
+        //feedDataController=FeedDataController.shareInstance
         passOject=UserDefaults()
         siteSelectedID=passOject.value(forKey: "siteID_key") as! String
         siteSelected=siteController.getSiteById(siteSelectedID as NSString)
@@ -74,8 +74,11 @@ class SiteSettingTableViewController: UITableViewController {
                 
                 
                 //Delete to Database
-                
-                self.feedDataController.deleteFeedDataBySiteItemID(siteItemDelete.siteItemID! as NSString)
+                let realm = try! Realm()
+                // Delete all objects from the realm
+                try! realm.write {
+                    realm.deleteAll()
+                }
                 self.siteItemController.deleteSiteItem(siteItemDelete)
                 
                 

@@ -9,6 +9,7 @@
 import UIKit
 import StoreKit
 import FirebaseMessaging
+import RealmSwift
 class Settings
 {
     fileprivate let countryCodeSelectedKey="countryCodeSelectedKey"
@@ -486,10 +487,15 @@ class SettingsTableViewController: UITableViewController ,UIGestureRecognizerDel
                 
                 let siteController=SiteController.shareInstance
                 let siteItemController=SiteItemController.shareInstance
-                let feedDataController=FeedDataController.shareInstance
+                
                 siteController.deleteAllSite()
                 siteItemController.deleteAllSiteItem()
-                feedDataController.deleteAllFeedData()
+                //Delete to Database
+                let realm = try! Realm()
+                // Delete all objects from the realm
+                try! realm.write {
+                    realm.deleteAll()
+                }
                 self.settings.setdatabaseVersionIgnoreKey(0)
                 
                 let alertMess = UIAlertController(title: NSLocalizedString("clear_success", comment: ""), message: "", preferredStyle: UIAlertController.Style.alert)
@@ -647,8 +653,12 @@ class SettingsTableViewController: UITableViewController ,UIGestureRecognizerDel
                 }
                 
                 //Delete All feeds
-                let feedController=FeedDataController.shareInstance
-                feedController.deleteAllFeedData()
+                //Delete to Database
+                let realm = try! Realm()
+                // Delete all objects from the realm
+                try! realm.write {
+                    realm.deleteAll()
+                }
                 
                 
                 let alertMess = UIAlertController(title: NSLocalizedString("clear_success", comment: ""), message: "", preferredStyle: UIAlertController.Style.alert)

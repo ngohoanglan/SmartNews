@@ -15,7 +15,7 @@ class ENSiteDetailMenuViewController: UITableViewController,UIGestureRecognizerD
     var passOject:UserDefaults!
     fileprivate var siteController:SiteController!
     fileprivate var siteItemController:SiteItemController!
-    fileprivate var feedController:FeedDataController!
+    //fileprivate var feedController:FeedDataController!
      var selectedMenuItem : Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +23,7 @@ class ENSiteDetailMenuViewController: UITableViewController,UIGestureRecognizerD
         
         siteController=SiteController.shareInstance
         siteItemController=SiteItemController.shareInstance
-        feedController=FeedDataController.shareInstance
+        //feedController=FeedDataController.shareInstance
         passOject=UserDefaults()
         siteSelectedID=passOject.value(forKey: "siteID_key") as! String
         siteSelected=siteController.getSiteById(siteSelectedID as NSString)
@@ -152,7 +152,7 @@ class ENSiteDetailMenuViewController: UITableViewController,UIGestureRecognizerD
         let fontSizeDetail=fontSize! - CGFloat(5.0)
         cell!.detailTextLabel?.font=UIFont(name: fontName!, size: fontSizeDetail)
         cell!.detailTextLabel?.textColor=UIColor.white
-        cell?.detailTextLabel?.text=feedController.getFeedStatusBySiteItemID(siteItem.siteItemID! as NSString)
+        cell?.detailTextLabel?.text="ABC"//feedController.getFeedStatusBySiteItemID(siteItem.siteItemID! as NSString)
      cell?.detailTextLabel?.backgroundColor=UIColor(red: 1/255, green: 1/255, blue: 149/255, alpha: 0.1)
         return cell!
     }

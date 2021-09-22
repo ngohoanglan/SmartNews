@@ -5,7 +5,7 @@
 //  Created by Ngô Lân on 10/10/16.
 //  Copyright © 2016 admin. All rights reserved.
 //
-
+import RealmSwift
 import Foundation
 import UIKit
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
@@ -29,6 +29,14 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 }
 class Utils
 {
+   static func checkFeedIsExist( siteItemID:String,link:String) -> Bool {
+        let realm = try! Realm()
+        let findByIdPredicate =
+        NSPredicate(format: "siteItemID = %@ AND link = %@", siteItemID, link)
+        let isExist =  ((try! realm.objects(FeedData.self).filter(findByIdPredicate).first) != nil)
+        return isExist
+       
+    }
    static func resizeImage(_ image: UIImage, maxWidth: CGFloat, maxHeight: CGFloat) -> UIImage {
         
         var scaleX:CGFloat=1

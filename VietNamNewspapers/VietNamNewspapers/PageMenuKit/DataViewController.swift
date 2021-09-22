@@ -5,31 +5,66 @@
 //  Created by Ngô Lân on 7/25/17.
 //  Copyright © 2017 admin. All rights reserved.
 //
-
+import RealmSwift
 import Foundation
 import UIKit
 import GoogleMobileAds
 import Nuke
-class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource,UIGestureRecognizerDelegate
+class DataViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UIGestureRecognizerDelegate
 {
-    /*
-    var shouldShowSearchResults = false
-    var searchController: UISearchController = ({
-        
-        let controller = UISearchController(searchResultsController: nil)
-        controller.hidesNavigationBarDuringPresentation = false
-        controller.dimsBackgroundDuringPresentation = false
-        controller.searchBar.searchBarStyle = .minimal
-        controller.searchBar.sizeToFit()
-        return controller
-    })()
-    */
-  let refreshControl = UIRefreshControl()
+    let realm: Realm
+    var notificationToken: NotificationToken?
+    var feedDataList: Results<FeedData>
+    required init() {
+        self.realm = try! Realm()
+        // Access all tasks in the realm, sorted by _id so that the ordering is defined.
+        feedDataList = realm.objects(FeedData.self).filter("siteItemID = %@","0").sorted(by: [SortDescriptor(keyPath: "loadTime",ascending: true),SortDescriptor(keyPath: "timeStamp",ascending: true)])
+
+        super.init(nibName: nil, bundle: nil)
+
+        self.title = title
+
+        // Observe the tasks for changes. Hang on to the returned notification token.
+        notificationToken = feedDataList.observe { [weak self] (changes) in
+            guard let tableView = self?.feedTableView else { return }
+            switch changes {
+            case .initial:
+                // Results are now populated and can be accessed without blocking the UI
+                tableView.reloadData()
+            case .update(_, let deletions, let insertions, let modifications):
+                // Query results have changed, so apply them to the UITableView.
+                tableView.performBatchUpdates({
+                    // It's important to be sure to always update a table in this order:
+                    // deletions, insertions, then updates. Otherwise, you could be unintentionally
+                    // updating at the wrong index!
+                    tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0) }),
+                        with: .automatic)
+                    tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+                        with: .automatic)
+                    tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+                        with: .automatic)
+                })
+            case .error(let error):
+                // An error occurred while opening the Realm file on the background worker thread
+                fatalError("\(error)")
+            }
+        }
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    deinit {
+        // Always invalidate any notification tokens when you are done with them.
+        notificationToken?.invalidate()
+    }
+    let refreshControl = UIRefreshControl()
     var feedTableView: UITableView = UITableView()
-  
+    
     fileprivate var siteItemController:SiteItemController!
-    fileprivate var feedDataController:FeedDataController!
-    fileprivate var feedDataList:Array<FeedData>=[]
+    //    fileprivate var feedDataController:FeedDataController!
+    //fileprivate var feedDataList:Array<FeedData>=[]
     fileprivate var feedDataFilteredList:Array<FeedData>=[]
     fileprivate var siteItemList:Array<SiteItem>=[]
     
@@ -42,13 +77,13 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     var cellFontSize:CGFloat=13.0
     var cellIPadFontSize:CGFloat=17.0
     var imageSize:CGFloat=75.0
-   /*
-    
-   var rowHeightImage:CGFloat=175.0
-    var rowHeightNotImage:CGFloat=100.0
-    var cellHeight:CGFloat=60.0
-    var cellFontSize:CGFloat=13.0
-    */
+    /*
+     
+     var rowHeightImage:CGFloat=175.0
+     var rowHeightNotImage:CGFloat=100.0
+     var cellHeight:CGFloat=60.0
+     var cellFontSize:CGFloat=13.0
+     */
     var isExpandDescription:Bool=false
     
     public private(set) var textLabel: UILabel? = nil
@@ -61,14 +96,7 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     let adsViewWidth=370
     //
     
-    override func setup() {
-        super.setup()
-      
-        siteItemController=SiteItemController.shareInstance
-        feedDataController=FeedDataController.shareInstance
-        
-       
-    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -77,25 +105,27 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     
     override func loadView() {
         super.loadView()
-         siteItemSelected=_siteItemSelected
-         self.title = siteItemSelected.siteItemName
-       
+        siteItemSelected=_siteItemSelected
+        feedDataList = realm.objects(FeedData.self).filter("siteItemID = %@",siteItemSelected.siteItemID).sorted(by: [SortDescriptor(keyPath: "loadTime",ascending: true),SortDescriptor(keyPath: "timeStamp",ascending: true)])
+        self.title = siteItemSelected.siteItemName
+        
     }
     
     override func viewDidLoad() {
-       
+        
         super.viewDidLoad()
+        siteItemController=SiteItemController.shareInstance
         isExpandDescription=setting.getExpandDescription()
-       
+        
         cellFontSize=CGFloat(setting.getTextSize())
         cellIPadFontSize = CGFloat(setting.getTextSize())+4
         /*
-        cellHeight=60 + (60*percentAdd)/100
-        cellFontSize=13 + (13*percentAdd)/100
-        imageSize=75.0 + (75.0*percentAdd)/100
-        rowHeightImage=175.0+(175.0*percentAdd)/100*2
+         cellHeight=60 + (60*percentAdd)/100
+         cellFontSize=13 + (13*percentAdd)/100
+         imageSize=75.0 + (75.0*percentAdd)/100
+         rowHeightImage=175.0+(175.0*percentAdd)/100*2
          rowHeightNotImage=75.0+(75*percentAdd)/100*2
-        */
+         */
         // Get main screen bounds
         let barHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
         let displayWidth: CGFloat = self.view.frame.width
@@ -112,19 +142,19 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         feedTableView.separatorStyle = .none
         if(UIDevice.current.userInterfaceIdiom == .phone)
         {
-        feedTableView.register(UINib(nibName: "FeedImageViewCell", bundle: nil), forCellReuseIdentifier: "CellNotDesc")
-        feedTableView.register(UINib(nibName: "FeedViewCell", bundle: nil), forCellReuseIdentifier: "CellNotImage")
+            feedTableView.register(UINib(nibName: "FeedImageViewCell", bundle: nil), forCellReuseIdentifier: "CellNotDesc")
+            feedTableView.register(UINib(nibName: "FeedViewCell", bundle: nil), forCellReuseIdentifier: "CellNotImage")
         }
         else
         {
-        feedTableView.register(UINib(nibName: "FeedImageViewCellIPad", bundle: nil), forCellReuseIdentifier: "CellNotDescIPad")
-        feedTableView.register(UINib(nibName: "FeedViewCellIPad", bundle: nil), forCellReuseIdentifier: "CellNotImageIPad")
+            feedTableView.register(UINib(nibName: "FeedImageViewCellIPad", bundle: nil), forCellReuseIdentifier: "CellNotDescIPad")
+            feedTableView.register(UINib(nibName: "FeedViewCellIPad", bundle: nil), forCellReuseIdentifier: "CellNotImageIPad")
         }
         refreshControl.addTarget(self, action: #selector(SiteDetailTableViewController.refreshControlAction(_:)), for: UIControl.Event.valueChanged)
         self.feedTableView.insertSubview(refreshControl, at: 0)
         
         
-       
+        
         
         self.view.addSubview(feedTableView)
         
@@ -172,17 +202,17 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-     
+        
         SelectionChange(siteItemSelected, autoFreshing: false)
         
         //self.navigationController?.navigationBar.isHidden = true
-         //AddNativeExpressAds()
+        //AddNativeExpressAds()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     }
-     func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
         
@@ -204,7 +234,7 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             feedTableView.insertSubview(adView!, at: index)
             index+=adsInterval
         }
-    
+        
     }
     fileprivate func SelectionChange(_ siteItem:SiteItem, autoFreshing:Bool)
     {
@@ -212,16 +242,13 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         {
             siteItem.siteItemURL=Utils.enCryptString2(siteItem.siteItemURL!)
         }
-        
         self.feedTableView.tableHeaderView=nil
-        feedDataList=feedDataController.getFeedDataBySiteItemId(siteItem.siteItemID! as NSString)
-        //
+        self.feedDataList = realm.objects(FeedData.self).filter("siteItemID = %@",siteItemSelected.siteItemID).sorted(by: [SortDescriptor(keyPath: "loadTime",ascending: true),SortDescriptor(keyPath: "timeStamp",ascending: true)])
         self.feedTableView.reloadData()
-        
         let currentTimeAdded=(Calendar.current as NSCalendar).date(byAdding: NSCalendar.Unit.minute, value: -2, to: Date(), options: NSCalendar.Options.init(rawValue: 0))
         if(siteItem.loadTime == nil || autoFreshing || siteItem.loadTime?.compare(currentTimeAdded!)==ComparisonResult.orderedAscending)
         {
-             UIApplication.shared.isNetworkActivityIndicatorVisible = true
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
             indicator.center=view.center
             indicator.hidesWhenStopped=true
             indicator.startAnimating()
@@ -231,52 +258,6 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             let currentTime=Date()
             if(2==3)//Download feed from theallatest's server
             {
-                DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
-                    
-                    do {
-                        var result=""
-                        let HostingDataSourceURL="http://thealllatestnews.com/api/FeedDatas/"+siteItem.siteItemURL!
-                        let urlFeed = URL(string: HostingDataSourceURL)
-                        
-                        try result = String(contentsOf: urlFeed!)
-                        //let rootItem=Mapper<Feeds>().map(JSONString: result as! String)
-                        let feeds:[FeedJson]=[]//(rootItem.feedsJson)!
-                        for feed in feeds
-                        {
-                            if(!(feed.Title?.isEmpty)! && !(feed.Link?.isEmpty)!)
-                            {
-                                let feedIsExist=self.feedDataController.getFeedDataBySiteItemIdAndLink(self.siteItemSelected.siteItemID! as NSString, link: feed.Link as! NSString )
-                                if(feedIsExist.count==0 )
-                                {
-                                    var fieldDetails=[String:NSObject]()
-                                    let feedID:String=UUID().uuidString
-                                    fieldDetails[FeedDataAttributes.feedID.rawValue]=feedID as NSObject?
-                                    fieldDetails[FeedDataAttributes.timeStamp.rawValue]=Date().timeIntervalSince1970 as NSObject?
-                                    fieldDetails[FeedDataAttributes.siteID.rawValue]=self.siteItemSelected.siteID as NSObject?
-                                    fieldDetails[FeedDataAttributes.siteItemID.rawValue]=self.siteItemSelected.siteItemID as NSObject?
-                                    fieldDetails[FeedDataAttributes.loadTime.rawValue]=currentTime as NSObject?
-                                    fieldDetails[FeedDataAttributes.title.rawValue]=feed.Title as NSObject?
-                                    fieldDetails[FeedDataAttributes.pubDateString.rawValue]=feed.PubDate as NSObject?
-                                    fieldDetails[FeedDataAttributes.link.rawValue]=feed.Link as NSObject?
-                                    fieldDetails[FeedDataAttributes.feedDescription.rawValue]=feed.Description as NSObject?
-                                    fieldDetails[FeedDataAttributes.linkImage.rawValue]=feed.ImgLink as NSObject?
-                                    
-                                    self.feedDataController.saveFeedData(fieldDetails)
-                                }
-                                
-                            }
-                        }
-                    } catch {
-                        print("Failed")
-                    }
-                    
-                    DispatchQueue.main.async(execute: {
-                        self.stopDownloadFeed(autoFreshing)
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                    })
-                }
-                
-                
             }
             else
             {
@@ -307,18 +288,15 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                 request.setValue("application/json, text/html, application/xhtml+xml, */*", forHTTPHeaderField: "Accept")
                 request.setValue("Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)", forHTTPHeaderField: "User-Agent")
                 do{
-                    
-                    
                     self.httpClient.doGet(request) { (data, error, httpStatusCode) -> Void in
                         if (httpStatusCode == nil || httpStatusCode!.rawValue != HTTPStatusCode.ok.rawValue)
                         {
                             self.DownloadError(autoFreshing)
                         }
-                            
+                        
                         else {
                             //Read JSON response in seperate thread
-                            DispatchQueue.global(qos: .userInitiated).async(execute: {
-                                
+                             
                                 
                                 let newSiteItemUpdate:Dictionary<String,AnyObject> = [SiteItemAttributes.loadTime.rawValue : currentTime as AnyObject]
                                 self.siteItemController.updateSiteItem(siteItem, newSiteItemDetails: newSiteItemUpdate)
@@ -435,7 +413,7 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                                                     imgFeed=imgLinks[0]
                                                     imgFeed=imgFeed.replacingOccurrences(of: "src=", with: "").replacingOccurrences(of: "\\", with: "").replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\"", with: "").replacingOccurrences(of: "'", with: "")
                                                 }
-                                                    
+                                                
                                                 else if(content.contains("media:content type=\"image/jpeg\""))
                                                 {
                                                     var mediaContent=content.subStringFromTwoTag("<media:content", endTag: "</media:content>")
@@ -467,35 +445,36 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                                         feedDescription=feedDescription.replacingOccurrences(of: "<[^>]+>", with: "",options: .regularExpression, range: nil)
                                         feedDescription=String(htmlEncodedString: feedDescription) ?? ""
                                         feedTitle=String(htmlEncodedString: feedTitle) ?? ""
-                                        let feedIsExist=self.feedDataController.getFeedDataBySiteItemIdAndLink(self.siteItemSelected.siteItemID! as NSString, link: feedLink as NSString)
-                                        if(feedIsExist.count==0 && !feedTitle.isEmpty && !feedLink.isEmpty)
+                                        let feedIsExist=Utils.checkFeedIsExist(siteItemID: self.siteItemSelected.siteItemID ?? "", link: self.getFullURL(url: feedLink, domainURL: siteItem.siteItemURL!) ?? "")
+                                        if(!feedIsExist)
                                         {
-                                            var fieldDetails=[String:NSObject]()
-                                            let feedID:String=UUID().uuidString
-                                            fieldDetails[FeedDataAttributes.feedID.rawValue]=feedID as NSObject?
-                                            fieldDetails[FeedDataAttributes.timeStamp.rawValue]=Date().timeIntervalSince1970 as NSObject?
-                                            fieldDetails[FeedDataAttributes.siteID.rawValue]=self.siteItemSelected.siteID as NSObject?
-                                            fieldDetails[FeedDataAttributes.siteItemID.rawValue]=self.siteItemSelected.siteItemID as NSObject?
-                                            fieldDetails[FeedDataAttributes.loadTime.rawValue]=currentTime as NSObject?
-                                            fieldDetails[FeedDataAttributes.title.rawValue]=feedTitle as NSObject?
-                                            fieldDetails[FeedDataAttributes.pubDateString.rawValue]=pubDateString as NSObject?
-                                            feedLink=self.getFullURL(url: feedLink, domainURL: siteItem.siteItemURL!)
-                                            fieldDetails[FeedDataAttributes.link.rawValue]=feedLink as NSObject?
-                                            fieldDetails[FeedDataAttributes.feedDescription.rawValue]=feedDescription as NSObject?
-                                            fieldDetails[FeedDataAttributes.linkImage.rawValue]=imgFeed as NSObject?
                                             
-                                            DispatchQueue.main.sync(execute: {
-                                                self.feedDataController.saveFeedData(fieldDetails)
+                                             
+                                                var mFeed=FeedData()
+                                                
+                                                mFeed.timeStamp=Int(Date().timeIntervalSince1970)
+                                                mFeed.siteItemID=self.siteItemSelected.siteItemID
+                                                mFeed.siteID=self.siteItemSelected.siteID
+                                                mFeed.loadTime=currentTime
+                                                mFeed.title=feedTitle
+                                                mFeed.pubDateString=pubDateString
+                                                mFeed.link=self.getFullURL(url: feedLink, domainURL: siteItem.siteItemURL!)
+                                                mFeed.feedDescription=feedDescription
+                                                mFeed.linkImage=imgFeed
+                                                let mRealm =  try! Realm()
+                                            try! mRealm.write({
+                                                mRealm.add(mFeed)
                                             })
                                             
                                         }
+                                       
                                         feedXML=feedXML.replacingOccurrences(of: startTag+content+endTag, with: "")
                                         
                                     }
                                     
                                 }
                                 else  if (feedXML.contains("<feed>") || feedXML.contains("<feed "))
-                                    
+                                
                                 {
                                     var content = feedXML.subStringFromTwoTag("<entry>", endTag: "</entry>")
                                     while(!content.isEmpty && content != "")
@@ -534,8 +513,6 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                                         {
                                             pubDateString=pubDateString.subStringFromTwoTag("<![CDATA[", endTag: "]]>")
                                         }
-                                        
-                                        
                                         var feedDescription:String!
                                         
                                         var description  = content.matchesForRegexInText("<summary[^>]*>(.*?)</summary>", text: content)
@@ -594,27 +571,24 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                                         }
                                         feedDescription=String(htmlEncodedString: feedDescription)!
                                         feedTitle=String(htmlEncodedString: feedTitle)!
-                                        let feedIsExist=self.feedDataController.getFeedDataBySiteItemIdAndLink(self.siteItemSelected.siteItemID! as NSString, link: feedLink as NSString)
-                                        if(feedIsExist.count==0 && !feedTitle.isEmpty && !feedLink.isEmpty)
+                                        let feedIsExist=Utils.checkFeedIsExist(siteItemID: self.siteItemSelected.siteItemID ?? "", link: self.getFullURL(url: feedLink, domainURL: siteItem.siteItemURL!) ?? "")
+                                        if(!feedIsExist)
                                         {
-                                            var fieldDetails=[String:NSObject]()
-                                            let feedID:String=UUID().uuidString
-                                            fieldDetails[FeedDataAttributes.feedID.rawValue]=feedID as NSObject?
-                                            fieldDetails[FeedDataAttributes.timeStamp.rawValue]=Date().timeIntervalSince1970 as NSObject?
-                                            fieldDetails[FeedDataAttributes.siteID.rawValue]=self.siteItemSelected.siteID as NSObject?
-                                            fieldDetails[FeedDataAttributes.siteItemID.rawValue]=self.siteItemSelected.siteItemID as NSObject?
-                                            fieldDetails[FeedDataAttributes.loadTime.rawValue]=currentTime as NSObject?
-                                            fieldDetails[FeedDataAttributes.title.rawValue]=feedTitle as NSObject?
-                                            fieldDetails[FeedDataAttributes.pubDateString.rawValue]=pubDateString as NSObject?
-                                            feedLink=self.getFullURL(url: feedLink, domainURL: siteItem.siteItemURL!)
-                                            
-                                            fieldDetails[FeedDataAttributes.link.rawValue]=feedLink as NSObject?
-                                            fieldDetails[FeedDataAttributes.feedDescription.rawValue]=feedDescription as NSObject?
-                                            fieldDetails[FeedDataAttributes.linkImage.rawValue]=imgFeed as NSObject?
-                                            DispatchQueue.main.sync(execute: {
-                                                self.feedDataController.saveFeedData(fieldDetails)
-                                            })
-                                            
+                                            try! self.realm.write
+                                            {
+                                                let mFeed=FeedData()
+                                                mFeed.timeStamp=Int(Date().timeIntervalSince1970)
+                                                mFeed.siteItemID=self.siteItemSelected.siteID
+                                                mFeed.siteID=self.siteItemSelected.siteID
+                                                mFeed.loadTime=currentTime
+                                                mFeed.title=feedTitle
+                                                mFeed.pubDateString=pubDateString
+                                                mFeed.link=self.getFullURL(url: feedLink, domainURL: siteItem.siteItemURL!)
+                                                mFeed.feedDescription=feedDescription
+                                                mFeed.linkImage=imgFeed
+                                                
+                                                self.realm.add(mFeed)
+                                            }
                                         }
                                         feedXML=feedXML.replacingOccurrences(of: "<entry>"+content+"</entry>", with: "")
                                         
@@ -626,7 +600,7 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                                     self.stopDownloadFeed(autoFreshing)
                                     UIApplication.shared.isNetworkActivityIndicatorVisible = false
                                 }
-                            })
+                            
                             
                         }
                     }
@@ -661,8 +635,9 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     fileprivate func stopDownloadFeed(_ autoFreshing:Bool)
     {
         self.sideMenuController()?.sideMenu?.menuViewController.viewDidLoad()
-        self.feedDataList=self.feedDataController.getFeedDataBySiteItemId(self.siteItemSelected.siteItemID! as NSString)
-        
+        let mRealm =  try! Realm()
+        self.feedDataList = mRealm.objects(FeedData.self).filter("siteItemID = %@",siteItemSelected.siteItemID).sorted(by: [SortDescriptor(keyPath: "loadTime",ascending: true),SortDescriptor(keyPath: "timeStamp",ascending: true)])
+        print(self.feedDataList.count)
         self.feedTableView.reloadData()
         self.indicator.stopAnimating()
         if(autoFreshing)
@@ -670,29 +645,29 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             self.refreshControl.endRefreshing()
         }
     }
-     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
         return feedDataList.count
     }
-   /* func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        var feedData:FeedData
-        feedData=feedDataList[(indexPath as NSIndexPath).row]
-         if(feedData.linkImage != nil )
-         {
-            return rowHeightImage
-        }
-        else
-         {
-            return rowHeightNotImage
-        }
-    }*/
+    /* func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+     var feedData:FeedData
+     feedData=feedDataList[(indexPath as NSIndexPath).row]
+     if(feedData.linkImage != nil )
+     {
+     return rowHeightImage
+     }
+     else
+     {
+     return rowHeightNotImage
+     }
+     }*/
     var btnExpandTapped:Bool=false
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         var feedData:FeedData
         
-         feedData=feedDataList[(indexPath as NSIndexPath).row]
+        feedData=feedDataList[(indexPath as NSIndexPath).row]
         if(!btnExpandTapped)
         {
             feedData.isExpand=isExpandDescription
@@ -720,8 +695,8 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                     //
                     
                     Nuke.loadImage(with: URL(string: feedData.linkImage ?? ""), into: cell.feedImageCell)
-                   
-                  
+                    
+                    
                     
                 }
                 
@@ -780,9 +755,9 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                                 }
                             }
                             self.present(activityVC, animated: true, completion: nil)
-                          
+                            
                         }
-                }
+                    }
                 if(feedData.isFavorite == 1)
                 {
                     let image = UIImage(named: "ic_bookmark") as UIImage?
@@ -807,11 +782,10 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                             cell.btImportan.setImage(image, for: UIControl.State())
                             feedData.isFavorite=1
                         }
-                        let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.isFavorite.rawValue : feedData.isFavorite!]
-                        self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
+                        
                         let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
                         self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
-                }
+                    }
                 
                 
                 let taplabeTitlelAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(labeTitlelAction(sender:)))
@@ -828,7 +802,7 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                 
                 return cell
             }
-                
+            
             else
             {
                 let cellNotImage = tableView.dequeueReusableCell(withIdentifier: "CellNotImage", for: indexPath)
@@ -894,7 +868,7 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                         
                         
                         
-                }
+                    }
                 if(feedData.isFavorite == 1)
                 {
                     let image = UIImage(named: "ic_bookmark") as UIImage?
@@ -919,11 +893,10 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                             cellNotImage.btnImportan.setImage(image, for: UIControl.State())
                             feedData.isFavorite=1
                         }
-                        let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.isFavorite.rawValue : feedData.isFavorite!]
-                        self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
+                        
                         let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
                         self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
-                }
+                    }
                 
                 //
                 let taplabeTitlelAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(labeTitlelAction(sender:)))
@@ -1011,7 +984,7 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                             }
                             self.present(activityVC, animated: true, completion: nil)
                         }
-                }
+                    }
                 if(feedData.isFavorite == 1)
                 {
                     let image = UIImage(named: "ic_bookmark") as UIImage?
@@ -1036,11 +1009,10 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                             cell.btImportan.setImage(image, for: UIControl.State())
                             feedData.isFavorite=1
                         }
-                        let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.isFavorite.rawValue : feedData.isFavorite!]
-                        self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
+                        
                         let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
                         self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
-                }
+                    }
                 
                 
                 let taplabeTitlelAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(labeTitlelAction(sender:)))
@@ -1057,7 +1029,7 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                 
                 return cell
             }
-                
+            
             else
             {
                 let cellNotImage = tableView.dequeueReusableCell(withIdentifier: "CellNotImageIPad", for: indexPath)
@@ -1123,7 +1095,7 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                         
                         
                         
-                }
+                    }
                 if(feedData.isFavorite == 1)
                 {
                     let image = UIImage(named: "ic_bookmark") as UIImage?
@@ -1148,11 +1120,10 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                             cellNotImage.btnImportan.setImage(image, for: UIControl.State())
                             feedData.isFavorite=1
                         }
-                        let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.isFavorite.rawValue : feedData.isFavorite!]
-                        self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
+                        
                         let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
                         self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
-                }
+                    }
                 
                 //
                 let taplabeTitlelAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(labeTitlelAction(sender:)))
@@ -1187,8 +1158,7 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         feedData=feedDataList[tag]
         
         feedData.isRead=1
-        let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.isRead.rawValue : feedData.isRead!]
-        self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
+        
         let indexPath=IndexPath(item: tag, section: 0)
         self.feedTableView.reloadRows(at: [indexPath], with: .none)
         let urlFeed=feedData.link!
@@ -1200,7 +1170,7 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                                           completionHandler: {
                                             (success) in
                                             print("Open \(urlFeed): \(success)")
-                })
+                                          })
             } else {
                 let success = UIApplication.shared.openURL(url)
                 print("Open \(urlFeed): \(success)")
@@ -1230,5 +1200,5 @@ class DataViewController: BaseViewController, UITableViewDelegate, UITableViewDa
 
 // Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+    return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

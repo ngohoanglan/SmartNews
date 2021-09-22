@@ -7,7 +7,11 @@
 //
 
 import UIKit
-import CoreData
+import RealmSwift
+
+//import CoreData
+/*
+
 class FeedDataController {
     fileprivate let persistenceManager: PersistenceManager!
     fileprivate var mainContextInstance: NSManagedObjectContext!
@@ -237,16 +241,19 @@ class FeedDataController {
         let minionManagedObjectContextWorker: NSManagedObjectContext =
         NSManagedObjectContext.init(concurrencyType: NSManagedObjectContextConcurrencyType.privateQueueConcurrencyType)
         minionManagedObjectContextWorker.parent = self.mainContextInstance
-        
+        do{
         //Assign field values
         for (key, value) in newFeedDataDetails {
             for attribute in FeedDataAttributes.getAll {
                 if (key == attribute.rawValue) {
-                    feedDataToUpdate.setValue(value, forKey: key)
+                  try  feedDataToUpdate.setValue(value, forKey: key)
                 }
             }
         }
-        
+        }catch
+        {
+            print("Error at: \(feedDataToUpdate.title ?? "updateFeedData")")
+        }
         //Persist new Event to datastore (via Managed Object Context Layer).
         self.persistenceManager.saveWorkerContext(minionManagedObjectContextWorker)
         self.persistenceManager.mergeWithMainContext()
@@ -518,3 +525,4 @@ class FeedDataController {
         NotificationCenter.default.post(name: Notification.Name(rawValue: "updateFeedDataTableData"), object: nil)
     }
 }
+*/

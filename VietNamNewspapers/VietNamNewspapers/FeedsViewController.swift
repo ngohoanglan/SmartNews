@@ -16,7 +16,7 @@ class FeedsViewController : BaseViewController
     let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
     fileprivate var siteController:SiteController!
     fileprivate var siteItemController:SiteItemController!
-    fileprivate var  feedDataController=FeedDataController.shareInstance
+    //fileprivate var  feedDataController=FeedDataController.shareInstance
     var siteSelectedID:String!
     var pageMenuController: PMKPageMenuController? = nil
     fileprivate var siteItemList:Array<SiteItem>=[]
@@ -45,7 +45,7 @@ class FeedsViewController : BaseViewController
         super.viewDidLoad()
         siteController=SiteController.shareInstance
         siteItemController=SiteItemController.shareInstance
-        feedDataController=FeedDataController.shareInstance
+        //feedDataController=FeedDataController.shareInstance
         passOject=UserDefaults()
         siteSelectedID=passOject.value(forKey: "siteID_key") as! String
         siteSelected=siteController.getSiteById(siteSelectedID as NSString)

@@ -8,19 +8,24 @@
 
 import Foundation
 import UIKit
- 
+import RealmSwift
 
 class SearchResultController : UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate,UISearchBarDelegate,UISearchResultsUpdating
 {
-    fileprivate var feedDataController:FeedDataController!
-    fileprivate var feedDataList:Array<FeedData>=[]
+    
+    //    fileprivate var feedDataController:FeedDataController!
+    
+    let realm: Realm
+    var notificationToken: NotificationToken?
+    var feedDataList: Results<FeedData>
+    
     var feedTableView: UITableView = UITableView()
     var cellFontSize:CGFloat=13.0
     var cellIPadFontSize:CGFloat=17.0
     var imageSize:CGFloat=75.0
     var isExpandDescription:Bool=false
-     let setting = Settings()
-     var shouldShowSearchResults = false
+    let setting = Settings()
+    var shouldShowSearchResults = false
     var rightBarItem:UIBarButtonItem=UIBarButtonItem()
     var leftBarItem:UIBarButtonItem=UIBarButtonItem()
     var searchController: UISearchController = ({
@@ -32,13 +37,30 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
         controller.searchBar.sizeToFit()
         return controller
     })()
+    required init() {
+        self.realm = try! Realm()
+        // Access all tasks in the realm, sorted by _id so that the ordering is defined.
+        feedDataList = realm.objects(FeedData.self).sorted(by: [SortDescriptor(keyPath: "loadTime",ascending: true),SortDescriptor(keyPath: "timeStamp",ascending: true)])
+        
+        super.init(nibName: nil, bundle: nil) 
+        
+       
+    }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    deinit {
+        // Always invalidate any notification tokens when you are done with them.
+        notificationToken?.invalidate()
+    }
     override func viewDidLoad() {
         
         super.viewDidLoad()
-          feedDataController=FeedDataController.shareInstance
+        //feedDataController=FeedDataController.shareInstance
         cellFontSize=CGFloat(setting.getTextSize())
         cellIPadFontSize = CGFloat(setting.getTextSize())+4
-         isExpandDescription=setting.getExpandDescription()
+        isExpandDescription=setting.getExpandDescription()
         
         
         
@@ -69,12 +91,12 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
         self.feedTableView.reloadData()
         
         self.view.addSubview(feedTableView)
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       
+        
         
         
         
@@ -116,7 +138,7 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
         NSLayoutConstraint.activate([leading, trailing, top, bottom])
         //End constraint
         
-
+        
         
         
         if(UIDevice.current.userInterfaceIdiom == .phone)
@@ -131,20 +153,20 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
             uiViewSearchBar.addSubview(searchController.searchBar)
             navigationItem.titleView=uiViewSearchBar
         }
-     
-
+        
+        
         searchController.searchBar.delegate=self
         searchController.searchResultsUpdater=self
         self.searchController.searchBar.placeholder="Search"
-
+        
         
         
     }
     
     //Begin Search Bar
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-       
-      
+        
+        
         
         self.navigationItem.rightBarButtonItem=nil
         self.navigationItem.leftBarButtonItem=nil
@@ -173,23 +195,23 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
         
         let searchString = searchController.searchBar.text
         
-        feedDataList=feedDataController.getFeedDataByTitleAndDescriptionKeyWord(keyWord: searchString as! NSString, description: searchString as! NSString)
+        //feedDataList=feedDataController.getFeedDataByTitleAndDescriptionKeyWord(keyWord: searchString as! NSString, description: searchString as! NSString)
         feedTableView.reloadData()
         
         searchController.searchBar.resignFirstResponder()
     }
     func updateSearchResults(for searchController: UISearchController) {
         /*
-        let searchString = searchController.searchBar.text
-        
-        // Filter the data array and get only those countries that match the search text.
-        
-        feedDataList = feedDataList.filter() {
-            return ($0.title!.lowercased().range(of: (searchString?.lowercased())!) != nil || $0.feedDescription!.lowercased().range(of: (searchString?.lowercased())!) != nil)
-        }
-        
-        // Reload the tableview.
-        feedTableView.reloadData()*/
+         let searchString = searchController.searchBar.text
+         
+         // Filter the data array and get only those countries that match the search text.
+         
+         feedDataList = feedDataList.filter() {
+         return ($0.title!.lowercased().range(of: (searchString?.lowercased())!) != nil || $0.feedDescription!.lowercased().range(of: (searchString?.lowercased())!) != nil)
+         }
+         
+         // Reload the tableview.
+         feedTableView.reloadData()*/
     }
     
     //End Search Bar
@@ -202,7 +224,7 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
         return 1
         
     }
-     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
         return feedDataList.count
@@ -238,22 +260,22 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                     cell.feedImageCell.image=nil
                     //
                     /*
-                    cell.feedImageCell.load.request(with: feedData.linkImage!, onCompletion: { image, error, operation in
-                        
-                        if operation == .network {
-                            let myImage : UIImage = Utils.resizeImage(image!, maxWidth: self.imageSize, maxHeight: self.imageSize)
-                            let transition = CATransition()
-                            transition.duration = 0.5
-                            transition.type = kCATransitionFade
-                            cell.feedImageCell.layer.add(transition, forKey: nil)
-                            cell.feedImageCell.image = myImage
-                            
-                            feedData.imageArray=UIImagePNGRepresentation(myImage)
-                            let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.imageArray.rawValue : feedData.imageArray! as AnyObject]
-                            self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
-                        }
-                    })
-                    */
+                     cell.feedImageCell.load.request(with: feedData.linkImage!, onCompletion: { image, error, operation in
+                     
+                     if operation == .network {
+                     let myImage : UIImage = Utils.resizeImage(image!, maxWidth: self.imageSize, maxHeight: self.imageSize)
+                     let transition = CATransition()
+                     transition.duration = 0.5
+                     transition.type = kCATransitionFade
+                     cell.feedImageCell.layer.add(transition, forKey: nil)
+                     cell.feedImageCell.image = myImage
+                     
+                     feedData.imageArray=UIImagePNGRepresentation(myImage)
+                     let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.imageArray.rawValue : feedData.imageArray! as AnyObject]
+                     self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
+                     }
+                     })
+                     */
                     
                 }
                 
@@ -314,7 +336,7 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                             self.present(activityVC, animated: true, completion: nil)
                             
                         }
-                }
+                    }
                 if(feedData.isFavorite == 1)
                 {
                     let image = UIImage(named: "ic_bookmark") as UIImage?
@@ -339,11 +361,10 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                             cell.btImportan.setImage(image, for: UIControl.State())
                             feedData.isFavorite=1
                         }
-                        let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.isFavorite.rawValue : feedData.isFavorite!]
-                        self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
+                        
                         let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
                         self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
-                }
+                    }
                 
                 
                 let taplabeTitlelAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(labeTitlelAction(sender:)))
@@ -360,7 +381,7 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                 
                 return cell
             }
-                
+            
             else
             {
                 let cellNotImage = tableView.dequeueReusableCell(withIdentifier: "CellNotImage", for: indexPath)
@@ -426,7 +447,7 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                         
                         
                         
-                }
+                    }
                 if(feedData.isFavorite == 1)
                 {
                     let image = UIImage(named: "ic_bookmark") as UIImage?
@@ -451,11 +472,10 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                             cellNotImage.btnImportan.setImage(image, for: UIControl.State())
                             feedData.isFavorite=1
                         }
-                        let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.isFavorite.rawValue : feedData.isFavorite!]
-                        self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
+                        
                         let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
                         self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
-                }
+                    }
                 
                 //
                 let taplabeTitlelAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(labeTitlelAction(sender:)))
@@ -495,22 +515,22 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                     cell.feedImageCell.image=nil
                     //
                     /*
-                    cell.feedImageCell.load.request(with: feedData.linkImage!, onCompletion: { image, error, operation in
-                        
-                        if operation == .network {
-                            let myImage : UIImage = Utils.resizeImage(image!, maxWidth: self.imageSize+50, maxHeight: self.imageSize+50)
-                            let transition = CATransition()
-                            transition.duration = 0.5
-                            transition.type = kCATransitionFade
-                            cell.feedImageCell.layer.add(transition, forKey: nil)
-                            cell.feedImageCell.image = myImage
-                            
-                            feedData.imageArray=UIImagePNGRepresentation(myImage)
-                            let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.imageArray.rawValue : feedData.imageArray! as AnyObject]
-                            self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
-                        }
-                    })
-                    */
+                     cell.feedImageCell.load.request(with: feedData.linkImage!, onCompletion: { image, error, operation in
+                     
+                     if operation == .network {
+                     let myImage : UIImage = Utils.resizeImage(image!, maxWidth: self.imageSize+50, maxHeight: self.imageSize+50)
+                     let transition = CATransition()
+                     transition.duration = 0.5
+                     transition.type = kCATransitionFade
+                     cell.feedImageCell.layer.add(transition, forKey: nil)
+                     cell.feedImageCell.image = myImage
+                     
+                     feedData.imageArray=UIImagePNGRepresentation(myImage)
+                     let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.imageArray.rawValue : feedData.imageArray! as AnyObject]
+                     self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
+                     }
+                     })
+                     */
                     
                 }
                 
@@ -570,7 +590,7 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                             }
                             self.present(activityVC, animated: true, completion: nil)
                         }
-                }
+                    }
                 if(feedData.isFavorite == 1)
                 {
                     let image = UIImage(named: "ic_bookmark") as UIImage?
@@ -595,11 +615,10 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                             cell.btImportan.setImage(image, for: UIControl.State())
                             feedData.isFavorite=1
                         }
-                        let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.isFavorite.rawValue : feedData.isFavorite!]
-                        self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
+                        
                         let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
                         self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
-                }
+                    }
                 
                 
                 let taplabeTitlelAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(labeTitlelAction(sender:)))
@@ -616,7 +635,7 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                 
                 return cell
             }
-                
+            
             else
             {
                 let cellNotImage = tableView.dequeueReusableCell(withIdentifier: "CellNotImageIPad", for: indexPath)
@@ -682,7 +701,7 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                         
                         
                         
-                }
+                    }
                 if(feedData.isFavorite == 1)
                 {
                     let image = UIImage(named: "ic_bookmark") as UIImage?
@@ -707,11 +726,10 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                             cellNotImage.btnImportan.setImage(image, for: UIControl.State())
                             feedData.isFavorite=1
                         }
-                        let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.isFavorite.rawValue : feedData.isFavorite!]
-                        self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
+                        
                         let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
                         self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
-                }
+                    }
                 
                 //
                 let taplabeTitlelAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(labeTitlelAction(sender:)))
@@ -733,7 +751,7 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
             }
         }
     }
-   @objc func labeTitlelAction(sender:UITapGestureRecognizer)
+    @objc func labeTitlelAction(sender:UITapGestureRecognizer)
     {
         
         
@@ -746,8 +764,7 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
         feedData=feedDataList[tag]
         
         feedData.isRead=1
-        let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.isRead.rawValue : feedData.isRead!]
-        self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
+        
         let indexPath=IndexPath(item: tag, section: 0)
         self.feedTableView.reloadRows(at: [indexPath], with: .none)
         let urlFeed=feedData.link!
@@ -759,7 +776,7 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                                           completionHandler: {
                                             (success) in
                                             print("Open \(urlFeed): \(success)")
-                })
+                                          })
             } else {
                 let success = UIApplication.shared.openURL(url)
                 print("Open \(urlFeed): \(success)")
@@ -793,5 +810,5 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
 
 // Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+    return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

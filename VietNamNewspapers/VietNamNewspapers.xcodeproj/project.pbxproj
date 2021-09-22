@@ -44,6 +44,7 @@
 		84ECB7E01CAE5846008F6A0A /* SiteSourceJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ECB7DF1CAE5846008F6A0A /* SiteSourceJson.swift */; };
 		C5656BA924B1CE6D00B33025 /* SelectNewspaperTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5656BA724B1CE6D00B33025 /* SelectNewspaperTableViewCell.swift */; };
 		C5656BAA24B1CE6D00B33025 /* SelectNewspaperTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5656BA824B1CE6D00B33025 /* SelectNewspaperTableViewCell.xib */; };
+		DA006CBF26FAD40A007046B2 /* RealmExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA006CBE26FAD40A007046B2 /* RealmExtension.swift */; };
 		DA0237011F64E168000D8806 /* SearchResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0237001F64E168000D8806 /* SearchResultController.swift */; };
 		DA08E4971D52C1520092C53F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA08E4961D52C1520092C53F /* StoreKit.framework */; };
 		DA0D065E1D1E2EF7007A0288 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0D065D1D1E2EF7007A0288 /* WebViewViewController.swift */; };
@@ -174,6 +175,7 @@
 		95843E377AB2ED6629936B65 /* Pods-VietNamNewspapers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VietNamNewspapers.debug.xcconfig"; path = "Target Support Files/Pods-VietNamNewspapers/Pods-VietNamNewspapers.debug.xcconfig"; sourceTree = "<group>"; };
 		C5656BA724B1CE6D00B33025 /* SelectNewspaperTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectNewspaperTableViewCell.swift; sourceTree = "<group>"; };
 		C5656BA824B1CE6D00B33025 /* SelectNewspaperTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectNewspaperTableViewCell.xib; sourceTree = "<group>"; };
+		DA006CBE26FAD40A007046B2 /* RealmExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmExtension.swift; sourceTree = "<group>"; };
 		DA0237001F64E168000D8806 /* SearchResultController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultController.swift; sourceTree = "<group>"; };
 		DA08E4961D52C1520092C53F /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		DA0D065D1D1E2EF7007A0288 /* WebViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 				DAFAF2FF1DAB6A0A00778781 /* Utils.swift */,
 				DAD121341E55EDD4000B1521 /* HtmlLinkExtraction.swift */,
 				DADAC05A24B55C5900086CEA /* UIButton.swift */,
+				DA006CBE26FAD40A007046B2 /* RealmExtension.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -760,6 +763,7 @@
 				DA27C4F31F2779B2002D2FB4 /* PMKPageMenuItemNetLab.swift in Sources */,
 				DA74EC311D502E9F00B367E8 /* SiteSettingTableViewController.swift in Sources */,
 				843B2F7C1C80AE0F00E956C8 /* CountryTableViewCell.swift in Sources */,
+				DA006CBF26FAD40A007046B2 /* RealmExtension.swift in Sources */,
 				844887A11C7B56C90007B8E3 /* ImportDataController.swift in Sources */,
 				844B9C6E1C78AE870047ED2F /* AppDelegate.swift in Sources */,
 				DA1545451D309F990059E7C0 /* KRProgressHUDIconType.swift in Sources */,

@@ -11,7 +11,7 @@ import MessageUI
 import Firebase
 import Nuke
 import FirebaseMessaging
-
+import RealmSwift
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     switch (lhs, rhs) {
     case let (l?, r?):
@@ -43,8 +43,8 @@ class SiteListTableViewController: UIViewController,UITableViewDelegate, UITable
      let HostingURL = "http://thealllatestnews.com/Resources/CountryList/";
     fileprivate var  siteController=SiteController.shareInstance
     fileprivate var  siteItemController=SiteItemController.shareInstance
-    fileprivate var  feedDataController=FeedDataController.shareInstance
-    
+    //fileprivate var  feedDataController=FeedDataController.shareInstance
+    let realm = try! Realm()
     fileprivate var siteList:Array<Site>=[]
      var serverDatabaseVersion:Int=0
      var pageMenuController: PMKPageMenuController? = nil
@@ -424,10 +424,16 @@ class SiteListTableViewController: UIViewController,UITableViewDelegate, UITable
                 
                 
                 //Delete to Database
-                let feedDataController=FeedDataController.shareInstance
+                //let feedDataController=FeedDataController.shareInstance
                 let siteItemController=SiteItemController.shareInstance
                 
-                feedDataController.deleteFeedDataBySiteID(siteDelete.siteID! as NSString)
+                //Delete to Database
+                let realm = try! Realm()
+                // Delete all objects from the realm
+                try! realm.write {
+                    realm.deleteAll()
+                }
+                
                 siteItemController.deleteSiteItemsBySiteID(siteDelete.siteID! as NSString)
                 self.siteController.deleteSite(siteDelete)
                 
@@ -568,9 +574,9 @@ class SiteListTableViewController: UIViewController,UITableViewDelegate, UITable
             DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
                 
                 //Clear old data
-                let feedController=FeedDataController.shareInstance
-                feedController.updateClearAllImage(3)
-                feedController.deleteFeedDataAfterDay(7)
+                //let feedController=FeedDataController.shareInstance
+                //feedController.updateClearAllImage(3)
+                //feedController.deleteFeedDataAfterDay(7)
                 //End old data
                 
                 self.countryCode=self.setting.getCountryCodeSelectedKey()
@@ -737,19 +743,26 @@ class SiteListTableViewController: UIViewController,UITableViewDelegate, UITable
         let newspapersList = newspapersList
         
         KRProgressHUD.show(progressHUDStyle: KRProgressHUDStyle.appColor, maskType: nil, activityIndicatorStyle: KRProgressHUDActivityIndicatorStyle.white, font: nil, message: "", image: nil)
-        DispatchQueue.global(qos: .userInitiated).async(execute: {
+        DispatchQueue.global(qos: .userInitiated).async(execute: { [self] in
             
             for site in newspapersDeleteList
             {
                 let siteDelete=self.siteController.getSiteByURL(site.url!)
-                self.feedDataController.deleteFeedDataBySiteID(siteDelete.siteID! as NSString)
+                try! self.realm.write {
+                   let feedDeletes=realm.objects(FeedData.self).filter("siteID = %@",siteDelete.siteID)
+                    realm.delete(feedDeletes)
+                } 
                 self.siteItemController.deleteSiteItemsBySiteID(siteDelete.siteID! as NSString)
                 self.siteController.deleteSite(siteDelete)
                 
             }
             for siteLocal in newspapersLocalDeleteList
             {
-                self.feedDataController.deleteFeedDataBySiteID(siteLocal.siteID! as NSString)
+                try! self.realm.write {
+                   let feedDeletes=realm.objects(FeedData.self).filter("siteID = %@",siteLocal.siteID)
+                    realm.delete(feedDeletes)
+                }
+                
                 self.siteItemController.deleteSiteItemsBySiteID(siteLocal.siteID! as NSString)                
                 self.siteController.deleteSite(siteLocal)
             }
@@ -772,7 +785,10 @@ class SiteListTableViewController: UIViewController,UITableViewDelegate, UITable
                     if(site.m==1)
                     {
                         let siteDelete=self.siteController.getSiteByURL(site.url!)
-                        self.feedDataController.deleteFeedDataBySiteID(siteDelete.siteID! as NSString)
+                        try! self.realm.write {
+                           let feedDeletes=realm.objects(FeedData.self).filter("siteID = %@",siteDelete.siteID)
+                            realm.delete(feedDeletes)
+                        }
                         self.siteItemController.deleteSiteItemsBySiteID(siteDelete.siteID! as NSString)
                         self.siteController.deleteSite(siteDelete)
                         

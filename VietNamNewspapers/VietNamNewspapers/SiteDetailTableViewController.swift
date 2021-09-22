@@ -5,6 +5,7 @@
 //  Created by admin on 4/4/16.
 //  Copyright © 2016 admin. All rights reserved.
 //
+import RealmSwift
 import Nuke
 import GoogleMobileAds
 import UIKit
@@ -47,11 +48,54 @@ class SiteDetailTableViewController: UIViewController, UITableViewDelegate, UITa
         return controller
     })()
     
-   
-   // @IBOutlet weak var constrainTableTopAdmob: NSLayoutConstraint!
+    let realm: Realm
+    var notificationToken: NotificationToken?
+    var feedDataList: Results<FeedData>
+    required init(realmConfiguration: Realm.Configuration, title: String) {
+        self.realm = try! Realm(configuration: realmConfiguration)
+        // Access all tasks in the realm, sorted by _id so that the ordering is defined.
+        feedDataList = realm.objects(FeedData.self).filter("siteItemID = %@",siteItemSelected.siteItemID).sorted(by: [SortDescriptor(keyPath: "loadTime",ascending: true),SortDescriptor(keyPath: "timeStamp",ascending: true)])
+
+        super.init(nibName: nil, bundle: nil)
+
+        self.title = title
+
+        // Observe the tasks for changes. Hang on to the returned notification token.
+        notificationToken = feedDataList.observe { [weak self] (changes) in
+            guard let tableView = self!.tableViewFeedList else { return }
+            switch changes {
+            case .initial:
+                // Results are now populated and can be accessed without blocking the UI
+                tableView.reloadData()
+            case .update(_, let deletions, let insertions, let modifications):
+                // Query results have changed, so apply them to the UITableView.
+                tableView.performBatchUpdates({
+                    // It's important to be sure to always update a table in this order:
+                    // deletions, insertions, then updates. Otherwise, you could be unintentionally
+                    // updating at the wrong index!
+                    tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0) }),
+                        with: .automatic)
+                    tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+                        with: .automatic)
+                    tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+                        with: .automatic)
+                })
+            case .error(let error):
+                // An error occurred while opening the Realm file on the background worker thread
+                fatalError("\(error)")
+            }
+        }
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    deinit {
+        // Always invalidate any notification tokens when you are done with them.
+        notificationToken?.invalidate()
+    }
     
-    //  @IBOutlet weak var constrainTableTop: NSLayoutConstraint!
-    //  @IBOutlet weak var constrainadmobHeight: NSLayoutConstraint!
     @IBOutlet weak var btnShowMenu: UIBarButtonItem!
    
     //@IBOutlet weak var adsBanner: GADBannerView!
@@ -63,8 +107,8 @@ class SiteDetailTableViewController: UIViewController, UITableViewDelegate, UITa
     var passOject:UserDefaults!
     fileprivate var siteController:SiteController!
     fileprivate var siteItemController:SiteItemController!
-    fileprivate var feedDataController:FeedDataController!
-    fileprivate var feedDataList:Array<FeedData>=[]
+    //fileprivate var feedDataController:FeedDataController!
+    //fileprivate var feedDataList:Array<FeedData>=[]
     fileprivate var feedDataFilteredList:Array<FeedData>=[]
     fileprivate var siteItemList:Array<SiteItem>=[]
     fileprivate var siteSelected:Site!
@@ -293,7 +337,7 @@ class SiteDetailTableViewController: UIViewController, UITableViewDelegate, UITa
     fileprivate func setup(){
         siteController=SiteController.shareInstance
         siteItemController=SiteItemController.shareInstance
-        feedDataController=FeedDataController.shareInstance
+        //feedDataController=FeedDataController.shareInstance
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -410,22 +454,26 @@ class SiteDetailTableViewController: UIViewController, UITableViewDelegate, UITa
             }
             cell.btnImportanTapped =
                 {
+                    
                     if(feedData.isFavorite == 1)
                     {
+                      
                         let image = UIImage(named: "not_importan") as UIImage?
                         cell.btImportan.setImage(image, for: UIControl.State())
                         feedData.isFavorite=0
+                        
                     }
                     else
                     {
+                         
                         let image = UIImage(named: "importan") as UIImage?
                         cell.btImportan.setImage(image, for: UIControl.State())
                         feedData.isFavorite=1
+                         
                     }
-                    let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.isFavorite.rawValue : feedData.isFavorite!]
-                    self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
                     let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
                     self.tableViewFeedList.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
+                    
             }
             
             
@@ -534,8 +582,7 @@ class SiteDetailTableViewController: UIViewController, UITableViewDelegate, UITa
                         cellNotImage.btnImportan.setImage(image, for: UIControl.State())
                         feedData.isFavorite=1
                     }
-                    let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.isFavorite.rawValue : feedData.isFavorite!]
-                    self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
+                 
                     let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
                     self.tableViewFeedList.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
             }
@@ -576,8 +623,7 @@ class SiteDetailTableViewController: UIViewController, UITableViewDelegate, UITa
             feedData=feedDataList[tag]
         }
         feedData.isRead=1
-        let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.isRead.rawValue : feedData.isRead!]
-        self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
+      
         let indexPath=IndexPath(item: tag, section: 0)
         self.tableViewFeedList.reloadRows(at: [indexPath], with: .none)
         let url=feedData.link
@@ -627,7 +673,8 @@ class SiteDetailTableViewController: UIViewController, UITableViewDelegate, UITa
         }
         
         self.tableViewFeedList.tableHeaderView=nil
-        feedDataList=feedDataController.getFeedDataBySiteItemId(siteItem.siteItemID! as NSString)
+        feedDataList = realm.objects(FeedData.self).filter("siteItemID = %@",siteItemSelected.siteItemID).sorted(by: [SortDescriptor(keyPath: "loadTime",ascending: true),SortDescriptor(keyPath: "timeStamp",ascending: true)])
+        //feedDataList=feedDataController.getFeedDataBySiteItemId(siteItem.siteItemID! as NSString)
         //
         self.tableViewFeedList.reloadData()
         
@@ -686,7 +733,7 @@ class SiteDetailTableViewController: UIViewController, UITableViewDelegate, UITa
                     
                 else {
                     //Read JSON response in seperate thread
-                    DispatchQueue.global(qos: .userInitiated).async(execute: {
+                    DispatchQueue.global(qos: .userInitiated).async(execute: { [self] in
                         
                         
                         let newSiteItemUpdate:Dictionary<String,AnyObject> = [SiteItemAttributes.loadTime.rawValue : currentTime as AnyObject]
@@ -836,9 +883,20 @@ class SiteDetailTableViewController: UIViewController, UITableViewDelegate, UITa
                                 feedDescription=feedDescription.replacingOccurrences(of: "<[^>]+>", with: "",options: .regularExpression, range: nil)
                                 feedDescription=String(htmlEncodedString: feedDescription)!
                                 feedTitle=String(htmlEncodedString: feedTitle)!
-                                let feedIsExist=self.feedDataController.getFeedDataBySiteItemIdAndLink(self.siteItemSelected.siteItemID! as NSString, link: feedLink as NSString)
-                                if(feedIsExist.count==0 && !feedTitle.isEmpty && !feedLink.isEmpty)
+                                let feedIsExist=Utils.checkFeedIsExist(siteItemID: self.siteItemSelected.siteItemID ?? "", link: feedLink)
+                                if(!feedIsExist && !feedTitle.isEmpty && !feedLink.isEmpty)
                                 {
+                                    try! realm.write
+                                    {
+                                        let feed=FeedData()
+                                        feed.feedDescription=feedDescription
+                                        feed.isFavorite=0
+                                        feed.isRead=0
+                                        feed.link=self.getFullURL(url: feedLink, domainURL: siteItem.siteItemURL!)
+                                        feed.linkImage=imgFeed
+                                        realm.add(feed)
+                                    }
+                                    /*
                                     var fieldDetails=[String:NSObject]()
                                     let feedID:String=UUID().uuidString
                                     fieldDetails[FeedDataAttributes.feedID.rawValue]=feedID as NSObject?
@@ -855,7 +913,7 @@ class SiteDetailTableViewController: UIViewController, UITableViewDelegate, UITa
                                     
                                     DispatchQueue.main.sync(execute: {
                                         self.feedDataController.saveFeedData(fieldDetails)
-                                    })
+                                    })*/
                                     
                                 }
                                 feedXML=feedXML.replacingOccurrences(of: startTag+content+endTag, with: "")
@@ -963,9 +1021,20 @@ class SiteDetailTableViewController: UIViewController, UITableViewDelegate, UITa
                                 }
                                 feedDescription=String(htmlEncodedString: feedDescription)!
                                 feedTitle=String(htmlEncodedString: feedTitle)!
-                                let feedIsExist=self.feedDataController.getFeedDataBySiteItemIdAndLink(self.siteItemSelected.siteItemID! as NSString, link: feedLink as NSString)
-                                if(feedIsExist.count==0 && !feedTitle.isEmpty && !feedLink.isEmpty)
+                                let feedIsExist=Utils.checkFeedIsExist(siteItemID: self.siteItemSelected.siteItemID ?? "", link: feedLink)
+                                if(!feedIsExist && !feedTitle.isEmpty && !feedLink.isEmpty)
                                 {
+                                    try! self.realm.write
+                                    {
+                                        let feed=FeedData()
+                                        feed.feedDescription=feedDescription
+                                        feed.isFavorite=0
+                                        feed.isRead=0
+                                        feed.link=self.getFullURL(url: feedLink, domainURL: siteItem.siteItemURL!)
+                                        feed.linkImage=imgFeed
+                                        self.realm.add(feed)
+                                    }
+                                    /*
                                     var fieldDetails=[String:NSObject]()
                                     let feedID:String=UUID().uuidString
                                     fieldDetails[FeedDataAttributes.feedID.rawValue]=feedID as NSObject?
@@ -983,7 +1052,7 @@ class SiteDetailTableViewController: UIViewController, UITableViewDelegate, UITa
                                     DispatchQueue.main.sync(execute: {
                                         self.feedDataController.saveFeedData(fieldDetails)
                                     })
-                                    
+                                    */
                                 }
                                 feedXML=feedXML.replacingOccurrences(of: "<entry>"+content+"</entry>", with: "")
                                 
@@ -1024,7 +1093,7 @@ class SiteDetailTableViewController: UIViewController, UITableViewDelegate, UITa
     fileprivate func stopDownloadFeed(_ autoFreshing:Bool)
     {
         self.sideMenuController()?.sideMenu?.menuViewController.viewDidLoad()
-        self.feedDataList=self.feedDataController.getFeedDataBySiteItemId(self.siteItemSelected.siteItemID! as NSString)
+        self.feedDataList = realm.objects(FeedData.self).filter("siteItemID = %@",siteItemSelected.siteItemID).sorted(by: [SortDescriptor(keyPath: "loadTime",ascending: true),SortDescriptor(keyPath: "timeStamp",ascending: true)])
         
         self.tableViewFeedList.reloadData()
         self.indicator.stopAnimating()

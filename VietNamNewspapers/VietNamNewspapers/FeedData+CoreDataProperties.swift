@@ -11,7 +11,8 @@
 
 import Foundation
 import CoreData
-
+import RealmSwift
+/*
 extension FeedData {
 
     @NSManaged var feedDescription: String?
@@ -29,3 +30,5 @@ extension FeedData {
     @NSManaged var timeStamp: NSNumber
 
 }
+*/
+
