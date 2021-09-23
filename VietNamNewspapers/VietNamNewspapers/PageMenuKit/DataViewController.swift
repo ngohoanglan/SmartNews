@@ -49,7 +49,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func loadView() {
         super.loadView()
         siteItemSelected=_siteItemSelected
-        feedDataList = realm.objects(FeedData.self).filter("siteItemID = %@",siteItemSelected.siteItemID).sorted(by: [SortDescriptor(keyPath: "loadTime",ascending: true),SortDescriptor(keyPath: "timeStamp",ascending: true)])
+        feedDataList = realm.objects(FeedData.self).filter("siteItemID = %@",siteItemSelected.siteItemID!).sorted(by: [SortDescriptor(keyPath: "loadTime",ascending: true),SortDescriptor(keyPath: "timeStamp",ascending: true)])
         self.title = siteItemSelected.siteItemName
         
     }
@@ -58,7 +58,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         super.viewDidLoad()
         // Access all tasks in the realm, sorted by _id so that the ordering is defined.
-        feedDataList = realm.objects(FeedData.self).filter("siteItemID = %@",_siteItemSelected.siteItemID).sorted(by: [SortDescriptor(keyPath: "loadTime",ascending: true),SortDescriptor(keyPath: "timeStamp",ascending: true)])
+        feedDataList = realm.objects(FeedData.self).filter("siteItemID = %@",_siteItemSelected.siteItemID!).sorted(by: [SortDescriptor(keyPath: "loadTime",ascending: true),SortDescriptor(keyPath: "timeStamp",ascending: true)])
 
         // Observe the tasks for changes. Hang on to the returned notification token.
         notificationToken = feedDataList.observe { [weak self] (changes) in
@@ -76,9 +76,9 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                     tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0) }),
                         with: .automatic)
                     tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
-                        with: .automatic)
+                                         with: .fade)
                     tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
-                        with: .automatic)
+                        with: .none)
                 })
             case .error(let error):
                 // An error occurred while opening the Realm file on the background worker thread
@@ -315,7 +315,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                                         }
                                         if(feedLink.isEmpty)
                                         {
-                                            var matched=feedLink.matchesForRegexInText("href=\"([^']*)\"", text: content)
+                                            let matched=feedLink.matchesForRegexInText("href=\"([^']*)\"", text: content)
                                             if matched.count>0
                                             {
                                                 feedLink=matched[0]
@@ -342,7 +342,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                                         {
                                             if(imgFeed.isEmpty)
                                             {
-                                                var imgLinks = feedDescription.matchesForRegexInText("(http://[^\\s]+(.jpg|.png))", text: feedDescription)
+                                                let imgLinks = feedDescription.matchesForRegexInText("(http://[^\\s]+(.jpg|.png))", text: feedDescription)
                                                 if(imgLinks.count>0)
                                                 {
                                                     imgFeed=imgLinks[0]
@@ -353,7 +353,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                                         }
                                         if(imgFeed=="" || imgFeed.contains("http")==false)
                                         {
-                                            var imgLinks = feedDescription.matchesForRegexInText("(http://[^\\s]+(.jpg|.png))", text: content)
+                                            let imgLinks = feedDescription.matchesForRegexInText("(http://[^\\s]+(.jpg|.png))", text: content)
                                             if(imgLinks.count>0)
                                             {
                                                 imgFeed=imgLinks[0]
@@ -361,7 +361,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                                             else
                                             {
                                                 
-                                                var imgLinks = feedDescription.matchesForRegexInText("\\s*(?i)src\\s*=\\s*(\"([^\"]*\")|'[^']*'|([^'\">\\s]+))", text: content)
+                                                let imgLinks = feedDescription.matchesForRegexInText("\\s*(?i)src\\s*=\\s*(\"([^\"]*\")|'[^']*'|([^'\">\\s]+))", text: content)
                                                 if(imgLinks.count>0)
                                                 {
                                                     imgFeed=imgLinks[0]
@@ -370,8 +370,8 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                                                 
                                                 else if(content.contains("media:content type=\"image/jpeg\""))
                                                 {
-                                                    var mediaContent=content.subStringFromTwoTag("<media:content", endTag: "</media:content>")
-                                                    var imgLinks = feedDescription.matchesForRegexInText("\\s*(?i)url\\s*=\\s*(\"([^\"]*\")|'[^']*'|([^'\">\\s]+))", text: content)
+                                                    let mediaContent=content.subStringFromTwoTag("<media:content", endTag: "</media:content>")
+                                                    let imgLinks = feedDescription.matchesForRegexInText("\\s*(?i)url\\s*=\\s*(\"([^\"]*\")|'[^']*'|([^'\">\\s]+))", text: content)
                                                     if(imgLinks.count>0)
                                                     {
                                                         imgFeed=imgLinks[0]
@@ -399,12 +399,12 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                                         feedDescription=feedDescription.replacingOccurrences(of: "<[^>]+>", with: "",options: .regularExpression, range: nil)
                                         feedDescription=String(htmlEncodedString: feedDescription) ?? ""
                                         feedTitle=String(htmlEncodedString: feedTitle) ?? ""
-                                        let feedIsExist=Utils.checkFeedIsExist(siteItemID: self.siteItemSelected.siteItemID ?? "", link: self.getFullURL(url: feedLink, domainURL: siteItem.siteItemURL!) ?? "")
+                                        let feedIsExist=Utils.checkFeedIsExist(siteItemID: self.siteItemSelected.siteItemID ?? "", link: self.getFullURL(url: feedLink, domainURL: siteItem.siteItemURL!) )
                                         if(!feedIsExist)
                                         {
                                             
                                              
-                                                var mFeed=FeedData()
+                                            let mFeed=FeedData()
                                                 
                                                 mFeed.timeStamp=Int(Date().timeIntervalSince1970)
                                                 mFeed.siteItemID=self.siteItemSelected.siteItemID
@@ -453,7 +453,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                                         {
                                             feedLink=content.subStringFromTwoTag("<link", endTag: "/>")
                                         }
-                                        var matched=feedLink.matchesForRegexInText("href=\"([^']*)\"", text: feedLink)
+                                        let matched=feedLink.matchesForRegexInText("href=\"([^']*)\"", text: feedLink)
                                         if matched.count>0
                                         {
                                             feedLink=matched[0]
@@ -482,7 +482,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                                         var imgFeed:String=""
                                         if(feedDescription != nil)
                                         {
-                                            var imgLinks = feedDescription.matchesForRegexInText("(http://[^\\s]+(.jpg|.png))", text: content)
+                                            let imgLinks = feedDescription.matchesForRegexInText("(http://[^\\s]+(.jpg|.png))", text: content)
                                             if(imgLinks.count>0)
                                             {
                                                 imgFeed=imgLinks[0]
@@ -491,7 +491,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                                         
                                         if(imgFeed=="" || imgFeed.contains("http")==false)
                                         {
-                                            var imgLinks = feedDescription.matchesForRegexInText("(http://[^\\s]+(.jpg|.png))", text: content)
+                                            let imgLinks = feedDescription.matchesForRegexInText("(http://[^\\s]+(.jpg|.png))", text: content)
                                             if(imgLinks.count>0)
                                             {
                                                 imgFeed=imgLinks[0]
@@ -499,7 +499,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                                             else
                                             {
                                                 
-                                                var imgLinks = feedDescription.matchesForRegexInText("\\s*(?i)src\\s*=\\s*(\"([^\"]*\")|'[^']*'|([^'\">\\s]+))", text: content)
+                                                let imgLinks = feedDescription.matchesForRegexInText("\\s*(?i)src\\s*=\\s*(\"([^\"]*\")|'[^']*'|([^'\">\\s]+))", text: content)
                                                 if(imgLinks.count>0)
                                                 {
                                                     imgFeed=imgLinks[0]
@@ -525,7 +525,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                                         }
                                         feedDescription=String(htmlEncodedString: feedDescription)!
                                         feedTitle=String(htmlEncodedString: feedTitle)!
-                                        let feedIsExist=Utils.checkFeedIsExist(siteItemID: self.siteItemSelected.siteItemID ?? "", link: self.getFullURL(url: feedLink, domainURL: siteItem.siteItemURL!) ?? "")
+                                        let feedIsExist=Utils.checkFeedIsExist(siteItemID: self.siteItemSelected.siteItemID ?? "", link: self.getFullURL(url: feedLink, domainURL: siteItem.siteItemURL!) )
                                         if(!feedIsExist)
                                         {
                                             try! self.realm.write
