@@ -308,7 +308,7 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                 }
                 
                 cell.btnExpandTapped = {
-                    self.btnExpandTapped=true
+                    self.btnExpandTapped=feedData.isExpand
                     if(!feedData.isExpand)
                     {
                         feedData.isExpand = true
@@ -416,7 +416,7 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                     
                 }
                 cellNotImage.btnExpandTapped = {
-                    self.btnExpandTapped=true
+                    self.btnExpandTapped=feedData.isExpand
                     if(!feedData.isExpand)
                     {
                         feedData.isExpand = true
@@ -563,7 +563,7 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                 }
                 
                 cell.btnExpandTapped = {
-                    self.btnExpandTapped=true
+                    self.btnExpandTapped=feedData.isExpand
                     if(!feedData.isExpand)
                     {
                         feedData.isExpand = true
@@ -670,7 +670,7 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                     
                 }
                 cellNotImage.btnExpandTapped = {
-                    self.btnExpandTapped=true
+                    self.btnExpandTapped=feedData.isExpand
                     if(!feedData.isExpand)
                     {
                         feedData.isExpand = true

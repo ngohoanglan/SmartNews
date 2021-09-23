@@ -419,7 +419,7 @@ class SiteDetailTableViewController: UIViewController, UITableViewDelegate, UITa
             }
             
             cell.btnExpandTapped = {
-                self.btnExpandTapped=true
+                self.btnExpandTapped=feedData.isExpand
                 if(!feedData.isExpand)
                 {
                     feedData.isExpand = true
@@ -505,6 +505,7 @@ class SiteDetailTableViewController: UIViewController, UITableViewDelegate, UITa
                 cellNotImage.lbTitle.font = UIFont.boldSystemFont(ofSize: textSize)
             }
             cellNotImage.lbTitle.text=feedData.title
+            cellNotImage.lbTitle.numberOfLines=3
             //cellNotImage.lbDescription.text=feedData.feedDescription
             cellNotImage.lbDescription.font=UIFont.systemFont(ofSize: textSize-2)
             cellNotImage.lbPubDate.text=feedData.pubDateString
@@ -526,7 +527,7 @@ class SiteDetailTableViewController: UIViewController, UITableViewDelegate, UITa
                 
             }
             cellNotImage.btnExpandTapped = {
-                self.btnExpandTapped=true
+                self.btnExpandTapped=feedData.isExpand
                 if(!feedData.isExpand)
                 {
                     feedData.isExpand = true

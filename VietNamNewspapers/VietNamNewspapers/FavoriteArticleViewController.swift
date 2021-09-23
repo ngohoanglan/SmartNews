@@ -404,7 +404,7 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                 }
                 
                 cell.btnExpandTapped = {
-                    self.btnExpandTapped=true
+                    self.btnExpandTapped=feedData.isExpand
                     if(!feedData.isExpand)
                     {
                         feedData.isExpand = true
@@ -516,7 +516,7 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                     
                 }
                 cellNotImage.btnExpandTapped = {
-                    self.btnExpandTapped=true
+                    self.btnExpandTapped=feedData.isExpand
                     if(!feedData.isExpand)
                     {
                         feedData.isExpand = true
@@ -639,7 +639,7 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                 }
                 
                 cell.btnExpandTapped = {
-                    self.btnExpandTapped=true
+                    self.btnExpandTapped=feedData.isExpand
                     if(!feedData.isExpand)
                     {
                         feedData.isExpand = true
@@ -750,7 +750,7 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                     
                 }
                 cellNotImage.btnExpandTapped = {
-                    self.btnExpandTapped=true
+                    self.btnExpandTapped=feedData.isExpand
                     if(!feedData.isExpand)
                     {
                         feedData.isExpand = true

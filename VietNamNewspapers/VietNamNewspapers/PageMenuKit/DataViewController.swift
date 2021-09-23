@@ -664,6 +664,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                     cell.lbTitleCell.font = UIFont.boldSystemFont(ofSize: cellFontSize)
                 }
                 cell.lbTitleCell.text=feedData.title
+                cell.lbTitleCell.numberOfLines=3
                 // cell.lbDescription.text=feedData.feedDescription
                 cell.lbDescription.font=UIFont.systemFont(ofSize: cellFontSize)
                 cell.lbPubdate.text=feedData.pubDateString
@@ -683,7 +684,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }
                 
                 cell.btnExpandTapped = {
-                    self.btnExpandTapped=true
+                    self.btnExpandTapped=feedData.isExpand
                     if(!feedData.isExpand)
                     {
                         feedData.isExpand = true
@@ -775,6 +776,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                     cellNotImage.lbTitle.font = UIFont.boldSystemFont(ofSize: cellFontSize)
                 }
                 cellNotImage.lbTitle.text=feedData.title
+                cellNotImage.lbTitle.numberOfLines=3
                 //cellNotImage.lbDescription.text=feedData.feedDescription
                 cellNotImage.lbDescription.font=UIFont.systemFont(ofSize: cellFontSize)
                 cellNotImage.lbPubDate.text=feedData.pubDateString
@@ -796,7 +798,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                     
                 }
                 cellNotImage.btnExpandTapped = {
-                    self.btnExpandTapped=true
+                    self.btnExpandTapped=feedData.isExpand
                     if(!feedData.isExpand)
                     {
                         feedData.isExpand = true
@@ -901,6 +903,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                     cell.lbTitleCell.font = UIFont.boldSystemFont(ofSize: cellIPadFontSize)
                 }
                 cell.lbTitleCell.text=feedData.title
+                cell.lbTitleCell.numberOfLines=3
                 // cell.lbDescription.text=feedData.feedDescription
                 cell.lbDescription.font=UIFont.systemFont(ofSize: cellIPadFontSize)
                 cell.lbPubdate.text=feedData.pubDateString
@@ -920,7 +923,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }
                 
                 cell.btnExpandTapped = {
-                    self.btnExpandTapped=true
+                    self.btnExpandTapped=feedData.isExpand
                     if(!feedData.isExpand)
                     {
                         feedData.isExpand = true
@@ -1010,6 +1013,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                     cellNotImage.lbTitle.font = UIFont.boldSystemFont(ofSize: cellIPadFontSize)
                 }
                 cellNotImage.lbTitle.text=feedData.title
+                cellNotImage.lbTitle.numberOfLines=3
                 //cellNotImage.lbDescription.text=feedData.feedDescription
                 cellNotImage.lbDescription.font=UIFont.systemFont(ofSize: cellIPadFontSize)
                 cellNotImage.lbPubDate.text=feedData.pubDateString
@@ -1031,7 +1035,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                     
                 }
                 cellNotImage.btnExpandTapped = {
-                    self.btnExpandTapped=true
+                    self.btnExpandTapped=feedData.isExpand
                     if(!feedData.isExpand)
                     {
                         feedData.isExpand = true
