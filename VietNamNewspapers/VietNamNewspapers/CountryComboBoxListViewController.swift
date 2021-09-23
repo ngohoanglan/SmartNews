@@ -47,9 +47,14 @@ class CountryComboBoxListViewController: UIViewController,UIPickerViewDataSource
         
         if(setting.getCountryCodeSelectedKey()=="")
         {
+            #if targetEnvironment(simulator)
+            country_code_selected="UK"
+            #else
             let locale = Locale.current
             print(locale.regionCode)
             country_code_selected=NSLocale.current.regionCode
+            #endif
+            
             if(country_code_selected=="GB")
             {
                 country_code_selected="UK"

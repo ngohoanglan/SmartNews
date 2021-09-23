@@ -80,6 +80,8 @@
 		DA27C4FD1F278236002D2FB4 /* DataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA27C4FC1F278236002D2FB4 /* DataViewController.swift */; };
 		DA3906151D351E8B0094CD23 /* ControllerMainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3906141D351E8B0094CD23 /* ControllerMainMenuViewController.swift */; };
 		DA3906171D351F060094CD23 /* ENMainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3906161D351F060094CD23 /* ENMainMenuViewController.swift */; };
+		DA3D4F2D26FC5FC60082E6E4 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3D4F2B26FC5FC60082E6E4 /* FeedTableViewCell.swift */; };
+		DA3D4F2E26FC5FC60082E6E4 /* FeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA3D4F2C26FC5FC60082E6E4 /* FeedTableViewCell.xib */; };
 		DA4DA7F51D6A092300A8F131 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA4DA7F71D6A092300A8F131 /* Localizable.strings */; };
 		DA644BE624BAA64B0033DB26 /* SiteListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA644BE424BAA64B0033DB26 /* SiteListCell.swift */; };
 		DA644BE724BAA64B0033DB26 /* SiteListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA644BE524BAA64B0033DB26 /* SiteListCell.xib */; };
@@ -211,6 +213,8 @@
 		DA27C4FC1F278236002D2FB4 /* DataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataViewController.swift; path = PageMenuKit/DataViewController.swift; sourceTree = "<group>"; };
 		DA3906141D351E8B0094CD23 /* ControllerMainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerMainMenuViewController.swift; sourceTree = "<group>"; };
 		DA3906161D351F060094CD23 /* ENMainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ENMainMenuViewController.swift; sourceTree = "<group>"; };
+		DA3D4F2B26FC5FC60082E6E4 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
+		DA3D4F2C26FC5FC60082E6E4 /* FeedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedTableViewCell.xib; sourceTree = "<group>"; };
 		DA4DA7F61D6A092300A8F131 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA4DA7F81D6A092D00A8F131 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA644BE424BAA64B0033DB26 /* SiteListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteListCell.swift; sourceTree = "<group>"; };
@@ -319,6 +323,7 @@
 		844B9C6C1C78AE860047ED2F /* VietNamNewspapers */ = {
 			isa = PBXGroup;
 			children = (
+				DA3D4F2A26FC5FA80082E6E4 /* Cells */,
 				DAB5E1BB1F3477D50092259D /* DJKFlipper */,
 				DAD556A71E4C609B005FEFB3 /* Nachrichten aktuell.entitlements */,
 				DA9265341E29C57200D48E19 /* GoogleService-Info.plist */,
@@ -479,6 +484,15 @@
 				DA1545A01D30EADA0059E7C0 /* ENSideMenuNavigationController.swift */,
 			);
 			name = SideMenu;
+			sourceTree = "<group>";
+		};
+		DA3D4F2A26FC5FA80082E6E4 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				DA3D4F2B26FC5FC60082E6E4 /* FeedTableViewCell.swift */,
+				DA3D4F2C26FC5FC60082E6E4 /* FeedTableViewCell.xib */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		DAB5E1BB1F3477D50092259D /* DJKFlipper */ = {
@@ -649,6 +663,7 @@
 				DA644BE724BAA64B0033DB26 /* SiteListCell.xib in Resources */,
 				DA2761571F750D7E00B03DEA /* FeedViewCellIPad.xib in Resources */,
 				844B9C781C78AE870047ED2F /* Assets.xcassets in Resources */,
+				DA3D4F2E26FC5FC60082E6E4 /* FeedTableViewCell.xib in Resources */,
 				DAF4EC3B1F2D7D4F00B67CA6 /* FeedImageViewCell.xib in Resources */,
 				DA2761591F750DA000B03DEA /* FeedImageViewCellIPad.xib in Resources */,
 				844B9C731C78AE870047ED2F /* Main.storyboard in Resources */,
@@ -750,6 +765,7 @@
 				84BF824E1C7ABC05005F339F /* FeedDataController.swift in Sources */,
 				DA0237011F64E168000D8806 /* SearchResultController.swift in Sources */,
 				844B9C761C78AE870047ED2F /* VietNamNewspapers.xcdatamodeld in Sources */,
+				DA3D4F2D26FC5FC60082E6E4 /* FeedTableViewCell.swift in Sources */,
 				DADF55EA1D07B8F40048E67C /* FeedNotDescriptionViewCellTableViewCell.swift in Sources */,
 				DA27C4F21F2779B2002D2FB4 /* PMKPageMenuItemHacka.swift in Sources */,
 				DA27C4F61F2779B2002D2FB4 /* PMKPageMenuItemSmart.swift in Sources */,

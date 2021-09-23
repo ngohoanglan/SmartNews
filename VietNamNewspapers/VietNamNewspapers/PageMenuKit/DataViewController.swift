@@ -108,6 +108,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
         feedTableView.separatorStyle = .none
         if(UIDevice.current.userInterfaceIdiom == .phone)
         {
+            feedTableView.register(UINib(nibName: "FeedTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedCell")
             feedTableView.register(UINib(nibName: "FeedImageViewCell", bundle: nil), forCellReuseIdentifier: "CellNotDesc")
             feedTableView.register(UINib(nibName: "FeedViewCell", bundle: nil), forCellReuseIdentifier: "CellNotImage")
         }
@@ -618,53 +619,36 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
      }*/
     var btnExpandTapped:Bool=false
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         var feedData:FeedData
-        
         feedData=feedDataList[(indexPath as NSIndexPath).row]
         if(!btnExpandTapped)
         {
             feedData.isExpand=isExpandDescription
         }
-        
-        
-        
         if(UIDevice.current.userInterfaceIdiom == .phone)
         {
             if((feedData.linkImage != nil ) && (feedData.linkImage?.count)!>10 && setting.getBlockImage()==true)
             {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "CellNotDesc", for: indexPath)
-                    as! FeedNotDescriptionViewCell
-                
-                
+                let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCell", for: indexPath)
+                    as! FeedTableViewCell
                 if(feedData.imageArray != nil && (feedData.imageArray?.count)!>0)
                 {
-                    cell.feedImageCell.image=UIImage(data: feedData.imageArray! as Data)
+                    cell.imgFeed.image=UIImage(data: feedData.imageArray! as Data)
                 }
                 else
                 {
-                    
-                    //
-                    cell.feedImageCell.image=nil
-                    //
-                    
-                    Nuke.loadImage(with: URL(string: feedData.linkImage ?? ""), into: cell.feedImageCell)
-                    
-                    
-                    
+                    Nuke.loadImage(with: URL(string: feedData.linkImage ?? ""), into: cell.imgFeed)
                 }
-                
                 if(feedData.isRead==1)
                 {
-                    
-                    cell.lbTitleCell.font = UIFont.systemFont(ofSize: cellFontSize)
+                    cell.lbTitle.font = UIFont.systemFont(ofSize: cellFontSize)
                 }
                 else
                 {
-                    cell.lbTitleCell.font = UIFont.boldSystemFont(ofSize: cellFontSize)
+                    cell.lbTitle.font = UIFont.boldSystemFont(ofSize: cellFontSize)
                 }
-                cell.lbTitleCell.text=feedData.title
-                cell.lbTitleCell.numberOfLines=3
+                cell.lbTitle.text=feedData.title
+                cell.lbTitle.numberOfLines=3
                 // cell.lbDescription.text=feedData.feedDescription
                 cell.lbDescription.font=UIFont.systemFont(ofSize: cellFontSize)
                 cell.lbPubdate.text=feedData.pubDateString
@@ -684,17 +668,16 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }
                 
                 cell.btnExpandTapped = {
-                    self.btnExpandTapped=feedData.isExpand
+                    
                     if(!feedData.isExpand)
                     {
                         feedData.isExpand = true
-                        // cell.csDescriptionHeight.constant=70.0
                     }
                     else
                     {
                         feedData.isExpand = false
-                        //cell.csDescriptionHeight.constant=0.0
                     }
+                    self.btnExpandTapped=true
                     let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
                     self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
                 }
@@ -716,19 +699,19 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                 if(feedData.isFavorite == 1)
                 {
                     let image = UIImage(named: "ic_bookmark") as UIImage?
-                    cell.btImportan.setImage(image, for: UIControl.State())
+                    cell.btnImportan.setImage(image, for: UIControl.State())
                 }
                 else
                 {
                     let image = UIImage(named: "ic_bookmark_border") as UIImage?
-                    cell.btImportan.setImage(image, for: UIControl.State())
+                    cell.btnImportan.setImage(image, for: UIControl.State())
                 }
                 cell.btnImportanTapped =
                     {
                         if(feedData.isFavorite == 1)
                         {
                             let image = UIImage(named: "ic_bookmark_border") as UIImage?
-                            cell.btImportan.setImage(image, for: UIControl.State())
+                            cell.btnImportan.setImage(image, for: UIControl.State())
                             try! self.realm.write({
                                 feedData.isFavorite=0
                             })
@@ -736,7 +719,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                         else
                         {
                             let image = UIImage(named: "ic_bookmark") as UIImage?
-                            cell.btImportan.setImage(image, for: UIControl.State())
+                            cell.btnImportan.setImage(image, for: UIControl.State())
                             try! self.realm.write({
                                 feedData.isFavorite=1
                             })
@@ -749,9 +732,9 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                 
                 
                 let taplabeTitlelAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(labeTitlelAction(sender:)))
-                cell.lbTitleCell.addGestureRecognizer(taplabeTitlelAction)
-                cell.lbTitleCell.tag=(indexPath as NSIndexPath).row
-                cell.lbTitleCell.isUserInteractionEnabled=true
+                cell.lbTitle.addGestureRecognizer(taplabeTitlelAction)
+                cell.lbTitle.tag=(indexPath as NSIndexPath).row
+                cell.lbTitle.isUserInteractionEnabled=true
                 taplabeTitlelAction.delegate = self // Remember to extend your class with UIGestureRecognizerDelegate
                 
                 let taplabeDesciptionAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(labeTitlelAction(sender:)))
