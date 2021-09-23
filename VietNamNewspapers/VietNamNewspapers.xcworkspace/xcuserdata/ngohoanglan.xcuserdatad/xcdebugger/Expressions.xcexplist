@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "DataViewController.stopDownloadFeed(_:):DataViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in DataViewController.SelectionChange(_:autoFreshing:):DataViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "DataViewController.init(nibName:bundle:):DataViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "(RealmSwift.Results&lt;LatestHeadline.FeedData&gt;)self.feedDataList">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DataViewController.init():DataViewController.swift">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
