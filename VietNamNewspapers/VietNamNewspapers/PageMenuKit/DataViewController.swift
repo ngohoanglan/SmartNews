@@ -12,17 +12,53 @@ import GoogleMobileAds
 import Nuke
 class DataViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UIGestureRecognizerDelegate
 {
-    let realm: Realm
+    public   var _siteItemSelected: SiteItem!
+    let realm = try! Realm()
     var notificationToken: NotificationToken?
-    var feedDataList: Results<FeedData>
-    required init() {
-        self.realm = try! Realm()
+    var feedDataList = try! Realm().objects(FeedData.self).filter("siteItemID = %@",UUID().uuidString)
+   
+    let refreshControl = UIRefreshControl()
+    var feedTableView: UITableView = UITableView()
+    
+    fileprivate var siteItemController:SiteItemController!
+    //    fileprivate var feedDataController:FeedDataController!
+    //fileprivate var feedDataList:Array<FeedData>=[]
+    fileprivate var feedDataFilteredList:Array<FeedData>=[]
+    fileprivate var siteItemList:Array<SiteItem>=[]
+    
+    fileprivate var siteItemSelected:SiteItem!
+    fileprivate var previousSiteItem:SiteItem!
+    let indicator=UIActivityIndicatorView(style: .gray)
+    fileprivate var httpClient:HTTPClient!
+    let setting = Settings()
+    var selectedMenuItem:Int=0
+    var cellFontSize:CGFloat=13.0
+    var cellIPadFontSize:CGFloat=17.0
+    var imageSize:CGFloat=75.0
+    
+    var isExpandDescription:Bool=false
+    
+    public private(set) var textLabel: UILabel? = nil
+  
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    override func loadView() {
+        super.loadView()
+        siteItemSelected=_siteItemSelected
+        feedDataList = realm.objects(FeedData.self).filter("siteItemID = %@",siteItemSelected.siteItemID).sorted(by: [SortDescriptor(keyPath: "loadTime",ascending: true),SortDescriptor(keyPath: "timeStamp",ascending: true)])
+        self.title = siteItemSelected.siteItemName
+        
+    }
+    
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
         // Access all tasks in the realm, sorted by _id so that the ordering is defined.
-        feedDataList = realm.objects(FeedData.self).filter("siteItemID = %@","0").sorted(by: [SortDescriptor(keyPath: "loadTime",ascending: true),SortDescriptor(keyPath: "timeStamp",ascending: true)])
-
-        super.init(nibName: nil, bundle: nil)
-
-        self.title = title
+        feedDataList = realm.objects(FeedData.self).filter("siteItemID = %@",_siteItemSelected.siteItemID).sorted(by: [SortDescriptor(keyPath: "loadTime",ascending: true),SortDescriptor(keyPath: "timeStamp",ascending: true)])
 
         // Observe the tasks for changes. Hang on to the returned notification token.
         notificationToken = feedDataList.observe { [weak self] (changes) in
@@ -49,83 +85,13 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                 fatalError("\(error)")
             }
         }
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    deinit {
-        // Always invalidate any notification tokens when you are done with them.
-        notificationToken?.invalidate()
-    }
-    let refreshControl = UIRefreshControl()
-    var feedTableView: UITableView = UITableView()
-    
-    fileprivate var siteItemController:SiteItemController!
-    //    fileprivate var feedDataController:FeedDataController!
-    //fileprivate var feedDataList:Array<FeedData>=[]
-    fileprivate var feedDataFilteredList:Array<FeedData>=[]
-    fileprivate var siteItemList:Array<SiteItem>=[]
-    
-    fileprivate var siteItemSelected:SiteItem!
-    fileprivate var previousSiteItem:SiteItem!
-    let indicator=UIActivityIndicatorView(style: .gray)
-    fileprivate var httpClient:HTTPClient!
-    let setting = Settings()
-    var selectedMenuItem:Int=0
-    var cellFontSize:CGFloat=13.0
-    var cellIPadFontSize:CGFloat=17.0
-    var imageSize:CGFloat=75.0
-    /*
-     
-     var rowHeightImage:CGFloat=175.0
-     var rowHeightNotImage:CGFloat=100.0
-     var cellHeight:CGFloat=60.0
-     var cellFontSize:CGFloat=13.0
-     */
-    var isExpandDescription:Bool=false
-    
-    public private(set) var textLabel: UILabel? = nil
-    public   var _siteItemSelected: SiteItem!
-    
-    //Ads
-    var adsToLoad = [GADNativeExpressAdView]()
-    let adsInterval=8
-    let adsViewHeight=175
-    let adsViewWidth=370
-    //
-    
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    override func loadView() {
-        super.loadView()
-        siteItemSelected=_siteItemSelected
-        feedDataList = realm.objects(FeedData.self).filter("siteItemID = %@",siteItemSelected.siteItemID).sorted(by: [SortDescriptor(keyPath: "loadTime",ascending: true),SortDescriptor(keyPath: "timeStamp",ascending: true)])
-        self.title = siteItemSelected.siteItemName
         
-    }
-    
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
         siteItemController=SiteItemController.shareInstance
         isExpandDescription=setting.getExpandDescription()
         
         cellFontSize=CGFloat(setting.getTextSize())
         cellIPadFontSize = CGFloat(setting.getTextSize())+4
-        /*
-         cellHeight=60 + (60*percentAdd)/100
-         cellFontSize=13 + (13*percentAdd)/100
-         imageSize=75.0 + (75.0*percentAdd)/100
-         rowHeightImage=175.0+(175.0*percentAdd)/100*2
-         rowHeightNotImage=75.0+(75*percentAdd)/100*2
-         */
+        
         // Get main screen bounds
         let barHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
         let displayWidth: CGFloat = self.view.frame.width
@@ -223,19 +189,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
-    func AddNativeExpressAds()
-    {
-        var index=4
-        let size=GADAdSizeFromCGSize(CGSize(width: adsViewWidth, height: adsViewHeight))
-        while index<feedDataList.count{
-            let adView=GADNativeExpressAdView(adSize: size)
-            adView?.adUnitID="ca-app-pub-3108267494433171/3899687304"
-            adView?.rootViewController=self
-            feedTableView.insertSubview(adView!, at: index)
-            index+=adsInterval
-        }
-        
-    }
+     
     fileprivate func SelectionChange(_ siteItem:SiteItem, autoFreshing:Bool)
     {
         if(siteItem.siteItemURL?.contains("http"))!
@@ -243,8 +197,8 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
             siteItem.siteItemURL=Utils.enCryptString2(siteItem.siteItemURL!)
         }
         self.feedTableView.tableHeaderView=nil
-        self.feedDataList = realm.objects(FeedData.self).filter("siteItemID = %@",siteItemSelected.siteItemID).sorted(by: [SortDescriptor(keyPath: "loadTime",ascending: true),SortDescriptor(keyPath: "timeStamp",ascending: true)])
-        self.feedTableView.reloadData()
+        //self.feedDataList = realm.objects(FeedData.self).filter("siteItemID = %@",siteItemSelected.siteItemID).sorted(by: [SortDescriptor(keyPath: "loadTime",ascending: true),SortDescriptor(keyPath: "timeStamp",ascending: true)])
+        //self.feedTableView.reloadData()
         let currentTimeAdded=(Calendar.current as NSCalendar).date(byAdding: NSCalendar.Unit.minute, value: -2, to: Date(), options: NSCalendar.Options.init(rawValue: 0))
         if(siteItem.loadTime == nil || autoFreshing || siteItem.loadTime?.compare(currentTimeAdded!)==ComparisonResult.orderedAscending)
         {
@@ -586,8 +540,8 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                                                 mFeed.link=self.getFullURL(url: feedLink, domainURL: siteItem.siteItemURL!)
                                                 mFeed.feedDescription=feedDescription
                                                 mFeed.linkImage=imgFeed
-                                                
                                                 self.realm.add(mFeed)
+                                               
                                             }
                                         }
                                         feedXML=feedXML.replacingOccurrences(of: "<entry>"+content+"</entry>", with: "")
@@ -636,9 +590,9 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
     {
         self.sideMenuController()?.sideMenu?.menuViewController.viewDidLoad()
         let mRealm =  try! Realm()
-        self.feedDataList = mRealm.objects(FeedData.self).filter("siteItemID = %@",siteItemSelected.siteItemID).sorted(by: [SortDescriptor(keyPath: "loadTime",ascending: true),SortDescriptor(keyPath: "timeStamp",ascending: true)])
+        //self.feedDataList = mRealm.objects(FeedData.self).filter("siteItemID = %@",siteItemSelected.siteItemID).sorted(by: [SortDescriptor(keyPath: "loadTime",ascending: true),SortDescriptor(keyPath: "timeStamp",ascending: true)])
         print(self.feedDataList.count)
-        self.feedTableView.reloadData()
+        //self.feedTableView.reloadData()
         self.indicator.stopAnimating()
         if(autoFreshing)
         {

@@ -55,22 +55,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D64CB0A3-EF7A-4EC1-BB0C-FF47FFCD3AE8"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VietNamNewspapers/PageMenuKit/DataViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
-            landmarkName = "DataViewController"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "FDB8C6F6-A2F9-466A-899D-372FD6232752"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -78,8 +62,8 @@
             filePath = "VietNamNewspapers/PageMenuKit/DataViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -405,22 +389,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "10990797-D836-4CBC-BFDF-49044115C84E"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VietNamNewspapers/PageMenuKit/DataViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
-            landmarkName = "init()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "CE7B65F4-F0B6-4C6F-9ECA-8CE30A9070B9"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -444,8 +412,8 @@
             filePath = "VietNamNewspapers/PageMenuKit/DataViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "479"
-            endingLineNumber = "479"
+            startingLineNumber = "433"
+            endingLineNumber = "433"
             landmarkName = "SelectionChange(_:autoFreshing:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -460,8 +428,8 @@
             filePath = "VietNamNewspapers/PageMenuKit/DataViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "468"
-            endingLineNumber = "468"
+            startingLineNumber = "422"
+            endingLineNumber = "422"
             landmarkName = "SelectionChange(_:autoFreshing:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -476,8 +444,8 @@
             filePath = "VietNamNewspapers/PageMenuKit/DataViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "577"
-            endingLineNumber = "577"
+            startingLineNumber = "531"
+            endingLineNumber = "531"
             landmarkName = "SelectionChange(_:autoFreshing:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -492,8 +460,8 @@
             filePath = "VietNamNewspapers/PageMenuKit/DataViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "580"
-            endingLineNumber = "580"
+            startingLineNumber = "534"
+            endingLineNumber = "534"
             landmarkName = "SelectionChange(_:autoFreshing:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -508,8 +476,8 @@
             filePath = "VietNamNewspapers/PageMenuKit/DataViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "590"
-            endingLineNumber = "590"
+            startingLineNumber = "543"
+            endingLineNumber = "543"
             landmarkName = "SelectionChange(_:autoFreshing:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -524,74 +492,10 @@
             filePath = "VietNamNewspapers/PageMenuKit/DataViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "639"
-            endingLineNumber = "639"
+            startingLineNumber = "593"
+            endingLineNumber = "593"
             landmarkName = "stopDownloadFeed(_:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "3966BEAE-B290-44F4-BD6F-68E4C8A26514"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VietNamNewspapers/PageMenuKit/DataViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "init()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "506B8918-125F-4827-B771-783C18EC0D37"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VietNamNewspapers/PageMenuKit/DataViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "init()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "506B8918-125F-4827-B771-783C18EC0D37 - 40d45a39f705d259"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #1 (RealmSwift.RealmCollectionChange&lt;RealmSwift.Results&lt;LatestHeadline.FeedData&gt;&gt;) -&gt; () in LatestHeadline.DataViewController.init() -&gt; LatestHeadline.DataViewController"
-                  moduleName = "LatestHeadline"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ngohoanglan/Desktop/SmartNews/VietNamNewspapers/VietNamNewspapers/PageMenuKit/DataViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "42"
-                  endingLineNumber = "42"
-                  offsetFromSymbolStart = "292">
-               </Location>
-               <Location
-                  uuid = "506B8918-125F-4827-B771-783C18EC0D37 - f606ab6956665ae0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.Int) -&gt; Foundation.IndexPath in closure #1 () -&gt; () in closure #1 (RealmSwift.RealmCollectionChange&lt;RealmSwift.Results&lt;LatestHeadline.FeedData&gt;&gt;) -&gt; () in LatestHeadline.DataViewController.init() -&gt; LatestHeadline.DataViewController"
-                  moduleName = "LatestHeadline"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ngohoanglan/Desktop/SmartNews/VietNamNewspapers/VietNamNewspapers/PageMenuKit/DataViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "42"
-                  endingLineNumber = "42"
-                  offsetFromSymbolStart = "24">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -604,8 +508,8 @@
             filePath = "VietNamNewspapers/PageMenuKit/DataViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "640"
-            endingLineNumber = "640"
+            startingLineNumber = "594"
+            endingLineNumber = "594"
             landmarkName = "stopDownloadFeed(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -620,10 +524,197 @@
             filePath = "VietNamNewspapers/PageMenuKit/DataViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "641"
-            endingLineNumber = "641"
+            startingLineNumber = "595"
+            endingLineNumber = "595"
             landmarkName = "stopDownloadFeed(_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FC405FAF-DC5E-4DB8-B6BA-0BF2F3C5492A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VietNamNewspapers/PageMenuKit/DataViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "DataViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "FC405FAF-DC5E-4DB8-B6BA-0BF2F3C5492A - 8ab512e075293efc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LatestHeadline.DataViewController.refreshControl.getter : __C.UIRefreshControl"
+                  moduleName = "LatestHeadline"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ngohoanglan/Desktop/SmartNews/VietNamNewspapers/VietNamNewspapers/PageMenuKit/DataViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  uuid = "FC405FAF-DC5E-4DB8-B6BA-0BF2F3C5492A - 68204658224fca1c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LatestHeadline.DataViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; LatestHeadline.DataViewController"
+                  moduleName = "LatestHeadline"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ngohoanglan/Desktop/SmartNews/VietNamNewspapers/VietNamNewspapers/PageMenuKit/DataViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "1240">
+               </Location>
+               <Location
+                  uuid = "FC405FAF-DC5E-4DB8-B6BA-0BF2F3C5492A - eab15e07bc8c60c6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LatestHeadline.DataViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;LatestHeadline.DataViewController&gt;"
+                  moduleName = "LatestHeadline"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ngohoanglan/Desktop/SmartNews/VietNamNewspapers/VietNamNewspapers/PageMenuKit/DataViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "1180">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CE4D27DF-CE6E-4B70-A991-12FFBE58086C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VietNamNewspapers/PageMenuKit/DataViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B34D2C63-DF76-4D9A-B691-36EBCE43570A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VietNamNewspapers/PageMenuKit/DataViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "DataViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "B34D2C63-DF76-4D9A-B691-36EBCE43570A - 71fe8d50c27c1b4f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LatestHeadline.DataViewController.feedDataList.getter : RealmSwift.Results&lt;LatestHeadline.FeedData&gt;"
+                  moduleName = "LatestHeadline"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ngohoanglan/Desktop/SmartNews/VietNamNewspapers/VietNamNewspapers/PageMenuKit/DataViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "108">
+               </Location>
+               <Location
+                  uuid = "B34D2C63-DF76-4D9A-B691-36EBCE43570A - c24aafdf52b746d3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LatestHeadline.DataViewController.feedDataList.setter : RealmSwift.Results&lt;LatestHeadline.FeedData&gt;"
+                  moduleName = "LatestHeadline"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ngohoanglan/Desktop/SmartNews/VietNamNewspapers/VietNamNewspapers/PageMenuKit/DataViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "128">
+               </Location>
+               <Location
+                  uuid = "B34D2C63-DF76-4D9A-B691-36EBCE43570A - 9e2ced786066b3fa"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LatestHeadline.DataViewController.feedDataList.modify : RealmSwift.Results&lt;LatestHeadline.FeedData&gt;"
+                  moduleName = "LatestHeadline"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ngohoanglan/Desktop/SmartNews/VietNamNewspapers/VietNamNewspapers/PageMenuKit/DataViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "B34D2C63-DF76-4D9A-B691-36EBCE43570A - a8511674cfe725fc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LatestHeadline.DataViewController.feedDataList.modify : RealmSwift.Results&lt;LatestHeadline.FeedData&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "LatestHeadline"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ngohoanglan/Desktop/SmartNews/VietNamNewspapers/VietNamNewspapers/PageMenuKit/DataViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  uuid = "B34D2C63-DF76-4D9A-B691-36EBCE43570A - 68204658224fcade"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LatestHeadline.DataViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; LatestHeadline.DataViewController"
+                  moduleName = "LatestHeadline"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ngohoanglan/Desktop/SmartNews/VietNamNewspapers/VietNamNewspapers/PageMenuKit/DataViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "632">
+               </Location>
+               <Location
+                  uuid = "B34D2C63-DF76-4D9A-B691-36EBCE43570A - eab15e07bc8c6004"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LatestHeadline.DataViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;LatestHeadline.DataViewController&gt;"
+                  moduleName = "LatestHeadline"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ngohoanglan/Desktop/SmartNews/VietNamNewspapers/VietNamNewspapers/PageMenuKit/DataViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "600">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
