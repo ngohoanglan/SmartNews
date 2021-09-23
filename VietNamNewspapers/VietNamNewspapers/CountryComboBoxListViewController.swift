@@ -26,7 +26,7 @@ class CountryComboBoxListViewController: UIViewController,UIPickerViewDataSource
     var setting=Settings()
     @IBOutlet weak var btImportNewspapers: UIButton!
     @IBAction func buttonImportNewspapers(_ sender: AnyObject) {
-        var index=pickerCountryList.selectedRow(inComponent: 0)
+        let index=pickerCountryList.selectedRow(inComponent: 0)
         country_code_selected=countryList[index].code
     }
     override func viewDidLoad() {

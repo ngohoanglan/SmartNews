@@ -24,8 +24,11 @@ class FeedData: Object {
     @Persisted var siteItemID: String?
     @Persisted var title: String?
     @Persisted var timeStamp: Int?
+    @Persisted var isExpand: Bool=false
+    /*
     @objc dynamic var isExpand = false
     override static func ignoredProperties() -> [String] {
         ["isExpand"]
     }
+    */
 }

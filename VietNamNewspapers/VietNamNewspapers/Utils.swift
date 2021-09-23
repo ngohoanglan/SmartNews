@@ -27,6 +27,16 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
         return rhs < lhs
     }
 }
+extension UIView {
+
+    func visiblity(gone: Bool, dimension: CGFloat = 0.0, attribute: NSLayoutConstraint.Attribute = .height) -> Void {
+        if let constraint = (self.constraints.filter{$0.firstAttribute == attribute}.first) {
+            constraint.constant = gone ? 0.0 : dimension
+            self.layoutIfNeeded()
+            self.isHidden = gone
+        }
+    }
+}
 class Utils
 {
    static func checkFeedIsExist( siteItemID:String,link:String) -> Bool {

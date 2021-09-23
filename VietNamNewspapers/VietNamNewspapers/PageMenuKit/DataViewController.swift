@@ -621,10 +621,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var feedData:FeedData
         feedData=feedDataList[(indexPath as NSIndexPath).row]
-        if(!btnExpandTapped)
-        {
-            feedData.isExpand=isExpandDescription
-        }
+        
         if(UIDevice.current.userInterfaceIdiom == .phone)
         {
             if((feedData.linkImage != nil ) && (feedData.linkImage?.count)!>10 && setting.getBlockImage()==true)
@@ -649,7 +646,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }
                 cell.lbTitle.text=feedData.title
                 cell.lbTitle.numberOfLines=3
-                // cell.lbDescription.text=feedData.feedDescription
+                cell.lbDescription.text=feedData.feedDescription
                 cell.lbDescription.font=UIFont.systemFont(ofSize: cellFontSize)
                 cell.lbPubdate.text=feedData.pubDateString
                 if(!feedData.isExpand )
@@ -666,20 +663,23 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                     //cell.csDescriptionHeight.constant=70.0
                     cell.lbDescription.text=feedData.feedDescription
                 }
-                
                 cell.btnExpandTapped = {
-                    
                     if(!feedData.isExpand)
                     {
-                        feedData.isExpand = true
+                        try! self.realm.write({
+                            feedData.isExpand = true
+                        })
                     }
                     else
                     {
-                        feedData.isExpand = false
+                        try! self.realm.write({
+                            feedData.isExpand = false
+                        })
                     }
-                    self.btnExpandTapped=true
+                    /*
                     let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
                     self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
+                    */
                 }
                 cell.btnShareTapped =
                     {
