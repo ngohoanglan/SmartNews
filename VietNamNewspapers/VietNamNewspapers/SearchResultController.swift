@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import RealmSwift
-
+import Nuke
 class SearchResultController : UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate,UISearchBarDelegate,UISearchResultsUpdating
 {
     
@@ -231,65 +231,34 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
     }
     var btnExpandTapped:Bool=false
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         var feedData:FeedData
-        
         feedData=feedDataList[(indexPath as NSIndexPath).row]
-        if(!btnExpandTapped)
-        {
-            feedData.isExpand=isExpandDescription
-        }
-        
         
         if(UIDevice.current.userInterfaceIdiom == .phone)
         {
             if((feedData.linkImage != nil ) && (feedData.linkImage?.count)!>10 && setting.getBlockImage()==true)
             {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "CellNotDesc", for: indexPath)
-                    as! FeedNotDescriptionViewCell
-                
-                
+                let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCell", for: indexPath)
+                    as! FeedTableViewCell
                 if(feedData.imageArray != nil && (feedData.imageArray?.count)!>0)
                 {
-                    cell.feedImageCell.image=UIImage(data: feedData.imageArray! as Data)
+                    cell.imgFeed.image=UIImage(data: feedData.imageArray! as Data)
                 }
                 else
                 {
-                    
-                    //
-                    cell.feedImageCell.image=nil
-                    //
-                    /*
-                     cell.feedImageCell.load.request(with: feedData.linkImage!, onCompletion: { image, error, operation in
-                     
-                     if operation == .network {
-                     let myImage : UIImage = Utils.resizeImage(image!, maxWidth: self.imageSize, maxHeight: self.imageSize)
-                     let transition = CATransition()
-                     transition.duration = 0.5
-                     transition.type = kCATransitionFade
-                     cell.feedImageCell.layer.add(transition, forKey: nil)
-                     cell.feedImageCell.image = myImage
-                     
-                     feedData.imageArray=UIImagePNGRepresentation(myImage)
-                     let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.imageArray.rawValue : feedData.imageArray! as AnyObject]
-                     self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
-                     }
-                     })
-                     */
-                    
+                    Nuke.loadImage(with: URL(string: feedData.linkImage ?? ""), into: cell.imgFeed)
                 }
-                
                 if(feedData.isRead==1)
                 {
-                    
-                    cell.lbTitleCell.font = UIFont.systemFont(ofSize: cellFontSize)
+                    cell.lbTitle.font = UIFont.systemFont(ofSize: cellFontSize)
                 }
                 else
                 {
-                    cell.lbTitleCell.font = UIFont.boldSystemFont(ofSize: cellFontSize)
+                    cell.lbTitle.font = UIFont.boldSystemFont(ofSize: cellFontSize)
                 }
-                cell.lbTitleCell.text=feedData.title
-                // cell.lbDescription.text=feedData.feedDescription
+                cell.lbTitle.text=feedData.title
+                cell.lbTitle.numberOfLines=3
+                cell.lbDescription.text=feedData.feedDescription
                 cell.lbDescription.font=UIFont.systemFont(ofSize: cellFontSize)
                 cell.lbPubdate.text=feedData.pubDateString
                 if(!feedData.isExpand )
@@ -306,21 +275,20 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                     //cell.csDescriptionHeight.constant=70.0
                     cell.lbDescription.text=feedData.feedDescription
                 }
-                
                 cell.btnExpandTapped = {
-                    self.btnExpandTapped=feedData.isExpand
                     if(!feedData.isExpand)
                     {
-                        feedData.isExpand = true
-                        // cell.csDescriptionHeight.constant=70.0
+                        try! self.realm.write({
+                            feedData.isExpand = true
+                        })
                     }
                     else
                     {
-                        feedData.isExpand = false
-                        //cell.csDescriptionHeight.constant=0.0
+                        try! self.realm.write({
+                            feedData.isExpand = false
+                        })
                     }
-                    let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
-                    self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
+                   
                 }
                 cell.btnShareTapped =
                     {
@@ -340,37 +308,40 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                 if(feedData.isFavorite == 1)
                 {
                     let image = UIImage(named: "ic_bookmark") as UIImage?
-                    cell.btImportan.setImage(image, for: UIControl.State())
+                    cell.btnImportan.setImage(image, for: UIControl.State())
                 }
                 else
                 {
                     let image = UIImage(named: "ic_bookmark_border") as UIImage?
-                    cell.btImportan.setImage(image, for: UIControl.State())
+                    cell.btnImportan.setImage(image, for: UIControl.State())
                 }
                 cell.btnImportanTapped =
                     {
                         if(feedData.isFavorite == 1)
                         {
                             let image = UIImage(named: "ic_bookmark_border") as UIImage?
-                            cell.btImportan.setImage(image, for: UIControl.State())
-                            feedData.isFavorite=0
+                            cell.btnImportan.setImage(image, for: UIControl.State())
+                            try! self.realm.write({
+                                feedData.isFavorite=0
+                            })
                         }
                         else
                         {
                             let image = UIImage(named: "ic_bookmark") as UIImage?
-                            cell.btImportan.setImage(image, for: UIControl.State())
-                            feedData.isFavorite=1
+                            cell.btnImportan.setImage(image, for: UIControl.State())
+                            try! self.realm.write({
+                                feedData.isFavorite=1
+                            })
+                            
                         }
                         
-                        let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
-                        self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
                     }
                 
                 
                 let taplabeTitlelAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(labeTitlelAction(sender:)))
-                cell.lbTitleCell.addGestureRecognizer(taplabeTitlelAction)
-                cell.lbTitleCell.tag=(indexPath as NSIndexPath).row
-                cell.lbTitleCell.isUserInteractionEnabled=true
+                cell.lbTitle.addGestureRecognizer(taplabeTitlelAction)
+                cell.lbTitle.tag=(indexPath as NSIndexPath).row
+                cell.lbTitle.isUserInteractionEnabled=true
                 taplabeTitlelAction.delegate = self // Remember to extend your class with UIGestureRecognizerDelegate
                 
                 let taplabeDesciptionAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(labeTitlelAction(sender:)))
@@ -395,6 +366,7 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                     cellNotImage.lbTitle.font = UIFont.boldSystemFont(ofSize: cellFontSize)
                 }
                 cellNotImage.lbTitle.text=feedData.title
+                cellNotImage.lbTitle.numberOfLines=3
                 //cellNotImage.lbDescription.text=feedData.feedDescription
                 cellNotImage.lbDescription.font=UIFont.systemFont(ofSize: cellFontSize)
                 cellNotImage.lbPubDate.text=feedData.pubDateString
@@ -419,16 +391,18 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                     self.btnExpandTapped=feedData.isExpand
                     if(!feedData.isExpand)
                     {
-                        feedData.isExpand = true
-                        //  cellNotImage.csHeightDescription.constant=70.0
+                        try! self.realm.write({
+                            feedData.isExpand = true
+                        })
+                       
                     }
                     else
                     {
-                        feedData.isExpand = false
-                        // cellNotImage.csHeightDescription.constant=0.0
+                        try! self.realm.write({
+                            feedData.isExpand = false
+                        })
                     }
-                    let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
-                    self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
+                    
                 }
                 cellNotImage.btnShareTapped =
                     {
@@ -464,13 +438,17 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                         {
                             let image = UIImage(named: "ic_bookmark_border") as UIImage?
                             cellNotImage.btnImportan.setImage(image, for: UIControl.State())
-                            feedData.isFavorite=0
+                            try! self.realm.write({
+                                feedData.isFavorite=0
+                            })
                         }
                         else
                         {
                             let image = UIImage(named: "ic_bookmark") as UIImage?
                             cellNotImage.btnImportan.setImage(image, for: UIControl.State())
-                            feedData.isFavorite=1
+                            try! self.realm.write({
+                                feedData.isFavorite=1
+                            })
                         }
                         
                         let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
@@ -504,35 +482,8 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                     as! FeedNotDescriptionViewCellIPad
                 
                 
-                if(feedData.imageArray != nil && (feedData.imageArray?.count)!>0)
-                {
-                    cell.feedImageCell.image=UIImage(data: feedData.imageArray! as Data)
-                }
-                else
-                {
-                    
-                    //
-                    cell.feedImageCell.image=nil
-                    //
-                    /*
-                     cell.feedImageCell.load.request(with: feedData.linkImage!, onCompletion: { image, error, operation in
-                     
-                     if operation == .network {
-                     let myImage : UIImage = Utils.resizeImage(image!, maxWidth: self.imageSize+50, maxHeight: self.imageSize+50)
-                     let transition = CATransition()
-                     transition.duration = 0.5
-                     transition.type = kCATransitionFade
-                     cell.feedImageCell.layer.add(transition, forKey: nil)
-                     cell.feedImageCell.image = myImage
-                     
-                     feedData.imageArray=UIImagePNGRepresentation(myImage)
-                     let newFeedUpdate:Dictionary<String,AnyObject> = [FeedDataAttributes.imageArray.rawValue : feedData.imageArray! as AnyObject]
-                     self.feedDataController.updateFeedData(feedData, newFeedDataDetails: newFeedUpdate)
-                     }
-                     })
-                     */
-                    
-                }
+                Nuke.loadImage(with: URL(string: feedData.linkImage ?? ""), into: cell.feedImageCell)
+                
                 
                 if(feedData.isRead==1)
                 {
@@ -544,6 +495,7 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                     cell.lbTitleCell.font = UIFont.boldSystemFont(ofSize: cellIPadFontSize)
                 }
                 cell.lbTitleCell.text=feedData.title
+                cell.lbTitleCell.numberOfLines=3
                 // cell.lbDescription.text=feedData.feedDescription
                 cell.lbDescription.font=UIFont.systemFont(ofSize: cellIPadFontSize)
                 cell.lbPubdate.text=feedData.pubDateString
@@ -566,16 +518,17 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                     self.btnExpandTapped=feedData.isExpand
                     if(!feedData.isExpand)
                     {
-                        feedData.isExpand = true
-                        // cell.csDescriptionHeight.constant=70.0
+                        try! self.realm.write({
+                            feedData.isExpand = true
+                        })
                     }
                     else
                     {
-                        feedData.isExpand = false
-                        //cell.csDescriptionHeight.constant=0.0
+                        try! self.realm.write({
+                            feedData.isExpand = false
+                        })
                     }
-                    let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
-                    self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
+                   
                 }
                 cell.btnShareTapped =
                     {
@@ -607,13 +560,17 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                         {
                             let image = UIImage(named: "ic_bookmark_border") as UIImage?
                             cell.btImportan.setImage(image, for: UIControl.State())
-                            feedData.isFavorite=0
+                            try! self.realm.write({
+                                feedData.isFavorite=0
+                            })
                         }
                         else
                         {
                             let image = UIImage(named: "ic_bookmark") as UIImage?
                             cell.btImportan.setImage(image, for: UIControl.State())
-                            feedData.isFavorite=1
+                            try! self.realm.write({
+                                feedData.isFavorite=1
+                            })
                         }
                         
                         let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
@@ -649,6 +606,7 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                     cellNotImage.lbTitle.font = UIFont.boldSystemFont(ofSize: cellIPadFontSize)
                 }
                 cellNotImage.lbTitle.text=feedData.title
+                cellNotImage.lbTitle.numberOfLines=3
                 //cellNotImage.lbDescription.text=feedData.feedDescription
                 cellNotImage.lbDescription.font=UIFont.systemFont(ofSize: cellIPadFontSize)
                 cellNotImage.lbPubDate.text=feedData.pubDateString
@@ -673,16 +631,17 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                     self.btnExpandTapped=feedData.isExpand
                     if(!feedData.isExpand)
                     {
-                        feedData.isExpand = true
-                        //  cellNotImage.csHeightDescription.constant=70.0
+                        try! self.realm.write({
+                            feedData.isExpand = true
+                        })
                     }
                     else
                     {
-                        feedData.isExpand = false
-                        // cellNotImage.csHeightDescription.constant=0.0
+                        try! self.realm.write({
+                            feedData.isExpand = false
+                        })
                     }
-                    let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
-                    self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
+                   
                 }
                 cellNotImage.btnShareTapped =
                     {
@@ -718,17 +677,19 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                         {
                             let image = UIImage(named: "ic_bookmark_border") as UIImage?
                             cellNotImage.btnImportan.setImage(image, for: UIControl.State())
-                            feedData.isFavorite=0
+                            try! self.realm.write({
+                                feedData.isFavorite=0
+                            })
                         }
                         else
                         {
                             let image = UIImage(named: "ic_bookmark") as UIImage?
                             cellNotImage.btnImportan.setImage(image, for: UIControl.State())
-                            feedData.isFavorite=1
+                            try! self.realm.write({
+                                feedData.isFavorite=1
+                            })
                         }
-                        
-                        let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
-                        self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
+                         
                     }
                 
                 //

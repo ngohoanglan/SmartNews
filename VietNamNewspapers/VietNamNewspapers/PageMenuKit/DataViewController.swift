@@ -676,10 +676,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                             feedData.isExpand = false
                         })
                     }
-                    /*
-                    let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
-                    self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
-                    */
+                   
                 }
                 cell.btnShareTapped =
                     {
@@ -782,16 +779,18 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                     self.btnExpandTapped=feedData.isExpand
                     if(!feedData.isExpand)
                     {
-                        feedData.isExpand = true
-                        //  cellNotImage.csHeightDescription.constant=70.0
+                        try! self.realm.write({
+                            feedData.isExpand = true
+                        })
+                       
                     }
                     else
                     {
-                        feedData.isExpand = false
-                        // cellNotImage.csHeightDescription.constant=0.0
+                        try! self.realm.write({
+                            feedData.isExpand = false
+                        })
                     }
-                    let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
-                    self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
+                    
                 }
                 cellNotImage.btnShareTapped =
                     {
@@ -907,16 +906,17 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                     self.btnExpandTapped=feedData.isExpand
                     if(!feedData.isExpand)
                     {
-                        feedData.isExpand = true
-                        // cell.csDescriptionHeight.constant=70.0
+                        try! self.realm.write({
+                            feedData.isExpand = true
+                        })
                     }
                     else
                     {
-                        feedData.isExpand = false
-                        //cell.csDescriptionHeight.constant=0.0
+                        try! self.realm.write({
+                            feedData.isExpand = false
+                        })
                     }
-                    let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
-                    self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
+                   
                 }
                 cell.btnShareTapped =
                     {
@@ -1019,16 +1019,17 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                     self.btnExpandTapped=feedData.isExpand
                     if(!feedData.isExpand)
                     {
-                        feedData.isExpand = true
-                        //  cellNotImage.csHeightDescription.constant=70.0
+                        try! self.realm.write({
+                            feedData.isExpand = true
+                        })
                     }
                     else
                     {
-                        feedData.isExpand = false
-                        // cellNotImage.csHeightDescription.constant=0.0
+                        try! self.realm.write({
+                            feedData.isExpand = false
+                        })
                     }
-                    let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
-                    self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
+                   
                 }
                 cellNotImage.btnShareTapped =
                     {
@@ -1076,9 +1077,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                                 feedData.isFavorite=1
                             })
                         }
-                        
-                        let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
-                        self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
+                         
                     }
                 
                 //

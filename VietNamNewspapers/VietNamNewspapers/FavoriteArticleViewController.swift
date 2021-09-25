@@ -341,51 +341,34 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
     
     var btnExpandTapped:Bool=false
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
-        
         var feedData:FeedData
-        if shouldShowSearchResults
-        {
-            feedData=feedDataFilteredList[(indexPath as NSIndexPath).row]
-        }
-        else{
-            feedData=feedDataList[(indexPath as NSIndexPath).row]
-        }
+        feedData=feedDataList[(indexPath as NSIndexPath).row]
         
-       
         if(UIDevice.current.userInterfaceIdiom == .phone)
         {
             if((feedData.linkImage != nil ) && (feedData.linkImage?.count)!>10 && setting.getBlockImage()==true)
             {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "CellNotDesc", for: indexPath)
-                    as! FeedNotDescriptionViewCell
-                
-                
+                let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCell", for: indexPath)
+                    as! FeedTableViewCell
                 if(feedData.imageArray != nil && (feedData.imageArray?.count)!>0)
                 {
-                    cell.feedImageCell.image=UIImage(data: feedData.imageArray! as Data)
+                    cell.imgFeed.image=UIImage(data: feedData.imageArray! as Data)
                 }
                 else
                 {
-                     
-                    Nuke.loadImage(with: URL(string: feedData.linkImage ?? ""), into: cell.feedImageCell)
-                    
-                   
-                    
+                    Nuke.loadImage(with: URL(string: feedData.linkImage ?? ""), into: cell.imgFeed)
                 }
-                
                 if(feedData.isRead==1)
                 {
-                    
-                    cell.lbTitleCell.font = UIFont.systemFont(ofSize: cellFontSize)
+                    cell.lbTitle.font = UIFont.systemFont(ofSize: cellFontSize)
                 }
                 else
                 {
-                    cell.lbTitleCell.font = UIFont.boldSystemFont(ofSize: cellFontSize)
+                    cell.lbTitle.font = UIFont.boldSystemFont(ofSize: cellFontSize)
                 }
-                cell.lbTitleCell.text=feedData.title
-                // cell.lbDescription.text=feedData.feedDescription
+                cell.lbTitle.text=feedData.title
+                cell.lbTitle.numberOfLines=3
+                cell.lbDescription.text=feedData.feedDescription
                 cell.lbDescription.font=UIFont.systemFont(ofSize: cellFontSize)
                 cell.lbPubdate.text=feedData.pubDateString
                 if(!feedData.isExpand )
@@ -402,21 +385,20 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                     //cell.csDescriptionHeight.constant=70.0
                     cell.lbDescription.text=feedData.feedDescription
                 }
-                
                 cell.btnExpandTapped = {
-                    self.btnExpandTapped=feedData.isExpand
                     if(!feedData.isExpand)
                     {
-                        feedData.isExpand = true
-                        // cell.csDescriptionHeight.constant=70.0
+                        try! self.realm.write({
+                            feedData.isExpand = true
+                        })
                     }
                     else
                     {
-                        feedData.isExpand = false
-                        //cell.csDescriptionHeight.constant=0.0
+                        try! self.realm.write({
+                            feedData.isExpand = false
+                        })
                     }
-                    let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
-                    self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
+                   
                 }
                 cell.btnShareTapped =
                     {
@@ -432,23 +414,23 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                             self.present(activityVC, animated: true, completion: nil)
                             
                         }
-                }
+                    }
                 if(feedData.isFavorite == 1)
                 {
                     let image = UIImage(named: "ic_bookmark") as UIImage?
-                    cell.btImportan.setImage(image, for: UIControl.State())
+                    cell.btnImportan.setImage(image, for: UIControl.State())
                 }
                 else
                 {
                     let image = UIImage(named: "ic_bookmark_border") as UIImage?
-                    cell.btImportan.setImage(image, for: UIControl.State())
+                    cell.btnImportan.setImage(image, for: UIControl.State())
                 }
                 cell.btnImportanTapped =
                     {
                         if(feedData.isFavorite == 1)
                         {
                             let image = UIImage(named: "ic_bookmark_border") as UIImage?
-                            cell.btImportan.setImage(image, for: UIControl.State())
+                            cell.btnImportan.setImage(image, for: UIControl.State())
                             try! self.realm.write({
                                 feedData.isFavorite=0
                             })
@@ -456,21 +438,20 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                         else
                         {
                             let image = UIImage(named: "ic_bookmark") as UIImage?
-                            cell.btImportan.setImage(image, for: UIControl.State())
+                            cell.btnImportan.setImage(image, for: UIControl.State())
                             try! self.realm.write({
                                 feedData.isFavorite=1
                             })
+                            
                         }
                         
-                        let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
-                        self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
-                }
+                    }
                 
                 
                 let taplabeTitlelAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(labeTitlelAction(sender:)))
-                cell.lbTitleCell.addGestureRecognizer(taplabeTitlelAction)
-                cell.lbTitleCell.tag=(indexPath as NSIndexPath).row
-                cell.lbTitleCell.isUserInteractionEnabled=true
+                cell.lbTitle.addGestureRecognizer(taplabeTitlelAction)
+                cell.lbTitle.tag=(indexPath as NSIndexPath).row
+                cell.lbTitle.isUserInteractionEnabled=true
                 taplabeTitlelAction.delegate = self // Remember to extend your class with UIGestureRecognizerDelegate
                 
                 let taplabeDesciptionAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(labeTitlelAction(sender:)))
@@ -481,7 +462,7 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                 
                 return cell
             }
-                
+            
             else
             {
                 let cellNotImage = tableView.dequeueReusableCell(withIdentifier: "CellNotImage", for: indexPath)
@@ -495,6 +476,7 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                     cellNotImage.lbTitle.font = UIFont.boldSystemFont(ofSize: cellFontSize)
                 }
                 cellNotImage.lbTitle.text=feedData.title
+                cellNotImage.lbTitle.numberOfLines=3
                 //cellNotImage.lbDescription.text=feedData.feedDescription
                 cellNotImage.lbDescription.font=UIFont.systemFont(ofSize: cellFontSize)
                 cellNotImage.lbPubDate.text=feedData.pubDateString
@@ -519,16 +501,18 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                     self.btnExpandTapped=feedData.isExpand
                     if(!feedData.isExpand)
                     {
-                        feedData.isExpand = true
-                        //  cellNotImage.csHeightDescription.constant=70.0
+                        try! self.realm.write({
+                            feedData.isExpand = true
+                        })
+                       
                     }
                     else
                     {
-                        feedData.isExpand = false
-                        // cellNotImage.csHeightDescription.constant=0.0
+                        try! self.realm.write({
+                            feedData.isExpand = false
+                        })
                     }
-                    let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
-                    self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
+                    
                 }
                 cellNotImage.btnShareTapped =
                     {
@@ -547,7 +531,7 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                         
                         
                         
-                }
+                    }
                 if(feedData.isFavorite == 1)
                 {
                     let image = UIImage(named: "ic_bookmark") as UIImage?
@@ -576,10 +560,10 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                                 feedData.isFavorite=1
                             })
                         }
-                      
+                        
                         let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
                         self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
-                }
+                    }
                 
                 //
                 let taplabeTitlelAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(labeTitlelAction(sender:)))
@@ -610,6 +594,7 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                 
                 Nuke.loadImage(with: URL(string: feedData.linkImage ?? ""), into: cell.feedImageCell)
                 
+                
                 if(feedData.isRead==1)
                 {
                     
@@ -620,6 +605,7 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                     cell.lbTitleCell.font = UIFont.boldSystemFont(ofSize: cellIPadFontSize)
                 }
                 cell.lbTitleCell.text=feedData.title
+                cell.lbTitleCell.numberOfLines=3
                 // cell.lbDescription.text=feedData.feedDescription
                 cell.lbDescription.font=UIFont.systemFont(ofSize: cellIPadFontSize)
                 cell.lbPubdate.text=feedData.pubDateString
@@ -642,16 +628,17 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                     self.btnExpandTapped=feedData.isExpand
                     if(!feedData.isExpand)
                     {
-                        feedData.isExpand = true
-                        // cell.csDescriptionHeight.constant=70.0
+                        try! self.realm.write({
+                            feedData.isExpand = true
+                        })
                     }
                     else
                     {
-                        feedData.isExpand = false
-                        //cell.csDescriptionHeight.constant=0.0
+                        try! self.realm.write({
+                            feedData.isExpand = false
+                        })
                     }
-                    let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
-                    self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
+                   
                 }
                 cell.btnShareTapped =
                     {
@@ -666,7 +653,7 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                             }
                             self.present(activityVC, animated: true, completion: nil)
                         }
-                }
+                    }
                 if(feedData.isFavorite == 1)
                 {
                     let image = UIImage(named: "ic_bookmark") as UIImage?
@@ -695,10 +682,10 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                                 feedData.isFavorite=1
                             })
                         }
-                       
+                        
                         let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
                         self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
-                }
+                    }
                 
                 
                 let taplabeTitlelAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(labeTitlelAction(sender:)))
@@ -715,7 +702,7 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                 
                 return cell
             }
-                
+            
             else
             {
                 let cellNotImage = tableView.dequeueReusableCell(withIdentifier: "CellNotImageIPad", for: indexPath)
@@ -729,6 +716,7 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                     cellNotImage.lbTitle.font = UIFont.boldSystemFont(ofSize: cellIPadFontSize)
                 }
                 cellNotImage.lbTitle.text=feedData.title
+                cellNotImage.lbTitle.numberOfLines=3
                 //cellNotImage.lbDescription.text=feedData.feedDescription
                 cellNotImage.lbDescription.font=UIFont.systemFont(ofSize: cellIPadFontSize)
                 cellNotImage.lbPubDate.text=feedData.pubDateString
@@ -753,16 +741,17 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                     self.btnExpandTapped=feedData.isExpand
                     if(!feedData.isExpand)
                     {
-                        feedData.isExpand = true
-                        //  cellNotImage.csHeightDescription.constant=70.0
+                        try! self.realm.write({
+                            feedData.isExpand = true
+                        })
                     }
                     else
                     {
-                        feedData.isExpand = false
-                        // cellNotImage.csHeightDescription.constant=0.0
+                        try! self.realm.write({
+                            feedData.isExpand = false
+                        })
                     }
-                    let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
-                    self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
+                   
                 }
                 cellNotImage.btnShareTapped =
                     {
@@ -781,7 +770,7 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                         
                         
                         
-                }
+                    }
                 if(feedData.isFavorite == 1)
                 {
                     let image = UIImage(named: "ic_bookmark") as UIImage?
@@ -810,10 +799,8 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                                 feedData.isFavorite=1
                             })
                         }
-                       
-                        let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
-                        self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
-                }
+                         
+                    }
                 
                 //
                 let taplabeTitlelAction:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(labeTitlelAction(sender:)))
@@ -834,7 +821,6 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
                 
             }
         }
-        
     }
    @objc func labeTitlelAction(sender:UITapGestureRecognizer)
     {
