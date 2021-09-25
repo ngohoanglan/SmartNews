@@ -126,8 +126,6 @@
                 <outlet property="btnImportan" destination="0xB-0X-H5G" id="Vwd-uE-0D7"/>
                 <outlet property="btnShare" destination="TLk-nw-fWa" id="dPg-xa-MVv"/>
                 <outlet property="imgFeed" destination="kA2-pW-Q2P" id="Lh8-4p-4y1"/>
-                <outlet property="imgFeedWidthConst" destination="FtD-5v-uNN" id="LNd-HJ-9pP"/>
-                <outlet property="imgHeightConst" destination="eCt-lS-Df1" id="7wk-Vg-JWs"/>
                 <outlet property="lbDescription" destination="dmw-V4-RQi" id="7fv-yM-VAh"/>
                 <outlet property="lbPubdate" destination="ww1-7V-nmY" id="fXl-EY-1uf"/>
                 <outlet property="lbTitle" destination="13a-vg-Zcc" id="Oip-QK-ReQ"/>

@@ -726,8 +726,6 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                             
                         }
                         
-                        let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
-                        self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
                     }
                 
                 
