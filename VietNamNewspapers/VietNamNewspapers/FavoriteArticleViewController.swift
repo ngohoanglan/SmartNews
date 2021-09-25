@@ -133,6 +133,7 @@ class FavoriteArticleViewController: UIViewController, UITableViewDelegate, UITa
         feedTableView.separatorStyle = .none
         if(UIDevice.current.userInterfaceIdiom == .phone)
         {
+            feedTableView.register(UINib(nibName: "FeedTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedCell")
             feedTableView.register(UINib(nibName: "FeedImageViewCell", bundle: nil), forCellReuseIdentifier: "CellNotDesc")
             feedTableView.register(UINib(nibName: "FeedViewCell", bundle: nil), forCellReuseIdentifier: "CellNotImage")
         }

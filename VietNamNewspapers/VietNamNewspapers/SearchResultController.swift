@@ -15,9 +15,9 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
     
     //    fileprivate var feedDataController:FeedDataController!
     
-    let realm: Realm
+    let realm = try! Realm()
     var notificationToken: NotificationToken?
-    var feedDataList: Results<FeedData>
+    var feedDataList = try! Realm().objects(FeedData.self).filter("siteItemID = %@",UUID().uuidString)
     
     var feedTableView: UITableView = UITableView()
     var cellFontSize:CGFloat=13.0
@@ -37,27 +37,36 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
         controller.searchBar.sizeToFit()
         return controller
     })()
-    required init() {
-        self.realm = try! Realm()
-        // Access all tasks in the realm, sorted by _id so that the ordering is defined.
-        feedDataList = realm.objects(FeedData.self).sorted(by: [SortDescriptor(keyPath: "loadTime",ascending: true),SortDescriptor(keyPath: "timeStamp",ascending: true)])
-        
-        super.init(nibName: nil, bundle: nil) 
-        
-       
-    }
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    deinit {
-        // Always invalidate any notification tokens when you are done with them.
-        notificationToken?.invalidate()
-    }
+     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        //feedDataController=FeedDataController.shareInstance
+        feedDataList = realm.objects(FeedData.self).filter("siteItemID = %@",UUID().uuidString).sorted(by: [SortDescriptor(keyPath: "loadTime",ascending: true),SortDescriptor(keyPath: "timeStamp",ascending: true)])
+        // Observe the tasks for changes. Hang on to the returned notification token.
+        notificationToken = feedDataList.observe { [weak self] (changes) in
+            guard let tableView = self?.feedTableView else { return }
+            switch changes {
+            case .initial:
+                // Results are now populated and can be accessed without blocking the UI
+                tableView.reloadData()
+            case .update(_, let deletions, let insertions, let modifications):
+                // Query results have changed, so apply them to the UITableView.
+                tableView.performBatchUpdates({
+                    // It's important to be sure to always update a table in this order:
+                    // deletions, insertions, then updates. Otherwise, you could be unintentionally
+                    // updating at the wrong index!
+                    tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0) }),
+                        with: .automatic)
+                    tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+                                         with: .fade)
+                    tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+                        with: .none)
+                })
+            case .error(let error):
+                // An error occurred while opening the Realm file on the background worker thread
+                fatalError("\(error)")
+            }
+        }
         cellFontSize=CGFloat(setting.getTextSize())
         cellIPadFontSize = CGFloat(setting.getTextSize())+4
         isExpandDescription=setting.getExpandDescription()
@@ -78,6 +87,7 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
         feedTableView.separatorStyle = .none
         if(UIDevice.current.userInterfaceIdiom == .phone)
         {
+            feedTableView.register(UINib(nibName: "FeedTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedCell")
             feedTableView.register(UINib(nibName: "FeedImageViewCell", bundle: nil), forCellReuseIdentifier: "CellNotDesc")
             feedTableView.register(UINib(nibName: "FeedViewCell", bundle: nil), forCellReuseIdentifier: "CellNotImage")
         }
@@ -195,6 +205,7 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
         
         let searchString = searchController.searchBar.text
         
+       feedDataList = realm.objects(FeedData.self).filter("title contains %@ or feedDescription contains %@",searchString,searchString).sorted(by: [SortDescriptor(keyPath: "loadTime",ascending: true),SortDescriptor(keyPath: "timeStamp",ascending: true)])
         //feedDataList=feedDataController.getFeedDataByTitleAndDescriptionKeyWord(keyWord: searchString as! NSString, description: searchString as! NSString)
         feedTableView.reloadData()
         
@@ -288,7 +299,8 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                             feedData.isExpand = false
                         })
                     }
-                   
+                    let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
+                    self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
                 }
                 cell.btnShareTapped =
                     {
@@ -402,7 +414,8 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                             feedData.isExpand = false
                         })
                     }
-                    
+                    let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
+                    self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
                 }
                 cellNotImage.btnShareTapped =
                     {
@@ -528,7 +541,8 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                             feedData.isExpand = false
                         })
                     }
-                   
+                    let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
+                    self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
                 }
                 cell.btnShareTapped =
                     {
@@ -641,7 +655,8 @@ class SearchResultController : UIViewController, UITableViewDelegate, UITableVie
                             feedData.isExpand = false
                         })
                     }
-                   
+                    let indexPath = IndexPath(row: (indexPath as NSIndexPath).row, section: 0)
+                    self.feedTableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
                 }
                 cellNotImage.btnShareTapped =
                     {
