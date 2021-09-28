@@ -16,10 +16,7 @@ platform :ios, '10.0'
 use_frameworks!
 
 pod 'Google-Mobile-Ads-SDK'
-pod 'Firebase/Analytics'
-pod 'Firebase/Core'
-pod 'Firebase/Messaging'
-pod 'Firebase/RemoteConfig'
+
 #pod 'DJKFlipper'
 pod 'ObjectMapper', '~> 3.5'
 
