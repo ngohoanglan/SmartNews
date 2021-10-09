@@ -49,7 +49,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func loadView() {
         super.loadView()
         siteItemSelected=_siteItemSelected
-        feedDataList = realm.objects(FeedData.self).filter("siteItemID = %@",siteItemSelected.siteItemID!).sorted(by: [SortDescriptor(keyPath: "loadTime",ascending: true),SortDescriptor(keyPath: "timeStamp",ascending: true)])
+        feedDataList = realm.objects(FeedData.self).filter("siteItemID = %@",siteItemSelected.siteItemID!).sorted(by: [SortDescriptor(keyPath: "loadTime",ascending: false),SortDescriptor(keyPath: "timeStamp",ascending: true)])
         self.title = siteItemSelected.siteItemName
         
     }
@@ -58,7 +58,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         super.viewDidLoad()
         // Access all tasks in the realm, sorted by _id so that the ordering is defined.
-        feedDataList = realm.objects(FeedData.self).filter("siteItemID = %@",_siteItemSelected.siteItemID!).sorted(by: [SortDescriptor(keyPath: "loadTime",ascending: true),SortDescriptor(keyPath: "timeStamp",ascending: true)])
+        feedDataList = realm.objects(FeedData.self).filter("siteItemID = %@",_siteItemSelected.siteItemID!).sorted(by: [SortDescriptor(keyPath: "loadTime",ascending: false),SortDescriptor(keyPath: "timeStamp",ascending: true)])
 
         // Observe the tasks for changes. Hang on to the returned notification token.
         notificationToken = feedDataList.observe { [weak self] (changes) in
@@ -542,6 +542,7 @@ class DataViewController: UIViewController, UITableViewDelegate, UITableViewData
                                                 mFeed.feedDescription=feedDescription
                                                 mFeed.linkImage=imgFeed
                                                 self.realm.add(mFeed)
+                                                print(mFeed)
                                                
                                             }
                                         }

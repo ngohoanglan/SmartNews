@@ -50,7 +50,7 @@ class FeedsViewController : BaseViewController
         siteSelectedID=passOject.value(forKey: "siteID_key") as! String
         siteSelected=siteController.getSiteById(siteSelectedID as NSString)
         siteItemList=siteItemController.getSiteItemBySiteId(siteSelectedID as NSString)
-        
+        print(siteSelectedID)
         
         var controllers: [UIViewController] = []
         for item in siteItemList {
