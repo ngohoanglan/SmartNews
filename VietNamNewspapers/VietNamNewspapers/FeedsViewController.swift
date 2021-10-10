@@ -5,15 +5,16 @@
 //  Created by Ngô Lân on 7/26/17.
 //  Copyright © 2017 admin. All rights reserved.
 //
-
+ 
 import GoogleMobileAds
 import Foundation
 import UIKit
 import PageMenuKit
-class FeedsViewController : BaseViewController,GADInterstitialDelegate
+class FeedsViewController : BaseViewController,GADFullScreenContentDelegate
     
 {
-    let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
+    var interstitial:GADInterstitialAdBeta?
+    //let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
     fileprivate var siteController:SiteController!
     fileprivate var siteItemController:SiteItemController!
     //fileprivate var  feedDataController=FeedDataController.shareInstance
@@ -22,10 +23,10 @@ class FeedsViewController : BaseViewController,GADInterstitialDelegate
     fileprivate var siteItemList:Array<SiteItem>=[]
     fileprivate var siteSelected:Site!
     var passOject:UserDefaults!
-    var adsBanner: GADBannerView = GADBannerView()
+   
     let setting = Settings()
     var searchResultController: SearchResultController!
-   
+    
     override func setup() {
         super.setup()
         
@@ -43,6 +44,18 @@ class FeedsViewController : BaseViewController,GADInterstitialDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let request = GADRequest()
+            GADInterstitialAdBeta.load(withAdUnitID:"ca-app-pub-3940256099942544/4411468910",
+                                        request: request,
+                              completionHandler: { [self] ad, error in
+                                if let error = error {
+                                  print("Failed to load interstitial ad with error: \(error.localizedDescription)")
+                                  return
+                                }
+                                interstitial = ad
+                                interstitial?.fullScreenContentDelegate = self
+                              }
+            )
         siteController=SiteController.shareInstance
         siteItemController=SiteItemController.shareInstance
         //feedDataController=FeedDataController.shareInstance
@@ -60,7 +73,7 @@ class FeedsViewController : BaseViewController,GADInterstitialDelegate
             controllers.append(viewController)
         }
         
-        let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
+        //let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
         /*
          * Available menuStyles:
          * .Plain, .Tab, .Smart, .Hacka, .Ellipse, .Web, .Suite, .NetLab, .NHK
@@ -101,18 +114,11 @@ class FeedsViewController : BaseViewController,GADInterstitialDelegate
            
         }
         //FacebookAds
-        let App = UIApplication.shared.delegate as! AppDelegate
-        if(App.hasShowAds==false)
-        {
-            App.gViewController = self;
-            App.showAdmobInterstitial(kGoogleFullScreenAppUnitID: setting.getAdmobKey())
-        }
+    
         
         //
         
         
-        adsBanner.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(adsBanner)
         
         
         NSLayoutConstraint(item: pageMenuController!.view, attribute: .leading, relatedBy: .equal, toItem: self.view, attribute: .leading, multiplier: 1.0, constant: 0.0).isActive = true
@@ -120,7 +126,8 @@ class FeedsViewController : BaseViewController,GADInterstitialDelegate
         NSLayoutConstraint(item: pageMenuController!.view, attribute: .trailing, relatedBy: .equal, toItem: self.view, attribute: .trailing, multiplier: 1.0, constant: 0.0).isActive = true
         
         NSLayoutConstraint(item: pageMenuController!.view, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1.0, constant: 0.0).isActive = true
-        
+        NSLayoutConstraint(item: pageMenuController!.view, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1.0, constant: 0.0).isActive = true
+        /*
         NSLayoutConstraint(item: pageMenuController!.view, attribute: .centerX, relatedBy: .equal, toItem: adsBanner, attribute: .centerX, multiplier: 1.0, constant: 0.0).isActive = true
         
         NSLayoutConstraint(item: adsBanner, attribute: .top, relatedBy: .equal, toItem: pageMenuController!.view, attribute: .bottom, multiplier: 1.0, constant: 0.0).isActive = true
@@ -130,14 +137,27 @@ class FeedsViewController : BaseViewController,GADInterstitialDelegate
         NSLayoutConstraint(item: adsBanner, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: 0.0).isActive = true
         
         NSLayoutConstraint(item: adsBanner, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 0.0).isActive = true
-        
+        */
         
         
         var backBarButton:UIBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.navigationItem.backBarButtonItem=backBarButton
         
     }
-    
+    /// Tells the delegate that the ad failed to present full screen content.
+     func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+       print("Ad did fail to present full screen content.")
+     }
+
+     /// Tells the delegate that the ad presented full screen content.
+     func adDidPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+       print("Ad did present full screen content.")
+     }
+
+     /// Tells the delegate that the ad dismissed full screen content.
+     func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+       print("Ad did dismiss full screen content.")
+     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //self.navigationController?.navigationBar.isHidden = false
