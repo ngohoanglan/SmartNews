@@ -10,7 +10,7 @@ import GoogleMobileAds
 import Foundation
 import UIKit
 import PageMenuKit
-class FeedsViewController : BaseViewController
+class FeedsViewController : BaseViewController,GADInterstitialDelegate
     
 {
     let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
@@ -101,9 +101,12 @@ class FeedsViewController : BaseViewController
            
         }
         //FacebookAds
-        
-        //
-        //EndSearchBarButton
+        let App = UIApplication.shared.delegate as! AppDelegate
+        if(App.hasShowAds==false)
+        {
+            App.gViewController = self;
+            App.showAdmobInterstitial(kGoogleFullScreenAppUnitID: setting.getAdmobKey())
+        }
         
         //
         

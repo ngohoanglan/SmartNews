@@ -32,7 +32,7 @@ class Settings
     fileprivate  let setting=UserDefaults.standard
     fileprivate let adsRemoveDefaultValue:Bool=false
     fileprivate let dateCheckUpdateDBValue:Date=Calendar.current.date(byAdding: .day, value: -100, to: Date())!
-    fileprivate var admobDefaultValue:String="ca-app-pub-3108267494433171/3375569241"
+    fileprivate var admobDefaultValue:String="ca-app-pub-3940256099942544/4411468910"
     func getCountryCodeSelectedKey() -> String {
         if(setting.object(forKey: countryCodeSelectedKey) != nil)
         {
