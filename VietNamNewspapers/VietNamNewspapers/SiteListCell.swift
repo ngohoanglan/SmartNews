@@ -10,6 +10,8 @@ import UIKit
 
 class SiteListCell: UITableViewCell {
 
+    @IBOutlet weak var imgSiteIcon: UIImageView!
+    @IBOutlet weak var lbSiteName: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

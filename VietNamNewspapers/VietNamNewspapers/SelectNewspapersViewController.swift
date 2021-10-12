@@ -321,8 +321,19 @@ class SelectNewspapersViewController: UIViewController, UITableViewDelegate,
                 DispatchQueue.main.sync {
                     KRProgressHUD.dismiss()
                     
+                    DispatchQueue.main.async { // Correct
+                        
+                        let story = UIStoryboard(name: "Main", bundle:nil)
+                         let vc = story.instantiateViewController(withIdentifier: "tabinit") as! UITabBarController
+                         UIApplication.shared.windows.first?.rootViewController = vc
+                         UIApplication.shared.windows.first?.makeKeyAndVisible()
+                        
+                        //self.performSegue(withIdentifier: "loginToTabbarVC", sender: nil)
+                    }
+                    /*
                     let mapViewControllerObj = self.storyboard?.instantiateViewController(withIdentifier: "SiteListStoryBoard") as? SiteListTableViewController
                     self.navigationController?.pushViewController(mapViewControllerObj!, animated: true)
+                    */
                 }
             }
             )

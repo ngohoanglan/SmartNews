@@ -33,11 +33,11 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 }
 
 
-class SiteListTableViewController: UIViewController,UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate,ENSideMenuDelegate{
+class SiteListTableViewController: UITableViewController, MFMailComposeViewControllerDelegate,ENSideMenuDelegate{
     var passOject:UserDefaults!
     let setting = Settings()
     var databaseServerVersion:Int=1
-    @IBOutlet weak var tableViewSiteList: UITableView!
+   // @IBOutlet weak var tableViewSiteList: UITableView!
     var verticalPostionContent:CGFloat=0
     let admobFromServer:String="http://thealllatestnews.com/api/home"
      let HostingURL = "http://thealllatestnews.com/Resources/CountryList/";
@@ -53,20 +53,19 @@ class SiteListTableViewController: UIViewController,UITableViewDelegate, UITable
     var cellFontSize:CGFloat=25.0
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let nib=UINib(nibName: "SiteListCell", bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: "SiteCell")
         getAdmobKeyFromServer(serverURL: admobFromServer)
-        tableViewSiteList.estimatedRowHeight = 60
-        tableViewSiteList.rowHeight = UITableView.automaticDimension
+        self.tableView.estimatedRowHeight = 60
+        self.tableView.rowHeight = UITableView.automaticDimension
         passOject=UserDefaults()
         if passOject.bool(forKey: "contentOffsetTableViewSiteList_key")
         {
             verticalPostionContent = passOject.value(forKey: "contentOffsetTableViewSiteList_key") as! CGFloat
         }
         self.navigationItem.title=NSLocalizedString("app_name", comment: "")
-        self.tableViewSiteList.delegate=self
-        self.tableViewSiteList.dataSource=self
-        
-        self.tableViewSiteList.setContentOffset(CGPoint(x: 0, y: verticalPostionContent), animated: false)
+       
+        self.tableView.setContentOffset(CGPoint(x: 0, y: verticalPostionContent), animated: false)
         self.sideMenuController()?.sideMenu?.delegate = self
         if(setting.getAppLaunchCount()>5 && setting.getRateApp()==false)
         {
@@ -118,187 +117,6 @@ class SiteListTableViewController: UIViewController,UITableViewDelegate, UITable
             
         }
 
-        /*
-        if(siteList.count==0)
-        {
-            
-            var siteController:SiteController
-            siteController=SiteController.shareInstance
-            var siteItemController:SiteItemController
-            siteItemController=SiteItemController.shareInstance
-           
-            let  HostingDataSourceURL=HostingURL+setting.getCountryCodeSelectedKey()+"/database.txt"
-           
-            
-            do {
-                
-                KRProgressHUD.show(progressHUDStyle: KRProgressHUDStyle.appColor, maskType: nil, activityIndicatorStyle: KRProgressHUDActivityIndicatorStyle.white, font: nil, message: "Data Processing", image: nil)
-                
-                DispatchQueue.global(qos: .userInitiated).async(execute: {
-                    
-                    
-                    
-                    if let URL = URL(string: HostingDataSourceURL) {
-                        do {
-                            let result = try String(contentsOf: URL)
-                            DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
-                                     
-                                let resultXML=Utils.deCryptString(result) as Any
-                                let rootItem=Mapper<SitesSource>().map(JSONString: resultXML as! String)
-                                let newspapers=(rootItem?.siteSource)!
-                                var position:Int=siteController.getSiteMaxPosition()+1
-                                
-                                if(rootItem?.version==nil)
-                                {
-                                    self.serverDatabaseVersion=1
-                                }
-                                else
-                                {
-                                    self.serverDatabaseVersion=(rootItem?.version)!
-                                }
-                                self.setting.setDatabaseVersion(self.serverDatabaseVersion)
-                                for site in newspapers
-                                {
-                                    if(site.m != nil && site.m != 2){
-                                        self.totalItemsChecked += 1
-                                    }
-                                }
-                                for site in newspapers
-                                {
-                                    DispatchQueue.main.async(execute: {
-                                        self.counter += 1
-                                        self.currentSiteName=site.name!
-                                        return
-                                    })
-                                    if site.m != nil && site.m == 2 {
-                                        //Site was deleted
-                                    }
-                                    else
-                                    {
-                                        var fieldDetails=[String:NSObject]()
-                                        let siteID:String=UUID().uuidString
-                                        fieldDetails[SiteAttributes.isDefault.rawValue]=1 as NSObject
-                                        fieldDetails[SiteAttributes.siteID.rawValue]=siteID as NSObject?
-                                        fieldDetails[SiteAttributes.siteName.rawValue]=site.name as NSObject?
-                                        fieldDetails[SiteAttributes.siteURL.rawValue]=site.url as NSObject?
-                                        fieldDetails[SiteAttributes.countryCode.rawValue]=self.setting.getCountryCodeSelectedKey() as NSObject?
-                                        fieldDetails[SiteAttributes.modify.rawValue]=site.m as NSObject?
-                                        fieldDetails[SiteAttributes.position.rawValue]=position as NSObject?
-                                        let IconUrl="http://www.google.com/s2/favicons?domain_url="+site.url!
-                                        fieldDetails[SiteAttributes.siteIconPath.rawValue]=IconUrl as NSObject?
-                                        if(site.iconArray?.count>0)
-                                        {
-                                            fieldDetails[SiteAttributes.iconArray.rawValue]=site.iconArray as NSObject?
-                                        }
-                                        else
-                                        {
-                                        }
-                                        if(siteController.IsSiteExist(site.url!, name: site.name!) == false)
-                                        {
-                                            DispatchQueue.main.sync(execute: {
-                                                siteController.saveSite(fieldDetails)
-                                            })
-                                            
-                                        }
-                                        position += 1
-                                        if(site.leaf==1)
-                                        {
-                                            var siteItemFields=[String:NSObject]()
-                                            siteItemFields[SiteItemAttributes.siteItemID.rawValue] = UUID().uuidString as NSObject?
-                                            siteItemFields[SiteItemAttributes.siteID.rawValue]=siteID as NSObject?
-                                            siteItemFields[SiteItemAttributes.siteItemName.rawValue]=site.name as NSObject?
-                                            siteItemFields[SiteItemAttributes.isFavorite.rawValue]=site.direct as NSObject?
-                                            siteItemFields[SiteItemAttributes.position.rawValue]=0 as NSObject?
-                                            siteItemFields[SiteItemAttributes.encoding.rawValue]=site.encoding as NSObject?
-                                            siteItemFields[SiteItemAttributes.isDefault.rawValue]=site._default as NSObject?
-                                            siteItemFields[SiteItemAttributes.siteItemNameBackup.rawValue]=site.name as NSObject?
-                                            let urlSiteItem=site.url as NSObject?
-                                            let urlEncoded=Utils.enCryptString2(urlSiteItem as! String)
-                                            siteItemFields[SiteItemAttributes.siteItemURL.rawValue]=urlEncoded as NSObject?
-                                            siteItemFields[SiteItemAttributes.siteItemURLBackup.rawValue]=urlEncoded as NSObject?
-                                            siteItemFields[SiteItemAttributes.position.rawValue]=0 as NSObject?
-                                            
-                                            if(siteItemController.IsSiteItemExist(site.url!) == false)
-                                            {
-                                                
-                                                DispatchQueue.main.sync(execute: {
-                                                    siteItemController.saveSiteItem(siteItemFields)
-                                                })
-                                            }
-                                        }
-                                        else
-                                        {
-                                            var siteItemPosition:Int=0
-                                            for siteItem in site.siteItemSource!
-                                            {
-                                                var siteItemFields=[String:NSObject]()
-                                                siteItemFields[SiteItemAttributes.siteItemID.rawValue] = UUID().uuidString as NSObject?
-                                                siteItemFields[SiteItemAttributes.siteID.rawValue]=siteID as NSObject?
-                                                siteItemFields[SiteItemAttributes.siteItemName.rawValue]=siteItem.name as NSObject?
-                                                siteItemFields[SiteItemAttributes.isFavorite.rawValue]=siteItem.direct as NSObject?
-                                                siteItemFields[SiteItemAttributes.position.rawValue]=siteItemPosition as NSObject?
-                                                siteItemFields[SiteItemAttributes.encoding.rawValue]=siteItem.encoding as NSObject?
-                                                siteItemFields[SiteItemAttributes.isDefault.rawValue]=siteItem._default as NSObject?
-                                                siteItemFields[SiteItemAttributes.siteItemNameBackup.rawValue]=siteItem.name as NSObject?
-                                                let urlSiteItem=siteItem.url as NSObject?
-                                                let urlEncoded=Utils.enCryptString2(urlSiteItem as! String)
-                                                siteItemFields[SiteItemAttributes.siteItemURL.rawValue]=urlEncoded as NSObject?
-                                                siteItemFields[SiteItemAttributes.siteItemURLBackup.rawValue]=urlEncoded as NSObject?
-                                                siteItemFields[SiteItemAttributes.position.rawValue]=siteItemPosition as NSObject?
-                                                
-                                                if(siteItemController.IsSiteItemExist(siteItem.url!) == false)
-                                                {
-                                                    DispatchQueue.main.sync(execute: {
-                                                        siteItemController.saveSiteItem(siteItemFields)
-                                                    })
-                                                    
-                                                }
-                                                siteItemPosition += 1
-                                                
-                                            }
-                                        }
-                                    }
-                                }
-                                if(rootItem?.version==nil)
-                                {
-                                    self.serverDatabaseVersion=1
-                                }
-                                else
-                                {
-                                    self.serverDatabaseVersion=(rootItem?.version)!
-                                }
-                                DispatchQueue.main.async {
-                                   KRProgressHUD.dismiss()
-                                    self.siteList=siteController.getAllSitesByCountry(self.setting.getCountryCodeSelectedKey())
-                                    self.tableViewSiteList.reloadData()
-                                 
-                                }
-                                
-                            }
-                            //)
-                            
-                        }
-                        catch
-                        {
-                            KRProgressHUD.dismiss()
-                            let alertController = UIAlertController(title: NSLocalizedString("error", comment: ""), message: NSLocalizedString("error_message", comment: ""), preferredStyle: .alert)
-                            
-                            let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in
-                                
-                            }
-                            alertController.addAction(OKAction)
-                            
-                            self.present(alertController, animated: true, completion:nil)
-                        }
-                    }
-                    
-                    
-                 
-                }
-                )}
-            
-        }
-        */
     }
     
     @IBAction func buttonShowMenu(_ sender: UIButton) {
@@ -307,7 +125,7 @@ class SiteListTableViewController: UIViewController,UITableViewDelegate, UITable
     
     
     @IBAction func btnEdit(_ sender: AnyObject) {
-        self.tableViewSiteList.isEditing = !self.tableViewSiteList.isEditing
+        self.tableView.isEditing = !self.tableView.isEditing
     }
     // MARK: - ENSideMenu Delegate
     func sideMenuWillOpen() {
@@ -365,40 +183,40 @@ class SiteListTableViewController: UIViewController,UITableViewDelegate, UITable
     
     // MARK: - Table view data source
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let newViewController = FeedsViewController()
         passOject.set(siteList[indexPath.row].siteID, forKey: "siteID_key")
         self.navigationController?.pushViewController(newViewController, animated: true)
     }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return siteList.count
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return cellHeight
         
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as!
-        SiteListTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SiteCell", for: indexPath) as!
+        SiteListCell
         
         let site=siteList[(indexPath as NSIndexPath).row]
         // Configure the cell...
-        Nuke.loadImage(with: URL(string: site.siteIconPath ?? ""), into: cell.imgIcon)
+        Nuke.loadImage(with: URL(string: site.siteIconPath ?? ""), into: cell.imgSiteIcon)
         
         cell.lbSiteName.text=site.siteName
         cell.lbSiteName.font=UIFont(name: cell.lbSiteName.font.fontName, size: cellFontSize)
         return cell
     }
-    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let source=siteList[(sourceIndexPath as NSIndexPath).row]
         
         siteList.remove(at: (sourceIndexPath as NSIndexPath).row)
@@ -413,7 +231,7 @@ class SiteListTableViewController: UIViewController,UITableViewDelegate, UITable
         }
         
     }
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCell.EditingStyle.delete {
             let siteDelete=siteList[(indexPath as NSIndexPath).row]
             let mess=String.localizedStringWithFormat(NSLocalizedString("confirm_delete_newspaper", comment: ""), siteDelete.siteName! )
@@ -438,7 +256,7 @@ class SiteListTableViewController: UIViewController,UITableViewDelegate, UITable
                 self.siteController.deleteSite(siteDelete)
                 
                 self.siteList.remove(at: (indexPath as NSIndexPath).row)
-                self.tableViewSiteList.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+                self.tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
             }))
             
             
@@ -453,14 +271,14 @@ class SiteListTableViewController: UIViewController,UITableViewDelegate, UITable
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        verticalPostionContent=tableViewSiteList.contentOffset.y
+        verticalPostionContent=tableView.contentOffset.y
         if( segue.identifier=="sitelist_sitedetail")
         {
-            let selectedIndex=((self.tableViewSiteList.indexPath(for: sender as! SiteListTableViewCell) as NSIndexPath?)?.row)! as Int
+            let selectedIndex=((self.tableView.indexPath(for: sender as! SiteListTableViewCell) as NSIndexPath?)?.row)! as Int
             passOject.set(siteList[selectedIndex].siteID, forKey: "siteID_key")
         }
         
-        passOject.set(tableViewSiteList.contentOffset.y, forKey: "contentOffsetTableViewSiteList_key")
+        passOject.set(tableView.contentOffset.y, forKey: "contentOffsetTableViewSiteList_key")
         
         
     }
@@ -888,7 +706,7 @@ class SiteListTableViewController: UIViewController,UITableViewDelegate, UITable
             DispatchQueue.main.async {
                 KRProgressHUD.dismiss()
                 
-                let mapViewControllerObj = self.storyboard?.instantiateViewController(withIdentifier: "SiteListStoryBoard") as? SiteListTableViewController
+                let mapViewControllerObj = self.storyboard?.instantiateViewController(withIdentifier: "vc_siteList") as? SiteListTableViewController
                 self.navigationController?.pushViewController(mapViewControllerObj!, animated: true)
             }
         }

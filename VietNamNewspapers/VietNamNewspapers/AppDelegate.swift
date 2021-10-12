@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GADInterstitialDelegate {
     var gViewController: UIViewController?
     var mInterstitial: GADInterstitial!
     var hasShowAds=false
-    
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
        
         
