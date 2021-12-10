@@ -29,7 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GADInterstitialDelegate {
         // Override point for customization after application launch.
         FirebaseApp.initialize()
               FirebaseApp.configure()
-              
+                
+        
               // [START set_messaging_delegate]
               Messaging.messaging().delegate = self
               

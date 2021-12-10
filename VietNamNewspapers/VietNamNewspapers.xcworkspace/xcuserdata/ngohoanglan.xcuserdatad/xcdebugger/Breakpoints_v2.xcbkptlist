@@ -1367,9 +1367,9 @@
             filePath = "VietNamNewspapers/AppDelegate.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
-            landmarkName = "application(_:didReceiveRemoteNotification:)"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
+            landmarkName = "showAdmobInterstitial(kGoogleFullScreenAppUnitID:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1383,9 +1383,9 @@
             filePath = "VietNamNewspapers/AppDelegate.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
-            landmarkName = "application(_:didReceiveRemoteNotification:)"
+            startingLineNumber = "195"
+            endingLineNumber = "195"
+            landmarkName = "showAdmobInterstitial(kGoogleFullScreenAppUnitID:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2390,9 +2390,9 @@
             filePath = "VietNamNewspapers/AppDelegate.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
-            landmarkName = "application(_:didReceiveRemoteNotification:)"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
+            landmarkName = "showAdmobInterstitial(kGoogleFullScreenAppUnitID:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2518,9 +2518,9 @@
             filePath = "VietNamNewspapers/AppDelegate.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "257"
-            endingLineNumber = "257"
-            landmarkName = "ActionPushMessage(_:)"
+            startingLineNumber = "258"
+            endingLineNumber = "258"
+            landmarkName = "application(_:didRegisterForRemoteNotificationsWithDeviceToken:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
